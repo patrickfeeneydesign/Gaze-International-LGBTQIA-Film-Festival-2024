@@ -16,15 +16,39 @@
     li:focus {
         outline: 2px dashed white; /* white outline */
         outline-offset: 2px;       /* Space between outline and element */
+        z-index: 1000;
     }
 
     section p:focus {
         outline: 4px dashed white; /* white outline */
         border-radius: 10px;
         outline-offset: 20px;       /* Space between outline and element */
+        z-index: 1000;
 
     }
+    h1:focus, h2:focus, h3:focus {
+        outline: 2px dashed white; /* white outline */
+        outline-offset: -5px;       /* Space between outline and element */
+        z-index: 1000;
+    }
 
+    h4:focus, h5:focus {
+        outline: 2px dashed black; /* white outline */
+        outline-offset: -5px;       /* Space between outline and element */
+        z-index: 1000;
+    }
+
+    article p:focus {
+        outline: 2px dashed black; /* white outline */
+        outline-offset: -10px;       /* Space between outline and element */
+        z-index: 1000;
+    }
+
+    figure:focus {
+        outline: 2px dashed white; /* white outline */
+        outline-offset: -10px;       /* Space between outline and element */
+        z-index: 2000;
+    }
 
     .custom-cursor {
         position: fixed;
@@ -47,36 +71,25 @@
     /* MAIN HEADER */
     header {
         position: fixed;
-        width: 25vw;
+        width: 19vw;
         color: white;
         text-align: left;
-        background: none;
+        background-color: white;
         margin: 0;
         padding: 0;
         z-index: 1000;
     }
-    
-    h1 {
-        background-color: #f7f7f7;
-        width: 15vw;
-        height: 5.8vw;
-        margin: 0;
-        padding: 2vw 2vw 2vw 2vw;    
-        color: #161717;
-        line-height: 1.6vw;
-    }
-    
-    h1 a {
-        text-decoration: none;
-        color: #161717;
-        font-weight: 600;
-        font-size: 1.4vw;
+
+    header img {
+        height: 3.5vw;
+        width: auto;
+        padding: 2vw;
     }
     
     /* NAVIGATION MAIN */
     nav {
         position: fixed;
-        padding-top: 9.8vw;
+        padding-top: 7.9vw;
         width: 19vw;
         background-color: #161717;
         z-index: 900;
@@ -165,6 +178,7 @@ nav ul li a:hover {
     }
     
     /* SECTION */
+    
     section {
         margin-left: 19vw;
         background-color: #f7f7f7;
@@ -244,21 +258,78 @@ nav ul li a:hover {
         color: #f7f7f7;
     }
 
-    /* IMG STYLE */
-    figure {
+
+
+
+
+    /* Article / lsiting  */
+
+    article {
+        margin-left: 19vw;
+        background-color: #f7f7f7;
+        display: flex;
+        flex-direction: column;
+    }
+
+    h2 {
+        background-color: #b2c5ff;
+        color: #161717;
+        font-size: 5vw;
+        padding-left: 3vw;
         margin: 0;
+        font-weight: 600;
+    }
+
+    h3 {
+        background-color: #e0e0e0;
+        color: #161717;
+        font-size: 2vw;
+        font-weight: 500;
+        padding-left: 3vw;
+        padding-top: 1vw;
+        padding-bottom: 1vw;
+        margin: 0;
+
+    }
+
+    figure {
         padding: 0;
+        margin: 0;
+        height: 30vw; /* Fixed height */
+        width: 81vw; /* Adjust width as necessary */
+        overflow: hidden; /* Ensures that any overflowing content is hidden */
+        position: relative; /* Ensures proper positioning of the image */
     }
     
-    img {
-        height: auto;
-        width: 60vw;
+   figure img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover; /* Covers the area, will be clipped to fit */
+        position: absolute;
     }
-    
-    figcaption {
-        font-size: 1.2vw;
+    h4 {
+        padding: 1vw 3vw 0.5vw 4vw;
+        font-size: 1.5vw;
+        font-weight: 500;
+        margin: 0;
+
+    }
+
+
+    h5 {
+        padding: 0.5vw 3vw 1vw 4vw;
+        font-size: 1.5vw;
         font-weight: 300;
-        margin-top: 1vw;
+        margin: 0;
+        font-style: italic;
+
+    }
+
+    article p {
+        padding: 1.5vw 20vw 1vw 4vw;
+        font-size: 1.3vw;
+        font-weight: 200;
+        margin: 0;
     }
     
     /* Footer */
