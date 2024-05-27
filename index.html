@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAZE INTERNATIONAL LGBTQIA FILM FESTIVAL</title>
+    <meta name="description" content="Join the GAZE INTERNATIONAL LGBTQIA FILM FESTIVAL for a celebration of queer cinema.">
+    <link rel="icon" href="path/to/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.typekit.net/opq3sul.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-XXXXX-Y');
+    </script>
+</head>
+<body>
+    <!-- Main Title -->
+    <header>
+        <h1 tabindex="-1"><a href="index.html"><span>GAZE</span> INTERNATIONAL <br> LGBTQIA FILM <br> FESTIVAL</a></h1>
+    </header>
+    <!-- Menu -->
+    <nav>
+        <ul>
+            <li class="dropdown" tabindex="0" aria-label="Main menu, Home">
+                <a href="#">HOME</a>
+                <ul class="dropdown-content">
+                    <li tabindex="0" aria-label="Director's Welcome message"><a href="index.html">Director's Welcome</a></li>
+                    <li tabindex="0" aria-label="Manager's Welcome message"><a href="index.html">Manager's Welcome</a></li>
+                    <li tabindex="0" aria-label="Latest news"><a href="index.html">News</a></li>
+                </ul>
+            </li>
+            <li class="dropdown" tabindex="0" aria-label="Main Menu, View programme">
+                <a href="#">PROGRAMME</a>
+                <ul class="dropdown-content">
+                    <li tabindex="0" aria-label="Sub menu, View timetable"><a href="index.html">Timetable</a></li>
+                    <li tabindex="0" aria-label="Thursday 2nd programme"><a href="index.html">Thursday 2nd</a></li>
+                    <li tabindex="0" aria-label="Friday 3rd programme"><a href="index.html">Friday 3rd</a></li>
+                    <li tabindex="0" aria-label="Saturday 4th programme"><a href="index.html">Saturday 4th</a></li>
+                    <li tabindex="0" aria-label="Sunday 5th programme"><a href="index.html">Sunday 5th</a></li>
+                </ul>
+            </li>
+            <li class="dropdown" tabindex="0" aria-label="Main Menu, View support options">
+                <a href="#">SUPPORT</a>
+                <ul class="dropdown-content">
+                    <li tabindex="0" aria-label="Sub Menu, Subscribe to newsletter"><a href="index.html">Subscribe</a></li>
+                    <li tabindex="0" aria-label="Donate to the festival"><a href="index.html">Donate</a></li>
+                    <li tabindex="0" aria-label="Become a Festival Friend"><a href="index.html">Festival Friends</a></li>
+                </ul>
+            </li>
+            <li class="dropdown" tabindex="0" aria-label="Main Menu, View archive">
+                <a href="#">ARCHIVE</a>
+                <ul class="dropdown-content">
+                    <li tabindex="0" aria-label="Sub Menu, View past programmes"><a href="index.html">Timeline</a></li>
+                    <li tabindex="0" aria-label="Submit GAZE materials"><a href="index.html">Submit</a></li>
+                </ul>
+            </li>
+            <li class="dropdown" tabindex="0" aria-label="Main Menu, Submit a film">
+                <a href="#">SUBMIT</a>
+                <ul class="dropdown-content">
+                    <li tabindex="0" aria-label="Sub Menu, Submit via Film Freeway"><a href="index.html">Film Freeway</a></li>
+                    <li tabindex="0" aria-label="Information on Submissions"><a href="index.html">Info</a></li>
+                </ul>
+            </li>        </ul>
+    </nav>
+    <!-- Main Body -->
+    <main>
+
+        <section class="backgroundimg" title="A distorted, image of a person in a striped shirt with wet hair and a blue tounge.">
+            <p tabindex="0">for the girls, <br>the gaze, <br>and the theys.</p>
+        </section>
+
+        <section class="blue">
+            <p tabindex="0" >at the light house cinema and irish film institute.</p>
+        </section>
+
+        <section class="backgroundimg2" title="A blurred, artistic image of a person with dark skin and short black hair, wearing green and yellow accents.">
+            <p tabindex="0">feast your eyes...</p>
+        </section>
+
+        <section class="green">
+            <p tabindex="0">fix your gaze...</p>
+        </section>
+
+        <section class="backgroundimg3" title="Two women sitting on a sofa with legs crossed, wearing sheer pantyhose and high-heels">
+            <p tabindex="0">August 2024</p>
+        </section>
+
+        <section class="pink">
+            <p tabindex="0">#gazefilmfest</p>
+        </section>
+
+    </main>
+    <!-- Footer -->
+    <footer>
+        <div class="social-icons">
+            <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+                <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
+            </a>
+            <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+                <img src="img/facebook-app-round-white-icon.png" alt="Link to Facebook page" tabindex="0">
+            </a>
+            <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+                <img src="img/x-social-media-white-icon.png" alt="Link to Twitter page" tabindex="0">
+            </a>
+        </div>
+    </footer>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const cursor = document.createElement('div');
+    cursor.classList.add('custom-cursor');
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
+    });
+
+    document.querySelectorAll('a, button, input').forEach(element => {
+        element.addEventListener('mouseenter', () => {
+            cursor.classList.add('hovered');
+        });
+        element.addEventListener('mouseleave', () => {
+            cursor.classList.remove('hovered');
+        });
+    });
+
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    dropdowns.forEach(dropdown => {
+        const mainLink = dropdown.querySelector('a:first-child');
+        const submenuLinks = dropdown.querySelectorAll('.dropdown-content a');
+
+        // Set tabindex to 0 for all submenu links from the start
+        submenuLinks.forEach(link => link.setAttribute('tabindex', '0'));
+
+        // Handle focus and click to toggle the active class
+        mainLink.addEventListener('focus', () => {
+            dropdown.classList.add('active');
+        });
+
+        mainLink.addEventListener('click', event => {
+            event.preventDefault();
+            dropdown.classList.toggle('active');
+        });
+
+        // Ensure the dropdown closes when focus or click moves away from the dropdown
+        document.addEventListener('click', event => {
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Manage the blur events on the dropdown links
+        dropdown.addEventListener('blur', event => {
+            setTimeout(() => {
+                if (!dropdown.contains(document.activeElement)) {
+                    dropdown.classList.remove('active');
+                }
+            }, 10);
+        }, true); // Use capture phase to ensure the blur event is caught early
+
+        // Add keydown event listener to li elements
+        const dropdownItems = dropdown.querySelectorAll('.dropdown-content li');
+        dropdownItems.forEach(item => {
+            item.addEventListener('keydown', event => {
+                if (event.key === 'Enter') {
+                    const link = item.querySelector('a');
+                    if (link) {
+                        link.click();
+                    }
+                }
+            });
+        });
+    });
+
+    // FOR MOBILE SITE, ensures that the drop down list stays activated 
+    document.addEventListener('DOMContentLoaded', () => {
+    const dropdowns = document.querySelectorAll('.dropdown');
+
+    if (window.innerWidth <= 768) {
+        dropdowns.forEach(dropdown => {
+            const mainLink = dropdown.querySelector('a:first-child');
+            const submenuLinks = dropdown.querySelectorAll('.dropdown-content a');
+
+            // Set tabindex to 0 for all submenu links from the start
+            submenuLinks.forEach(link => link.setAttribute('tabindex', '0'));
+
+            // Handle focus and click to toggle the active class
+            mainLink.addEventListener('focus', () => {
+                dropdown.classList.add('active');
+            });
+
+            mainLink.addEventListener('click', event => {
+                event.preventDefault();
+                dropdown.classList.toggle('active');
+            });
+
+            // Prevent closing the dropdown when clicking inside the dropdown or on the main link
+            document.addEventListener('click', event => {
+                if (!dropdown.contains(event.target) && !mainLink.contains(event.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+
+            // Manage the blur events on the dropdown links
+            dropdown.addEventListener('blur', event => {
+                setTimeout(() => {
+                    if (!dropdown.contains(document.activeElement) && !mainLink.contains(document.activeElement)) {
+                        dropdown.classList.remove('active');
+                    }
+                }, 10);
+            }, true); // Use capture phase to ensure the blur event is caught early
+        });
+    }
+});
+
+
+
+
+
+
+
+    // Add keydown event listener to images within social media links
+    const socialMediaImages = document.querySelectorAll('.social-icons a img');
+    socialMediaImages.forEach(image => {
+        image.addEventListener('keydown', event => {
+            if (event.key === 'Enter') {
+                const link = image.closest('a');
+                if (link) {
+                    link.click();
+                }
+            }
+        });
+    });
+});
+
+
+
+// This is for parralax effect on our image backgrounds
+function applyParallaxEffect() {
+  if (window.innerWidth > 768) { // Adjust the width as needed
+    document.addEventListener('scroll', function() {
+      const backgroundImg = document.querySelector('.backgroundimg');
+      const scrollPosition = window.pageYOffset;
+      const startScroll = 100; // The scroll amount after which the effect should start
+
+      if (scrollPosition > startScroll) {
+        // Calculate the scale factor based on the scroll position
+        const scale = 1 + (scrollPosition - startScroll) * -0.0002; // Adjust the multiplier for desired zoom effect
+        backgroundImg.style.transform = `scale(${scale})`;
+      } else {
+        // Reset the scale when the scroll position is less than the startScroll
+        backgroundImg.style.transform = 'scale(1)';
+      }
+    });
+
+    document.addEventListener('scroll', function() {
+      const backgroundImg = document.querySelector('.backgroundimg2');
+      const scrollPosition = window.pageYOffset;
+      const startScroll = 800; // The scroll amount after which the effect should start
+
+      if (scrollPosition > startScroll) {
+        // Calculate the scale factor based on the scroll position
+        const scale = 1 + (scrollPosition - startScroll) * -0.0002; // Adjust the multiplier for desired zoom effect
+        backgroundImg.style.transform = `scale(${scale})`;
+      } else {
+        // Reset the scale when the scroll position is less than the startScroll
+        backgroundImg.style.transform = 'scale(1)';
+      }
+    });
+
+    document.addEventListener('scroll', function() {
+      const backgroundImg = document.querySelector('.backgroundimg3');
+      const scrollPosition = window.pageYOffset;
+      const startScroll = 2000; // The scroll amount after which the effect should start
+
+      if (scrollPosition > startScroll) {
+        // Calculate the scale factor based on the scroll position
+        const scale = 1 + (scrollPosition - startScroll) * -0.0002; // Adjust the multiplier for desired zoom effect
+        backgroundImg.style.transform = `scale(${scale})`;
+      } else {
+        // Reset the scale when the scroll position is less than the startScroll
+        backgroundImg.style.transform = 'scale(1)';
+      }
+    });
+  }
+}
+
+applyParallaxEffect();
+window.addEventListener('resize', applyParallaxEffect); // Reapply the effect if the window is resized
+
+    </script>
+</body>
+</html>

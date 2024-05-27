@@ -1,0 +1,522 @@
+/* Desktop styles */
+@media (min-width: 768px) {
+
+    body {
+        font-family: tt-commons-pro, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #161717;
+    }
+    
+    body, a, button, input {
+        cursor: none; /* Hide the default cursor for the body and all interactive elements */
+    }
+
+    /* FOCUS STYELS */
+    li:focus {
+        outline: 2px dashed white; /* white outline */
+        outline-offset: 2px;       /* Space between outline and element */
+    }
+
+    section p:focus {
+        outline: 4px dashed white; /* white outline */
+        border-radius: 10px;
+        outline-offset: 20px;       /* Space between outline and element */
+
+    }
+
+
+    .custom-cursor {
+        position: fixed;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        pointer-events: none; /* Prevent the cursor from interfering with other elements */
+        z-index: 10000; /* Ensure the cursor is above all other elements */
+        transform: translate(-50%, -50%);
+        background-color: white;
+        mix-blend-mode: difference; /* Ensure the cursor blends with the background */
+    }
+    
+    .hovered {
+        background-color: white;
+        border: 2px solid white;
+        mix-blend-mode: normal;
+    }
+    
+    /* MAIN HEADER */
+    header {
+        position: fixed;
+        width: 25vw;
+        color: white;
+        text-align: left;
+        background: none;
+        margin: 0;
+        padding: 0;
+        z-index: 1000;
+    }
+    
+    h1 {
+        background-color: #f7f7f7;
+        width: 15vw;
+        height: 5.8vw;
+        margin: 0;
+        padding: 2vw 2vw 2vw 2vw;    
+        color: #161717;
+        line-height: 1.6vw;
+    }
+    
+    h1 a {
+        text-decoration: none;
+        color: #161717;
+        font-weight: 600;
+        font-size: 1.4vw;
+    }
+    
+    /* NAVIGATION MAIN */
+    nav {
+        position: fixed;
+        padding-top: 9.8vw;
+        width: 19vw;
+        background-color: #161717;
+        z-index: 900;
+    }
+    
+    nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    nav ul li {
+        position: relative;
+    }
+    
+    nav ul li a {
+        color: #f7f7f7;
+        padding: 0.7vw 2.5vw 0.7vw 1.5vw;
+        font-size: 2.1vw;
+        font-weight: 200;
+        display: block;
+        text-decoration: none;
+        border-left: 1vw solid white;
+    }
+    
+    nav ul li a span {
+        color: #8bd3f6;
+        font-weight: 900;
+    }
+
+
+
+    nav ul li a:focus, 
+nav ul li a:hover {
+    background-color: #d0d0d0;
+    color: #161717;
+    outline: none; /* Optional: removes the default focus outline */
+}
+
+.dropdown-content a:hover {
+    background-color: #161717;
+    color: #f7f7f7;
+}
+
+/* Ensures dropdown stays visible when any child has focus */
+.dropdown:focus-within .dropdown-content {
+    display: block;
+}
+
+/* Style for focusing on links within the dropdown for better visibility */
+.dropdown-content li a:focus {
+    background-color: #e0e0e0; /* Light grey background for focused links */
+    color: #161717;
+    outline: none; /* Optional: Adjust according to your visual design needs */
+}
+    
+
+
+    /* NAVIGATION SUBMENU */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        left: 16vw;
+        top: 0;
+        white-space: nowrap;
+        background-color: #f7f7f7;
+        border-left: none;
+    }
+    
+    .dropdown-content li {
+        display: inline-block;
+        text-align: left;
+    }
+    
+    .dropdown-content li a {
+        font-size: 1vw;
+        border-left: none;
+        color: #161717;
+        padding: 0.5vw 0.6vw 0.5vw 0.6vw;
+        padding-left: 1.5vw;
+        padding-right: 1.5vw;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    
+    /* SECTION */
+    section {
+        margin-left: 19vw;
+        background-color: #f7f7f7;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 7vw 7vw 7vw 7vw;
+    }
+    
+    section p {
+        line-height: 7vw;
+        font-size: 10vh;
+        color: #161717;
+        font-weight: 600;
+    }
+    
+    .blue {
+        background-color: #8bd3f6;
+    }
+
+    .green {
+        background-color: #c7e87b;
+    }
+
+    .pink {
+        background-color: #f084e6;
+    }
+
+    /* This area contains styling for the sections which have images in the bacgkround */ 
+
+
+    .backgroundimg {
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/Yonghong02.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* Initial scale for the background image */
+        transform: scale(1);
+        transition: transform 0.2s ease-out; /* Smooth transition */
+        z-index: 1;
+    }
+    
+    .backgroundimg p {
+        color: #f7f7f7;
+    }
+    
+        
+    .backgroundimg2 {
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_EDEN_Marlen_Stahlhuth_10124.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* Initial scale for the background image */
+        transform: scale(1);
+        transition: transform 0.2s ease-out; /* Smooth transition */
+        z-index: 1;
+    }
+    
+    .backgroundimg2 p {
+        color: #f7f7f7;
+    }
+
+    .backgroundimg3 {
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS__80s-shoot_by-Ivan-Resnik_00013.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* Initial scale for the background image */
+        transform: scale(1);
+        transition: transform 0.2s ease-out; /* Smooth transition */
+        z-index: 1;
+    }
+    
+    .backgroundimg3 p {
+        color: #f7f7f7;
+    }
+
+    /* IMG STYLE */
+    figure {
+        margin: 0;
+        padding: 0;
+    }
+    
+    img {
+        height: auto;
+        width: 60vw;
+    }
+    
+    figcaption {
+        font-size: 1.2vw;
+        font-weight: 300;
+        margin-top: 1vw;
+    }
+    
+    /* Footer */
+    footer {
+        background-color: #f7f7f7;
+        height: 3.5vw;
+        width: 19vw;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+    
+    .social-icons {
+        display: flex;
+        gap: 20px;
+    }
+    
+    .social-icons a img {
+        height: 1.2vw;
+        width: auto;
+        padding-left: 1vw;
+        padding-right: 1vw;
+        filter: invert(100%);
+    }
+    
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Mobile styles */
+@media (max-width: 767px) {
+
+    body {
+        font-family: tt-commons-pro, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #161717;
+    }
+
+    /* MAIN HEADER */
+    header {
+        width: 100%;
+    }
+
+    h1 {
+        width: fit-content;
+        line-height: 4vw;
+        margin-left: 5vw;
+        margin-bottom: 5vw;
+        margin-top: 5vw;
+    }
+
+    h1 a {
+        font-size: 3vw; /* Adjust font size for mobile */
+        text-decoration: none;
+        color:#f7f7f7;
+        font-weight: 500;
+    }
+
+    nav {
+        width: 100%;
+        background-color: #161717;
+    }
+
+    nav ul {
+        width: 100%;
+        text-align: left;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        background-color: #f7f7f7;
+
+    }
+
+    nav ul li a {
+        width: 100%;
+        font-size: 8vw; /* Adjust font size for mobile */
+        font-weight: 500;
+        text-decoration: none;
+        color: #161717;
+
+    } 
+    /* THIS IS THE SELECTOR FOR THE ACTUAL main menu buttons     */
+    li.dropdown {
+          padding-left: 4vw;
+    }
+
+
+    li.dropdown.active {
+        background-color: #8bd3f6;
+    }
+
+    /* Submenu items display underneath the parent item */
+    .dropdown-content {
+        position: static; /* Change from absolute to static */
+        display: none;
+        width: 100%;
+        background-color: #161717; /* Different background color for submenu */
+        }
+
+    .dropdown-content li {
+        display: block; /* Display submenu items in a column */
+        width: 100%;
+        padding: 2vw 0 2vw 0;
+    }
+
+    .dropdown-content li a {
+        font-size: 4vw; /* Adjust font size for submenu items */
+        margin: 2vw;
+        color:#f7f7f7;
+    }
+
+    /* Show submenu on tap (when active) */
+    .dropdown.active .dropdown-content {
+        display: block;
+        animation: slide-down 0.3s ease-out;
+    }
+
+    /* Animation for submenu */
+    @keyframes slide-down {
+        from {
+            max-height: 0;
+            opacity: 0;
+        }
+        to {
+            max-height: 500px; /* Arbitrary large value */
+            opacity: 1;
+        }
+    }
+    
+    /* SECTION */
+    section {
+        background-color: #f7f7f7;
+        display: flex;
+        flex-direction: column; /* Ensures text and other elements are stacked vertically */
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    
+    section p {
+        line-height: 7vh;
+        font-size: 7vh; /* Adjust this value to change the text size */
+        color: #161717;
+        font-weight: 600;
+    }
+    
+    .blue {
+        background-color: #8bd3f6;
+    }
+    
+
+
+    /* Image section styles */
+    :focus {
+        outline: 2px solid #ff00aa; /* Blue outline */
+        outline-offset: 2px;       /* Space between outline and element */
+    }
+
+    .backgroundimg {
+        /* LINEAR GRADIENT TO TINT THE IMAGE DARKER */ 
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/bigboys_01.jpeg');
+        background-size: cover;
+        background-position: center;
+    }
+    
+    .backgroundimg p {
+        color: #f7f7f7;
+    }
+
+
+
+    .backgroundimg2 {
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/greenblueimg.jpg');
+        background-size:cover;
+    }
+
+    .backgroundimg2 p {
+        color: #f7f7f7;
+    }
+
+    .backgroundimg3 {
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/The Journey Home.jpg');
+        background-size:cover;
+
+    }
+
+    .backgroundimg3 p {
+        color: #f7f7f7;
+    }
+
+
+
+
+
+    
+    /* IMG STYLE */
+    figure {
+        margin: 0; /* Reset margin */
+        padding: 10vw;
+        margin-bottom: 5vw;
+    }
+    
+    img {
+        height: auto;
+        width: 80vw;; /* Maintain aspect ratio */
+    }
+    
+    figcaption {
+        font-size: 2.5vw;
+        font-weight: 300;
+        margin-top: 1vw;
+    }
+    
+    /* Footer */
+    footer {
+        background-color: #f7f7f7;
+        height: 10vw;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000; /* Ensure it stays on top of other elements */
+    }
+    
+    .social-icons {
+        display: flex;
+        gap: 20px;
+    }
+    
+    .social-icons a img {
+        height: 3vw; /* Adjust size as needed */
+        width: auto;
+        padding-left: 1vw;
+        padding-right: 1vw;
+        filter: invert(100%); /* Change icon color to white */
+    }
+}
