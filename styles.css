@@ -69,22 +69,32 @@
     }
     
     /* MAIN HEADER */
-    header {
-        position: fixed;
-        width: 19vw;
-        color: white;
-        text-align: left;
-        background-color: white;
-        margin: 0;
-        padding: 0;
-        z-index: 1000;
-    }
+header {
+    position: fixed;
+    width: 19vw;
+    color: white;
+    text-align: left;
+    background-color: white; /* Ensure this is not overridden */
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+}
 
-    header img {
-        height: 3.5vw;
-        width: auto;
-        padding: 2vw;
+header img {
+    height: 3.5vw;
+    width: auto;
+    padding: 2vw;
+    -moz-transition: all 0.3s; /* Mozilla specific transition */
+    transition: all 0.3s;
+}
+
+/* Add Mozilla specific prefixes if necessary */
+@media screen and (-moz-images-in-menus: 0) {
+    header {
+        text-decoration: none;/* Mozilla-specific styles if needed */
     }
+}
+
     
     /* NAVIGATION MAIN */
     nav {
