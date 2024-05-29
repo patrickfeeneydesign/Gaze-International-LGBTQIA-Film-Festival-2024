@@ -576,25 +576,75 @@ li.dropdown.active {
     }
 
 
+/* Article / lsiting  */
 
-    
-    /* IMG STYLE */
-    figure {
-        margin: 0; /* Reset margin */
-        padding: 10vw;
-        margin-bottom: 5vw;
-    }
-    
-    img {
-        height: auto;
-        width: 80vw;; /* Maintain aspect ratio */
-    }
-    
-    figcaption {
-        font-size: 2.5vw;
-        font-weight: 300;
-        margin-top: 1vw;
-    }
+article {
+    background-color: #f7f7f7;
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    background-color: #b2c5ff;
+    color: #161717;
+    font-size: 8vw;
+    padding-left: 3vw;
+    margin: 0;
+    font-weight: 600;
+}
+
+h3 {
+    background-color: #e0e0e0;
+    color: #161717;
+    font-size: 4.5vw;
+    font-weight: 500;
+    padding-left: 3vw;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
+    margin: 0;
+
+}
+
+figure {
+    padding: 0;
+    margin: 0;
+    height: 45vw; /* Fixed height */
+    width: 100%; /* Adjust width as necessary */
+    overflow: hidden; /* Ensures that any overflowing content is hidden */
+    position: relative; /* Ensures proper positioning of the image */
+}
+
+figure img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover; /* Covers the area, will be clipped to fit */
+    position: absolute;
+}
+
+h4 {
+    padding: 3vw 3vw 0.5vw 4vw;
+    font-size: 4vw;
+    font-weight: 500;
+    margin: 0;
+
+}
+
+
+h5 {
+    padding: 3vw 3vw 1vw 4vw;
+    font-size: 4vw;
+    font-weight: 300;
+    margin: 0;
+    font-style: italic;
+
+}
+
+article p {
+    padding: 3vw 20vw 1vw 4vw;
+    font-size: 3.5vw;
+    font-weight: 200;
+    margin: 0;
+}
     
     /* Footer */
     footer {
