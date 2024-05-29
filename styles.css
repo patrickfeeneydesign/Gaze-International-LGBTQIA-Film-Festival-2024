@@ -417,96 +417,94 @@ nav ul li a:hover {
         background-color: #161717;
     }
 
+    .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #161717;
+        color: #e0e0e0;
+        padding: 8px 16px;
+        z-index: 10000;
+        transition: top 0.3s;
+      }
+      
+      .skip-link:focus {
+        top: -40px;
+      }
+
     /* MAIN HEADER */
     header {
         width: 100%;
-    }
-
-    h1 {
-        width: fit-content;
-        line-height: 4vw;
-        margin-left: 5vw;
-        margin-bottom: 5vw;
-        margin-top: 5vw;
-    }
-
-    h1 a {
-        font-size: 3vw; /* Adjust font size for mobile */
-        text-decoration: none;
-        color:#f7f7f7;
-        font-weight: 500;
-    }
-
-    nav {
-        width: 100%;
-        background-color: #161717;
-    }
-
-    nav ul {
-        width: 100%;
-        text-align: left;
-        list-style: none;
-        margin: 0;
-        padding: 0;
         background-color: #f7f7f7;
-
+        border-bottom: 1px solid black;
     }
 
-    nav ul li a {
-        width: 100%;
-        font-size: 8vw; /* Adjust font size for mobile */
-        font-weight: 500;
-        text-decoration: none;
-        color: #161717;
+   
+header img {
+    height: 10vw;
+    width: auto;
+    padding: 5vw;
+    -moz-transition: all 0.3s; /* Mozilla specific transition */
+    transition: all 0.3s;
+}
+nav {
+    width: 100%;
+    background-color: #161717;
+}
 
-    } 
-    /* THIS IS THE SELECTOR FOR THE ACTUAL main menu buttons     */
-    li.dropdown {
-          padding-left: 4vw;
-    }
+nav ul {
+    width: 100%;
+    text-align: left;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color: #161717;
+}
 
+nav ul li a {
+    width: 100%;
+    font-size: 8vw; /* Adjust font size for mobile */
+    font-weight: 500;
+    text-decoration: none;
+    color: #f7f7f7;
+}
 
-    li.dropdown.active {
-        background-color: #8bd3f6;
-    }
+li.dropdown {
+    padding-left: 4vw;
+}
 
-    /* Submenu items display underneath the parent item */
-    .dropdown-content {
-        position: static; /* Change from absolute to static */
-        display: none;
-        width: 100%;
-        background-color: #161717; /* Different background color for submenu */
-        }
+li.dropdown.active {
+    background-color: #161717;
+    color:#161717;
+}
 
-    .dropdown-content li {
-        display: block; /* Display submenu items in a column */
-        width: 100%;
-        padding: 2vw 0 2vw 0;
-    }
+/* Submenu items display underneath the parent item */
+.dropdown-content {
+    position: static; /* Change from absolute to static */
+    overflow: hidden;
+    max-height: 0; /* Initially hide the submenu */
+    width: 100%;
+    background-color: #f7f7f7; /* Different background color for submenu */
+    transition: max-height 0.5s ease-out; /* Smooth transition for opening and closing */
+}
 
-    .dropdown-content li a {
-        font-size: 4vw; /* Adjust font size for submenu items */
-        margin: 2vw;
-        color:#f7f7f7;
-    }
+.dropdown-content li {
+    display: block; /* Display submenu items in a column */
+    width: 100%;
+    padding: 2vw 0;
+}
 
-    /* Show submenu on tap (when active) */
-    .dropdown.active .dropdown-content {
-        display: block;
-        animation: slide-down 0.3s ease-out;
-    }
+.dropdown-content li a {
+    font-size: 4vw; /* Adjust font size for submenu items */
+    margin: 2vw;
+    color: #161717;
+}
 
-    /* Animation for submenu */
-    @keyframes slide-down {
-        from {
-            max-height: 0;
-            opacity: 0;
-        }
-        to {
-            max-height: 500px; /* Arbitrary large value */
-            opacity: 1;
-        }
-    }
+/* Expand the submenu when the parent dropdown is active */
+.dropdown.active .dropdown-content {
+    max-height: 1000px; /* Adjust as needed to fit content */
+}
+
     
     /* SECTION */
     section {
@@ -531,17 +529,10 @@ nav ul li a:hover {
     
 
 
-    /* Image section styles */
-    :focus {
-        outline: 2px solid #ff00aa; /* Blue outline */
-        outline-offset: 2px;       /* Space between outline and element */
-    }
-
     .backgroundimg {
         /* LINEAR GRADIENT TO TINT THE IMAGE DARKER */ 
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/bigboys_01.jpeg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/Yonghong02.jpg');
         background-size: cover;
-        background-position: center;
     }
     
     .backgroundimg p {
@@ -551,7 +542,7 @@ nav ul li a:hover {
 
 
     .backgroundimg2 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/greenblueimg.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_EDEN_Marlen_Stahlhuth_10124.jpg');
         background-size:cover;
     }
 
@@ -560,7 +551,7 @@ nav ul li a:hover {
     }
 
     .backgroundimg3 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/The Journey Home.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS__80s-shoot_by-Ivan-Resnik_00013.jpg');
         background-size:cover;
 
     }
@@ -569,7 +560,20 @@ nav ul li a:hover {
         color: #f7f7f7;
     }
 
+    
+    .blue {
+        background-color: #8bd3f6;
+    }
 
+    .green {
+        background-color: #c7e87b;
+    }
+
+    .pink {
+        background-color: #f084e6;
+        /* ADDING A MARGIN BECUASE OF FOOTER OVERLAP */
+        margin-bottom: 10vw;
+    }
 
 
 

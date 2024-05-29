@@ -18,17 +18,19 @@
     </script>
 </head>
 <body>
-        <!-- SKIP TO CONTENT -->
+    <!-- SKIP TO CONTENT -->
     <a href="#maincontent" role="button" class="skip-link">Press enter to skip to page content, or press tab to continue</a>
     <!-- Main Title -->
-    <header tabindex="0" aria-label="Introduction, press tab to skip. Welcome to GAZE International L G B T Q I A Film Festival. GAZE takes place in the Irish Film Institute and Light House Cinema from the 1st to the 5th of August 2024. This website can be used to learn more about the films and book tickets for the screenings. For more information on venue access and accomodations for disabilities, please contact the venues directly. To enter the main menu, press tab.">
-        <img alt="Gaze Film Festival Logo, Page Header" src="img/gaze_logo.png">
+    <header tabindex="0" aria-label="Introduction, press tab to skip. Welcome to GAZE International L G B T Q I A Film Festival. GAZE takes place in the Irish Film Institute and Light House Cinema from the 1st to the 5th of August 2024. This website can be used to learn more about the films and book tickets for the screenings. For more information on venue access and accommodations for disabilities, please contact the venues directly. To enter the main as the film festival logo, click or press enter.">
+        <a href="index.html" style="display: inline-block; cursor: pointer;">
+            <img alt="Gaze Film Festival Logo, Page Header" src="img/gaze_logo.png">
+        </a>
     </header>
     <!-- Menu -->
     <nav>
         <ul>
-            <li class="dropdown" tabindex="0" aria-label="You are now on the main menu, Home, press tab to navigate to sub menu.">
-                <a href="index.html" aria-haspopup="true" role="button">HOME</a>
+            <li class="dropdown" tabindex="0" aria-label="You are now on the main menu, About, press tab to navigate to sub menu.">
+                <a href="#" aria-haspopup="true" role="button">ABOUT</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" Director's Welcome message" role="button"><a href="index.html">Director's Welcome</a></li>
                     <li tabindex="0" aria-label=" Manager's Welcome message" role="button"><a href="index.html">Manager's Welcome</a></li>
@@ -72,7 +74,7 @@
     <!-- Main Body -->
     <main id="maincontent">
 
-        <section class="backgroundimg" title="A distorted, image of a person in a striped shirt with wet hair and a blue tounge.">
+        <section class="backgroundimg" title="A distorted, image of a person in a striped shirt with wet hair and a blue tongue.">
             <p tabindex="0" role="heading">for the<br>girls, gaze, <br>and theys.</p>
         </section>
 
@@ -111,9 +113,10 @@
             </a>
         </div>
     </footer>
-
     <script>
-document.addEventListener('DOMContentLoaded', () => {
+        
+        document.addEventListener('DOMContentLoaded', () => {
+    // Setup custom cursor
     const cursor = document.createElement('div');
     cursor.classList.add('custom-cursor');
     document.body.appendChild(cursor);
@@ -132,184 +135,91 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Dropdown functionality enhanced for keyboard and mobile support
     const dropdowns = document.querySelectorAll('.dropdown');
-
     dropdowns.forEach(dropdown => {
         const mainLink = dropdown.querySelector('a:first-child');
-        const submenuLinks = dropdown.querySelectorAll('.dropdown-content a');
-
-        // Set tabindex to 0 for all submenu links from the start
-        submenuLinks.forEach(link => link.setAttribute('tabindex', '0'));
-
-        // Handle focus and click to toggle the active class
-        mainLink.addEventListener('focus', () => {
-            dropdown.classList.add('active');
-        });
+        const parentLi = dropdown.parentElement;
 
         mainLink.addEventListener('click', event => {
-            event.preventDefault();
+            event.preventDefault(); // Prevent default link behavior
             dropdown.classList.toggle('active');
         });
 
-        // FIXING THE MAIN MENU ISSUE
-
-        mainLink.addEventListener('click', event => {
-    // Toggle dropdown only, navigation should be handled elsewhere if dropdown is active
-    event.preventDefault(); // Prevent default might still be necessary to manage dropdown
-    dropdown.classList.toggle('active');
-
-    // If the dropdown is not meant to stay open or further interaction is expected, navigate:
-    if (!dropdown.classList.contains('active')) {
-        window.location.href = mainLink.href; // Navigate manually when dropdown is deactivated
-    }
-});
-
-        // Ensure the dropdown closes when focus or click moves away from the dropdown
-        document.addEventListener('click', event => {
-            if (!dropdown.contains(event.target)) {
-                dropdown.classList.remove('active');
-            }
-        });
-
-        // Manage the blur events on the dropdown links
-        dropdown.addEventListener('blur', event => {
-            setTimeout(() => {
-                if (!dropdown.contains(document.activeElement)) {
-                    dropdown.classList.remove('active');
-                }
-            }, 10);
-        }, true); // Use capture phase to ensure the blur event is caught early
-
-        // Add keydown event listener to li elements
-        const dropdownItems = dropdown.querySelectorAll('.dropdown li, .dropdown-content li');
-        dropdownItems.forEach(item => {
-            item.addEventListener('keydown', event => {
-                if (event.key === 'Enter') {
-                    const link = item.querySelector('a');
-                    if (link) {
-                        link.click();
+        // Keyboard navigation enhancement
+        dropdown.querySelectorAll('li').forEach(li => {
+            li.addEventListener('keydown', (event) => {
+                if (event.key === "Enter") {
+                    const childAnchor = li.querySelector('a');
+                    if (childAnchor) {
+                        childAnchor.click();
+                        event.preventDefault();
                     }
                 }
             });
         });
+
+        // Mobile-specific event handling for parent <li> elements
+        if (window.innerWidth <= 767) {
+            parentLi.addEventListener('keydown', (event) => {
+                if (event.key === "Enter") {
+                    dropdown.classList.toggle('active');
+                    event.preventDefault();
+                }
+            });
+        }
     });
 
-    // FOR MOBILE SITE, ensures that the drop down list stays activated 
-    document.addEventListener('DOMContentLoaded', () => {
-    const dropdowns = document.querySelectorAll('.dropdown');
-
-    if (window.innerWidth <= 768) {
-        dropdowns.forEach(dropdown => {
-            const mainLink = dropdown.querySelector('a:first-child');
-            const submenuLinks = dropdown.querySelectorAll('.dropdown-content a');
-
-            // Set tabindex to 0 for all submenu links from the start
-            submenuLinks.forEach(link => link.setAttribute('tabindex', '0'));
-
-            // Handle focus and click to toggle the active class
-            mainLink.addEventListener('focus', () => {
-                dropdown.classList.add('active');
-            });
-
-            mainLink.addEventListener('click', event => {
-                event.preventDefault();
-                dropdown.classList.toggle('active');
-            });
-
-            // Prevent closing the dropdown when clicking inside the dropdown or on the main link
+    // Header keyboard accessibility
+    const header = document.querySelector('header');
+    header.addEventListener('keydown', (event) => {
+        if (event.key === "Enter" || event.keyCode === 13) {
+            const link = header.querySelector('a');
+            if (link) {
+                window.location.href = link.href;
+            }
+        }
+    });
+});
+        
+            // Clicking outside of dropdowns closes them on desktop
             document.addEventListener('click', event => {
-                if (!dropdown.contains(event.target) && !mainLink.contains(event.target)) {
-                    dropdown.classList.remove('active');
+                if (!event.target.closest('.dropdown') && window.innerWidth > 767) {
+                    dropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('active');
+                    });
                 }
             });
-
-            // Manage the blur events on the dropdown links
-            dropdown.addEventListener('blur', event => {
-                setTimeout(() => {
-                    if (!dropdown.contains(document.activeElement) && !mainLink.contains(document.activeElement)) {
-                        dropdown.classList.remove('active');
-                    }
-                }, 10);
-            }, true); // Use capture phase to ensure the blur event is caught early
-        });
-    }
-});
-
-
-
-
-
-
-
-    // Add keydown event listener to images within social media links
-    const socialMediaImages = document.querySelectorAll('.social-icons a img');
-    socialMediaImages.forEach(image => {
-        image.addEventListener('keydown', event => {
-            if (event.key === 'Enter') {
-                const link = image.closest('a');
-                if (link) {
-                    link.click();
-                }
+        
+            // Initialize parallax effects on desktop only
+            if (window.innerWidth > 768) {
+                applyParallaxEffect();
             }
-        });
-    });
-});
-
-
-
-// This is for parralax effect on our image backgrounds
-function applyParallaxEffect() {
-  if (window.innerWidth > 768) { // Adjust the width as needed
-    document.addEventListener('scroll', function() {
-      const backgroundImg = document.querySelector('.backgroundimg');
-      const scrollPosition = window.pageYOffset;
-      const startScroll = 100; // The scroll amount after which the effect should start
-
-      if (scrollPosition > startScroll) {
-        // Calculate the scale factor based on the scroll position
-        const scale = 1 + (scrollPosition - startScroll) * -0.0002; // Adjust the multiplier for desired zoom effect
-        backgroundImg.style.transform = `scale(${scale})`;
-      } else {
-        // Reset the scale when the scroll position is less than the startScroll
-        backgroundImg.style.transform = 'scale(1)';
-      }
-    });
-
-    document.addEventListener('scroll', function() {
-      const backgroundImg = document.querySelector('.backgroundimg2');
-      const scrollPosition = window.pageYOffset;
-      const startScroll = 800; // The scroll amount after which the effect should start
-
-      if (scrollPosition > startScroll) {
-        // Calculate the scale factor based on the scroll position
-        const scale = 1 + (scrollPosition - startScroll) * -0.0002; // Adjust the multiplier for desired zoom effect
-        backgroundImg.style.transform = `scale(${scale})`;
-      } else {
-        // Reset the scale when the scroll position is less than the startScroll
-        backgroundImg.style.transform = 'scale(1)';
-      }
-    });
-
-    document.addEventListener('scroll', function() {
-      const backgroundImg = document.querySelector('.backgroundimg3');
-      const scrollPosition = window.pageYOffset;
-      const startScroll = 2000; // The scroll amount after which the effect should start
-
-      if (scrollPosition > startScroll) {
-        // Calculate the scale factor based on the scroll position
-        const scale = 1 + (scrollPosition - startScroll) * -0.0002; // Adjust the multiplier for desired zoom effect
-        backgroundImg.style.transform = `scale(${scale})`;
-      } else {
-        // Reset the scale when the scroll position is less than the startScroll
-        backgroundImg.style.transform = 'scale(1)';
-      }
-    });
-  }
-}
-
-applyParallaxEffect();
-window.addEventListener('resize', applyParallaxEffect); // Reapply the effect if the window is resized
-
+        
+            // Reapply parallax effects on window resize if it crosses the threshold
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    applyParallaxEffect();
+                }
+            });
+        
+        function applyParallaxEffect() {
+            document.addEventListener('scroll', () => {
+                const backgrounds = [
+                    { element: document.querySelector('.backgroundimg'), startScroll: 100 },
+                    { element: document.querySelector('.backgroundimg2'), startScroll: 500 },
+                    { element: document.querySelector('.backgroundimg3'), startScroll: 1200 }
+                ];
+        
+                backgrounds.forEach(bg => {
+                    if (bg.element) {
+                        const scrollPosition = window.pageYOffset;
+                        const scale = scrollPosition > bg.startScroll ? 1 + (scrollPosition - bg.startScroll) * -0.0002 : 1;
+                        bg.element.style.transform = `scale(${scale})`;
+                    }
+                });
+            });
+        }
     </script>
 </body>
 </html>
