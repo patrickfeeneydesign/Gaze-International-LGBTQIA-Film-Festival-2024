@@ -7,10 +7,28 @@
         padding: 0;
         background-color: #161717;
     }
-    
+
     body, a, button, input {
         cursor: none; /* Hide the default cursor for the body and all interactive elements */
     }
+    
+/* SKIP LINK STYLE */
+
+    .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #161717;
+        color: #e0e0e0;
+        padding: 8px 16px;
+        z-index: 10000;
+        transition: top 0.3s;
+      }
+      
+      .skip-link:focus {
+        top: 0;
+      }
+
 
     /* FOCUS STYELS */
     li:focus {
