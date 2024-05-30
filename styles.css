@@ -15,19 +15,12 @@
 /* SKIP LINK STYLE */
 
     .skip-link {
-        position: absolute;
-        top: -40px;
-        left: 0;
-        background: #161717;
-        color: #e0e0e0;
-        padding: 8px 16px;
-        z-index: 10000;
-        transition: top 0.3s;
+display: none;
       }
       
       .skip-link:focus {
-        top: 0;
-      }
+        display: none;
+    }
 
 
     /* FOCUS STYELS */
@@ -417,20 +410,14 @@ nav ul li a:hover {
         background-color: #161717;
     }
 
+    /* SKIP LINK STYLE */
+
     .skip-link {
-        position: absolute;
-        top: -40px;
-        left: 0;
-        background: #161717;
-        color: #e0e0e0;
-        padding: 8px 16px;
-        z-index: 10000;
-        transition: top 0.3s;
+    display: none;
       }
       
       .skip-link:focus {
-        top: -40px;
-      }
+        display: none;      }
 
     /* MAIN HEADER */
     header {
