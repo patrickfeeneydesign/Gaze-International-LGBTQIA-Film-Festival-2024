@@ -30,7 +30,7 @@
     <nav>
         <ul>
             <li class="dropdown" tabindex="0" aria-label="You are now on the main menu, About, press tab to navigate to sub menu.">
-                <a href="#" aria-haspopup="true" role="button">ABOUT</a>
+                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">ABOUT</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" Director's Welcome message" role="button"><a href="Directors_Welcome.html">Director's Welcome</a></li>
                     <li tabindex="0" aria-label=" Manager's Welcome message" role="button"><a href="index.html">Manager's Welcome</a></li>
@@ -51,20 +51,20 @@
             </li>
             -->
             <li class="dropdown" tabindex="0" aria-label="Main Menu, Support">
-                <a href="#" aria-haspopup="true" role="button">SUPPORT</a>
+                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">SUPPORT</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" Subscribe to newsletter" role="button"><a href="index.html">Subscribe</a></li>
                     <li tabindex="0" aria-label=" Become a Festival Friend" role="button"><a href="index.html">Festival Friends</a></li>
                 </ul>
             </li>
             <li class="dropdown" tabindex="0" aria-label="Main Menu, GAZE Archive">
-                <a href="#" aria-haspopup="true" role="button">ARCHIVE</a>
+                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">ARCHIVE</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" View past programmes" role="button"><a href="index.html">Timeline</a></li>
                 </ul>
             </li>
             <li class="dropdown" tabindex="0" aria-label="Main Menu, Submissions">
-                <a href="#" aria-haspopup="true" role="button">SUBMIT</a>
+                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">SUBMIT</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" Submit via Film Freeway" role="button"><a href="index.html">Film Freeway</a></li>
                     <li tabindex="0" aria-label=" Information on Submissions" role="button"><a href="index.html">Info</a></li>
@@ -119,6 +119,35 @@
     </footer>
     <script>
         
+
+
+        
+        // FOR ACCESIBLE DROPDOWN ARIA LABELS
+        
+        document.addEventListener('DOMContentLoaded', function() {
+    var dropdown = document.querySelector('.dropdown > a');
+    var dropdownContent = document.querySelector('.dropdown .dropdown-content');
+
+    // Toggle dropdown and aria-expanded attribute
+    dropdown.addEventListener('click', function(event) {
+        event.preventDefault();  // Prevent the default anchor behavior
+        var isExpanded = dropdown.getAttribute('aria-expanded') === 'true';
+        dropdown.setAttribute('aria-expanded', !isExpanded);
+        dropdownContent.style.display = isExpanded ? 'none' : 'block';
+    });
+
+    // Close the dropdown if clicking outside of it
+    document.addEventListener('click', function(event) {
+        if (!dropdown.contains(event.target)) {
+            dropdown.setAttribute('aria-expanded', 'false');
+            dropdownContent.style.display = 'none';
+        }
+    });
+});
+
+
+
+
         document.addEventListener('DOMContentLoaded', () => {
     // Setup custom cursor
     const cursor = document.createElement('div');

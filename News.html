@@ -18,10 +18,10 @@
     </script>
 </head>
 <body>
-    <!-- SKIP TO CONTENT -->
-    <a href="#maincontent" role="button" class="skip-link">Press enter to skip to page content, or press tab to continue</a>
-    <!-- Main Title -->
-    <header tabindex="0" aria-label="Introduction, press tab to skip. Welcome to GAZE International L G B T Q I A Film Festival. GAZE takes place in the Irish Film Institute and Light House Cinema from the 1st to the 5th of August 2024. This website can be used to learn more about the films and book tickets for the screenings. For more information on venue access and accommodations for disabilities, please contact the venues directly. To enter the main as the film festival logo, click or press enter.">
+            <!-- SKIP TO CONTENT -->
+            <a href="#maincontent" role="button" class="skip-link">Press enter to skip to the page content, or press tab to continue</a>
+                <!-- Main Title -->
+    <header tabindex="0" aria-label="Home Button, GAZE Film Festival">
         <a href="index.html" style="display: inline-block; cursor: pointer;">
             <img alt="Gaze Film Festival Logo, Page Header" src="img/gaze_logo.png">
         </a>
@@ -34,7 +34,7 @@
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" Director's Welcome message" role="button"><a href="Directors_Welcome.html">Director's Welcome</a></li>
                     <li tabindex="0" aria-label=" Manager's Welcome message" role="button"><a href="index.html">Manager's Welcome</a></li>
-                    <li tabindex="0" aria-label=" Latest news" role="button"><a href="News.html">News</a></li>
+                    <li tabindex="0" aria-label=" Latest news" role="button"><a href="index.html">News</a></li>
                 </ul>
             </li>
 
@@ -72,49 +72,31 @@
             </li>        
         </ul>
     </nav>
+    </nav>
     <!-- Main Body -->
     <main id="maincontent">
-
-        <section class="backgroundimg" title="A distorted, image of a person in a striped shirt with wet hair and a blue tongue.">
-            <p tabindex="0" role="heading">for the<br>girls, gaze, <br>and theys.</p>
-        </section>
-
-        <section class="blue">
-            <p tabindex="0" role="heading">at the light house cinema and irish film institute.</p>
-        </section>
-
-        <section class="backgroundimg2" title="A blurred, artistic image of a person with dark skin and short black hair, wearing green and yellow accents.">
-            <p tabindex="0" role="heading">feast your eyes...</p>
-        </section>
-
-        <section class="green">
-            <p tabindex="0" role="heading">fix your gaze...</p>
-        </section>
-
-        <section class="backgroundimg3" title="Two women sitting on a sofa with legs crossed, wearing sheer pantyhose and high-heels">
-            <p tabindex="0" role="heading">August 2024</p>
-        </section>
-
-        <section class="pink">
-            <p tabindex="0" role="heading">#gazefilmfest</p>
-        </section>
+        <article>
+            <iframe src="https://gaze-news.blogspot.com/2024/05/passionate-about-lgbtqia-cinema-you.html">
+        </article>
 
     </main>
     <!-- Footer -->
     <footer>
         <div class="social-icons">
-            <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" role="link">
+            <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
                 <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
             </a>
-            <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" role="link">
+            <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
                 <img src="img/facebook-app-round-white-icon.png" alt="Link to Facebook page" tabindex="0">
             </a>
-            <a href="https://www.twitter.com" target="_blank" aria-label="Twitter" role="link">
+            <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
                 <img src="img/x-social-media-white-icon.png" alt="Link to Twitter page" tabindex="0">
             </a>
         </div>
     </footer>
     <script>
+        
+
         
         // FOR ACCESIBLE DROPDOWN ARIA LABELS
         
@@ -138,6 +120,8 @@
         }
     });
 });
+
+
 
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -194,8 +178,6 @@
             });
         }
     });
-
-    
 
     // Header keyboard accessibility
     const header = document.querySelector('header');
