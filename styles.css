@@ -11,19 +11,34 @@
     body, a, button, input {
         cursor: none; /* Hide the default cursor for the body and all interactive elements */
     }
-    
+
 /* SKIP LINK STYLE */
 
     .skip-link {
-display: none;
+        top: -10vw;
+        position: absolute;
+        background-color: #161717;
+        color: #e0e0e0;
+        z-index: 10000;
       }
       
       .skip-link:focus {
-        display: none;
+        top: 0;
+        position: absolute;
+        background-color: #161717;
+        color: #e0e0e0;
+        opacity: 100%;
+        z-index: 10000;
     }
 
 
     /* FOCUS STYELS */
+    header:focus {
+        outline: 2px dashed white; /* white outline */
+        outline-offset: 2px;       /* Space between outline and element */
+        z-index: 3000;
+    }
+
     li:focus {
         outline: 2px dashed white; /* white outline */
         outline-offset: 2px;       /* Space between outline and element */
@@ -35,31 +50,16 @@ display: none;
         border-radius: 10px;
         outline-offset: 20px;       /* Space between outline and element */
         z-index: 1000;
-
     }
-    h1:focus, h2:focus, h3:focus {
+
+    .social-icons img:focus {
         outline: 2px dashed white; /* white outline */
-        outline-offset: -5px;       /* Space between outline and element */
-        z-index: 1000;
+        outline-offset: 2px -1px 2px -1px;       /* Space between outline and element */
+        z-index: 3000;
     }
 
-    h4:focus, h5:focus {
-        outline: 2px dashed black; /* white outline */
-        outline-offset: -5px;       /* Space between outline and element */
-        z-index: 1000;
-    }
 
-    article p:focus {
-        outline: 2px dashed black; /* white outline */
-        outline-offset: -10px;       /* Space between outline and element */
-        z-index: 1000;
-    }
-
-    figure:focus {
-        outline: 2px dashed white; /* white outline */
-        outline-offset: -10px;       /* Space between outline and element */
-        z-index: 2000;
-    }
+/* CUSTOM CURSOR */
 
     .custom-cursor {
         position: fixed;
@@ -78,6 +78,9 @@ display: none;
         border: 2px solid white;
         mix-blend-mode: normal;
     }
+
+
+
     
     /* MAIN HEADER */
 header {
@@ -85,7 +88,7 @@ header {
     width: 19vw;
     color: white;
     text-align: left;
-    background-color: white; /* Ensure this is not overridden */
+     background-color: white; /* Ensure this is not overridden */
     margin: 0;
     padding: 0;
     z-index: 1000;
@@ -106,58 +109,155 @@ header img {
     }
 }
 
-    
-    /* NAVIGATION MAIN */
-    nav {
-        position: fixed;
-        padding-top: 7.9vw;
-        width: 19vw;
-        background-color: #161717;
-        z-index: 900;
-    }
-    
-    nav ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-    }
-    
-    nav ul li {
-        position: relative;
-    }
-    
-    nav ul li a {
-        color: #f7f7f7;
-        padding: 0.7vw 2.5vw 0.7vw 1.5vw;
-        font-size: 2.1vw;
-        font-weight: 200;
-        display: block;
-        text-decoration: none;
-        border-left: 1vw solid white;
-    }
-    
-    nav ul li a span {
-        color: #8bd3f6;
-        font-weight: 900;
-    }
+
+/* Button to toggle the menu */
+.menu-toggle {
+    position: fixed;
+    top: 7.93vw;
+    left: 0; /* Ensure it starts from the edge */
+    width: 4vw;
+    height: 3vw;
+    background-color: #161717;
+    color: white;
+    font-size: 2vw;
+    z-index: 3000; /* Adjust if necessary to be above other elements */
+    cursor: pointer;
+    border: none;
+    padding: 0 1vw 0 1vw;
+    transition: width 0.3s ease; /* Smooth width transition */
+}
+
+.menu-toggle:before {
+    content: '☰'; /* Hamburger icon */
+    font-size: 2vw;
+    display: block;
+    text-align: center;
+}
+
+.menu-toggle.expanded:before {
+    content: 'MENU'; /* Close icon */
+    text-align: left;
+}
+
+.menu-toggle.expanded {
+    width: 17vw; /* Expanded width */
+    border: none;
+    background-color: #8bd3f6;
+    color: #161717;
+}
+
+/* PARENT NAV */
 
 
+/* Initial state of the navigation */
+nav {
+    position: fixed;
+    top: 10.9vw;
+    width: 14vw;
+    left: -20vw;  /* Explicitly start off-screen */
+    opacity: 0;  /* Start fully transparent */
+    z-index: 1100;
+    transition: left 0.3s ease, opacity 0.3s ease;  /* Smooth slide and fade transition */
+    box-shadow: 5px 0 15px rgba(0,0,0,0.2); /* Shadow for depth */
+}
 
-    nav ul li a:focus, 
+nav ul {
+    list-style-type: none;
+    background-color: #161717;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    position: relative;
+}
+
+nav ul li a {
+    color: #f7f7f7;
+    padding: 0.7vw 2.5vw 0.7vw 1.5vw;
+    font-size: 1.5vw;
+    font-weight: 200;
+    display: block;
+    text-decoration: none;
+    border-left: 1vw solid #f7f7f7;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+nav ul li a span {
+    color: #8bd3f6;
+    font-weight: 900;
+}
+
+nav ul li a:focus, 
 nav ul li a:hover {
     background-color: #d0d0d0;
     color: #161717;
-    outline: none; /* Optional: removes the default focus outline */
+    outline: none;
+    z-index: 1100;
+}
+
+
+
+/* NAVIGATION SUBMENU */
+.dropdown-content {
+    display: block;
+    position: absolute;
+    left: 12vw;
+    top: 0;
+    white-space: nowrap;
+    background-color: #f7f7f7;
+    border-left: none;
+    opacity: 0; /* Initially fully transparent */
+    transform: translateX(-3px); /* Start slightly above to give a dropping effect */
+    visibility: hidden; /* Initially not visible */
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease; /* Smooth transition for opacity, transform, and visibility */
+}
+
+.dropdown-content li {
+    display: inline-block;
+    text-align: left;
+    margin-right: -4px;
+}
+
+.dropdown-content li a {
+    font-size: 1vw;
+    border-left: none;
+    color: #161717;
+    padding: 0.5vw 0.6vw 0.5vw 0.6vw;
+    padding-left: 1.5vw;
+    padding-right: 1.5vw;
 }
 
 .dropdown-content a:hover {
     background-color: #161717;
     color: #f7f7f7;
+    z-index: 1100;
+} 
+.dropdown:focus .dropdown-content {
+    left: 17vw;
+    top: 0;
+    opacity: 1; /* Fully visible */
+    transform: translateX(0); /* Move to final vertical position */
+    visibility: visible; /* Make visible and interactable */
 }
+.dropdown:hover .dropdown-content {
+    left: 12vw;
+    top: 0;
+    opacity: 1; /* Fully visible */
+    transform: translateX(0); /* Move to final vertical position */
+    visibility: visible; /* Make visible and interactable */
+}
+
 
 /* Ensures dropdown stays visible when any child has focus */
 .dropdown:focus-within .dropdown-content {
     display: block;
+    z-index: 1100;
+    left: 12vw;
+    top: 0;
+    opacity: 1; /* Fully visible */
+    transform: translateX(0); /* Move to final vertical position */
+    visibility: visible; /* Make visible and interactable */
 }
 
 /* Style for focusing on links within the dropdown for better visibility */
@@ -165,44 +265,13 @@ nav ul li a:hover {
     background-color: #e0e0e0; /* Light grey background for focused links */
     color: #161717;
     outline: none; /* Optional: Adjust according to your visual design needs */
+    z-index: 1100;
 }
-    
-
-
-    /* NAVIGATION SUBMENU */
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        left: 16vw;
-        top: 0;
-        white-space: nowrap;
-        background-color: #f7f7f7;
-        border-left: none;
-    }
-    
-    .dropdown-content li {
-        display: inline-block;
-        text-align: left;
-    }
-    
-    .dropdown-content li a {
-        font-size: 1vw;
-        border-left: none;
-        color: #161717;
-        padding: 0.5vw 0.6vw 0.5vw 0.6vw;
-        padding-left: 1.5vw;
-        padding-right: 1.5vw;
-    }
-    
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
+   
     
     /* SECTION */
     
-    section {
-        margin-left: 19vw;
-        background-color: #f7f7f7;
+    section {        background-color: #f7f7f7;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -286,29 +355,31 @@ nav ul li a:hover {
     /* Article / lsiting  */
 
     article {
-        margin-left: 19vw;
         background-color: #f7f7f7;
         display: flex;
         flex-direction: column;
     }
 
     h2 {
-        background-color: #b2c5ff;
+        background-color: #8bd3f6;
         color: #161717;
-        font-size: 5vw;
-        padding-left: 3vw;
+        text-align: left;
+        font-size: 10vw;
+        line-height: 12vw;
+        padding-left: 23vw;
+        padding-top: 4vw;
+        padding-right: 25vw;
         margin: 0;
         font-weight: 600;
     }
 
     h3 {
-        background-color: #e0e0e0;
+        background-color: #8bd3f6;
         color: #161717;
-        font-size: 2vw;
-        font-weight: 500;
-        padding-left: 3vw;
-        padding-top: 1vw;
-        padding-bottom: 1vw;
+        font-size: 3vw;
+        font-weight: 300;
+        padding-left: 24vw;
+        padding-bottom: 4vw;
         margin: 0;
 
     }
@@ -316,10 +387,12 @@ nav ul li a:hover {
     figure {
         padding: 0;
         margin: 0;
-        height: 30vw; /* Fixed height */
-        width: 81vw; /* Adjust width as necessary */
+        height: 20vw; /* Fixed height */
+        width: 20vw; /* Adjust width as necessary */
         overflow: hidden; /* Ensures that any overflowing content is hidden */
-        position: relative; /* Ensures proper positioning of the image */
+        position:absolute; /* Ensures proper positioning of the image */
+        right: 0px;
+        top: 38.5vw;
     }
     
    figure img {
@@ -327,9 +400,10 @@ nav ul li a:hover {
         width: 100%;
         object-fit: cover; /* Covers the area, will be clipped to fit */
         position: absolute;
+        right: 0;
     }
     h4 {
-        padding: 1vw 3vw 0.5vw 4vw;
+        padding: 4vw 28vw 2vw 4vw;
         font-size: 1.5vw;
         font-weight: 500;
         margin: 0;
@@ -338,7 +412,7 @@ nav ul li a:hover {
 
 
     h5 {
-        padding: 0.5vw 3vw 1vw 4vw;
+        padding: 2vw 5vw 2vw 4vw;
         font-size: 1.5vw;
         font-weight: 300;
         margin: 0;
@@ -347,7 +421,7 @@ nav ul li a:hover {
     }
 
     article p {
-        padding: 1.5vw 20vw 1vw 4vw;
+        padding: 2vw 28vw 2vw 4vw;
         font-size: 1.3vw;
         font-weight: 200;
         margin: 0;
@@ -357,14 +431,20 @@ nav ul li a:hover {
     footer {
         background-color: #f7f7f7;
         height: 3.5vw;
-        width: 19vw;
+        width: 32vw;
         position: fixed;
         bottom: 0;
-        left: 0;
+       right: 0;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 1000;
+    }
+
+    footer.white-background {
+        background-color: #161717;
+        color: white;
+
     }
     
     .social-icons {
@@ -379,6 +459,21 @@ nav ul li a:hover {
         padding-right: 1vw;
         filter: invert(100%);
     }
+
+    footer.white-background .social-icons a img {
+        filter: invert(0%);
+    }
+
+    .footer-text {
+        color: black; /* Text color for readability on dark background */
+        font-size: 0.7vw; /* Adjusted to fit the smaller footer height on desktop */
+        text-align: right; /* Text aligned to the left */
+        padding-left: 2vw;
+        font-weight: 300;
+    }
+    footer.white-background .footer-text {
+        color: white; /* Sets the text color to white when within a 'white-background' footer */
+    }
     
     }
     
@@ -395,6 +490,24 @@ nav ul li a:hover {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+    
 
 
 
@@ -426,7 +539,9 @@ nav ul li a:hover {
         border-bottom: 1px solid black;
     }
 
-   
+   .menu-toggle {
+    display: none;
+   }
 header img {
     height: 10vw;
     width: auto;
@@ -446,6 +561,7 @@ nav ul {
     margin: 0;
     padding: 0;
     background-color: #161717;
+    color:#e0e0e0
 }
 
 nav ul li a {
@@ -462,7 +578,7 @@ li.dropdown {
 
 li.dropdown.active {
     background-color: #161717;
-    color:#161717;
+    color:#f7f7f7;
 }
 
 /* Submenu items display underneath the parent item */
@@ -487,11 +603,10 @@ li.dropdown.active {
     color: #161717;
 }
 
-/* Expand the submenu when the parent dropdown is active */
+/* Assuming active class is added via JS when dropdown is expanded */
 .dropdown.active .dropdown-content {
-    max-height: 1000px; /* Adjust as needed to fit content */
+    max-height: 1000px; /* Adjust based on content size */
 }
-
     
     /* SECTION */
     section {
@@ -572,7 +687,7 @@ article {
 }
 
 h2 {
-    background-color: #b2c5ff;
+    background-color: #8bd3f6;
     color: #161717;
     font-size: 8vw;
     padding-left: 3vw;
@@ -608,55 +723,72 @@ figure img {
     position: absolute;
 }
 
-h4 {
-    padding: 3vw 3vw 0.5vw 4vw;
+article h4 {
+    padding: 5vw 3vw 0.5vw 4vw;
     font-size: 4vw;
     font-weight: 500;
-    margin: 0;
+    margin-left: 7vw;
+    margin-top: 0;
+    margin-right: 6vw;
+    margin-bottom: 0;
 
 }
 
 
-h5 {
+article h5 {
     padding: 3vw 3vw 1vw 4vw;
     font-size: 4vw;
     font-weight: 300;
-    margin: 0;
+    margin-left: 7vw;
+    margin-top: 0;
+    margin-right: 5vw;
+    margin-bottom: 0;
     font-style: italic;
 
 }
 
 article p {
-    padding: 3vw 20vw 1vw 4vw;
+    padding: 3vw 13vw 1vw 4vw;
     font-size: 3.5vw;
     font-weight: 200;
-    margin: 0;
+    margin-left: 7vw;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
 }
     
-    /* Footer */
-    footer {
-        background-color: #f7f7f7;
-        height: 10vw;
-        width: 100%;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000; /* Ensure it stays on top of other elements */
-    }
-    
-    .social-icons {
-        display: flex;
-        gap: 20px;
-    }
-    
-    .social-icons a img {
-        height: 3vw; /* Adjust size as needed */
-        width: auto;
-        padding-left: 1vw;
-        padding-right: 1vw;
-        filter: invert(100%); /* Change icon color to white */
-    }
+/* Footer */
+footer {
+    background-color: #161717;
+    height: 12vw;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between; /* Align items on opposite ends */
+    align-items: center;
+    padding: 0 3vw; /* Add some horizontal padding */
+    z-index: 1000; /* Ensure it stays on top of other elements */
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons a img {
+    height: 5vw; /* Adjust size as needed */
+    width: auto;
+    padding-left: 1vw;
+    padding-right: 1vw;
+    padding-top: 1vw;
+}
+
+.footer-text {
+    color: white; /* Set the text color to white */
+    font-size: 2vw; /* Adjust the font size as needed */
+    padding-right: 7vw;
+    text-align: left; /* Align the text to the left */
+}
 }

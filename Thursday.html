@@ -18,29 +18,30 @@
     </script>
 </head>
 <body>
-            <!-- SKIP TO CONTENT -->
-            <a href="#maincontent" role="button" class="skip-link">Press enter to skip to the page content, or press tab to continue</a>
-                <!-- Main Title -->
-    <header tabindex="0" aria-label="Home Button, GAZE Film Festival">
+    <!-- SKIP TO CONTENT -->
+    <a href="#maincontent" role="button" tabindex="0" class="skip-link">Press enter to skip to page content, or press tab to continue</a>
+    <!-- Main Title -->
+    <header tabindex="0" aria-label="Introduction, press tab to skip. Welcome to GAZE International L G B T Q I A Film Festival. GAZE takes place in the Irish Film Institute and Light House Cinema from the 1st to the 5th of August 2024. This website can be used to learn more about the films and book tickets for the screenings. For more information on venue access and accommodations for disabilities, please contact the venues directly. To enter the main as the film festival logo, click or press enter.">
         <a href="index.html" style="display: inline-block; cursor: pointer;">
             <img alt="Gaze Film Festival Logo, Page Header" src="img/gaze_logo.png">
         </a>
     </header>
+    <!-- BUTTON TOGGLE MENU -->
+    <button class="menu-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="You are now on the main menu"></button>
     <!-- Menu -->
     <nav>
         <ul>
-            <li class="dropdown" tabindex="0" aria-label="You are now on the main menu, About, press tab to navigate to sub menu.">
+            <li class="dropdown" tabindex="0" aria-label="Main Menu Header, About">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">ABOUT</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" Director's Welcome message" role="button"><a href="Directors_Welcome.html">Director's Welcome</a></li>
-                    <li tabindex="0" aria-label=" Manager's Welcome message" role="button"><a href="index.html">Manager's Welcome</a></li>
-                    <li tabindex="0" aria-label=" Latest news" role="button"><a href="index.html">News</a></li>
+                    <li tabindex="0" aria-label=" Manager's Welcome message" role="button"><a href="chair.html">Chairperson's Welcome</a></li>
                 </ul>
             </li>
 
             <!-- HIDDEN FOR NOW
-            <li class="dropdown" tabindex="0" aria-label="main menu, Programme of events">
-                <a href="#" aria-haspopup="true" role="button">PROGRAMME</a>
+            <li class="dropdown" tabindex="0" aria-label="Main Menu Header, Programme of events">
+                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">PROGRAMME</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" View timetable" role="button"><a href="index.html">Timetable</a></li>
                     <li tabindex="0" aria-label=" view Films showing on Thursday the 2nd of August" role="button"><a href="Thursday.html">Thursday 1st</a></li>
@@ -50,20 +51,20 @@
                 </ul>
             </li>
             -->
-            <li class="dropdown" tabindex="0" aria-label="Main Menu, Support">
+            <li class="dropdown" tabindex="0" aria-label="Main Menu Header, Support">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">SUPPORT</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" Subscribe to newsletter" role="button"><a href="index.html">Subscribe</a></li>
                     <li tabindex="0" aria-label=" Become a Festival Friend" role="button"><a href="index.html">Festival Friends</a></li>
                 </ul>
             </li>
-            <li class="dropdown" tabindex="0" aria-label="Main Menu, GAZE Archive">
+            <li class="dropdown" tabindex="0" aria-label="Main Menu Header, GAZE Archive">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">ARCHIVE</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" View past programmes" role="button"><a href="index.html">Timeline</a></li>
                 </ul>
             </li>
-            <li class="dropdown" tabindex="0" aria-label="Main Menu, Submissions">
+            <li class="dropdown" tabindex="0" aria-label="Main Menu Header, Submissions">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">SUBMIT</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" Submit via Film Freeway" role="button"><a href="index.html">Film Freeway</a></li>
@@ -71,7 +72,6 @@
                 </ul>
             </li>        
         </ul>
-    </nav>
     </nav>
     <!-- Main Body -->
     <main id="maincontent">
@@ -106,153 +106,239 @@
     <!-- Footer -->
     <footer>
         <div class="social-icons">
-            <a href="https://www.instagram.com" target="_blank" aria-label="Instagram">
+            <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" role="link">
                 <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
             </a>
-            <a href="https://www.facebook.com" target="_blank" aria-label="Facebook">
+            <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" role="link">
                 <img src="img/facebook-app-round-white-icon.png" alt="Link to Facebook page" tabindex="0">
             </a>
-            <a href="https://www.twitter.com" target="_blank" aria-label="Twitter">
+            <a href="https://www.twitter.com" target="_blank" aria-label="Twitter" role="link">
                 <img src="img/x-social-media-white-icon.png" alt="Link to Twitter page" tabindex="0">
             </a>
         </div>
+        <div class="footer-text">
+            &copy; GAZE Film Festival 2024 | All rights reserved
+        </div>
     </footer>
-    <script>
-        
+   <script>
+    
+   document.addEventListener('DOMContentLoaded', function() {
+    const nav = document.querySelector('nav');
+    const toggleButton = document.querySelector('.menu-toggle');
+    const dropdowns = document.querySelectorAll('.dropdown');
+    const cursor = createCustomCursor();
 
+    if (window.matchMedia("(min-width: 768px)").matches) {
+        const cursor = createCustomCursor();
+        setupCustomCursor(cursor);
+        setupDropdowns(dropdowns);
+        setupMenuToggle(document.querySelector('.menu-toggle'), document.querySelector('nav'));
+    }
+    setupDropdownZZ(dropdowns);
+    setupAccessibility();
+    initializeParallaxEffects();
 
-        
-        // FOR ACCESIBLE DROPDOWN ARIA LABELS
-        
-        document.addEventListener('DOMContentLoaded', function() {
-    var dropdown = document.querySelector('.dropdown > a');
-    var dropdownContent = document.querySelector('.dropdown .dropdown-content');
-
-    // Toggle dropdown and aria-expanded attribute
-    dropdown.addEventListener('click', function(event) {
-        event.preventDefault();  // Prevent the default anchor behavior
-        var isExpanded = dropdown.getAttribute('aria-expanded') === 'true';
-        dropdown.setAttribute('aria-expanded', !isExpanded);
-        dropdownContent.style.display = isExpanded ? 'none' : 'block';
-    });
-
-    // Close the dropdown if clicking outside of it
-    document.addEventListener('click', function(event) {
-        if (!dropdown.contains(event.target)) {
-            dropdown.setAttribute('aria-expanded', 'false');
-            dropdownContent.style.display = 'none';
-        }
-    });
 });
 
-
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-    // Setup custom cursor
+function createCustomCursor() {
     const cursor = document.createElement('div');
     cursor.classList.add('custom-cursor');
     document.body.appendChild(cursor);
+    return cursor;
+}
 
+function setupCustomCursor(cursor) {
     document.addEventListener('mousemove', (e) => {
         cursor.style.left = `${e.clientX}px`;
         cursor.style.top = `${e.clientY}px`;
     });
 
     document.querySelectorAll('a, button, input').forEach(element => {
-        element.addEventListener('mouseenter', () => {
-            cursor.classList.add('hovered');
-        });
-        element.addEventListener('mouseleave', () => {
-            cursor.classList.remove('hovered');
-        });
+        element.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
+        element.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
+    });
+}
+
+// NAV FOCUS SETUP
+function setupFocusWithinNav(nav) {
+    const focusableElements = nav.querySelectorAll('a, button, input'); // Extend this selector to include other focusable elements if needed
+    focusableElements.forEach(element => {
+        element.addEventListener('focus', openMenu);
+    });
+}
+
+function setupMenuToggle(toggleButton, nav) {
+    let closeMenuTimeout;
+
+    // Function to open the menu
+    function openMenu() {
+        clearTimeout(closeMenuTimeout); // Clear any pending close command
+        nav.style.left = '0vw';
+        nav.style.opacity = '1';
+        toggleButton.setAttribute('aria-expanded', 'true');
+        toggleButton.classList.add('expanded');
+    }
+
+    // Function to close the menu
+    function closeMenu() {
+        clearTimeout(closeMenuTimeout); // Clear any pending open command to prevent conflicts
+        closeMenuTimeout = setTimeout(() => {
+            nav.style.left = '-20vw';
+            nav.style.opacity = '0';
+            toggleButton.setAttribute('aria-expanded', 'false');
+            toggleButton.classList.remove('expanded');
+        }, 2500); // Correct delay to 2000 milliseconds
+    }
+
+    // Toggle menu on click
+     // toggleButton.addEventListener('click', function() {
+     //    let isOpen = toggleButton.getAttribute('aria-expanded') === 'true';
+     //    if (isOpen) {
+     //        closeMenu();
+     //    } else {
+     //        openMenu();
+     //    }
+     // });
+
+    // Open menu on focus
+    toggleButton.addEventListener('focus', openMenu);
+
+    // Hover events
+    toggleButton.addEventListener('mouseenter', openMenu);
+    // Only close the menu when leaving both button and nav area
+    toggleButton.addEventListener('mouseleave', function(event) {
+        if (!nav.contains(event.relatedTarget)) {
+            closeMenu();
+        }
+    });
+    nav.addEventListener('mouseleave', function(event) {
+        if (!toggleButton.contains(event.relatedTarget)) {
+            closeMenu();
+        }
     });
 
-    // Dropdown functionality enhanced for keyboard and mobile support
-    const dropdowns = document.querySelectorAll('.dropdown');
+    // Ensure keyboard accessibility
+    toggleButton.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault(); // Stop default action
+            toggleButton.click(); // Simulate click for keyboard
+        }
+    });
+}
+
+function setupDropdowns(dropdowns) {
     dropdowns.forEach(dropdown => {
         const mainLink = dropdown.querySelector('a:first-child');
-        const parentLi = dropdown.parentElement;
+        const dropdownContent = dropdown.querySelector('.dropdown-content');
+        const dropdownLinks = dropdown.querySelectorAll('li');
 
-        mainLink.addEventListener('click', event => {
-            event.preventDefault(); // Prevent default link behavior
-            dropdown.classList.toggle('active');
+        mainLink.addEventListener('click', function(event) {
+            event.preventDefault();
+            const isExpanded = dropdownContent.style.maxHeight !== '';
+            mainLink.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+            dropdownContent.style.maxHeight = isExpanded ? '' : dropdownContent.scrollHeight + 'px';
         });
 
-        // Keyboard navigation enhancement
-        dropdown.querySelectorAll('li').forEach(li => {
-            li.addEventListener('keydown', (event) => {
-                if (event.key === "Enter") {
-                    const childAnchor = li.querySelector('a');
-                    if (childAnchor) {
-                        childAnchor.click();
-                        event.preventDefault();
-                    }
-                }
-            });
+        document.addEventListener('click', function(event) {
+            if (!dropdown.contains(event.target)) {
+                mainLink.setAttribute('aria-expanded', 'false');
+                dropdownContent.style.maxHeight = '';
+            }
         });
 
-        // Mobile-specific event handling for parent <li> elements
-        if (window.innerWidth <= 767) {
-            parentLi.addEventListener('keydown', (event) => {
-                if (event.key === "Enter") {
-                    dropdown.classList.toggle('active');
+        // Adding key press event for dropdown items
+        dropdownLinks.forEach(item => {
+            item.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
                     event.preventDefault();
-                }
-            });
-        }
-    });
-
-    // Header keyboard accessibility
-    const header = document.querySelector('header');
-    header.addEventListener('keydown', (event) => {
-        if (event.key === "Enter" || event.keyCode === 13) {
-            const link = header.querySelector('a');
-            if (link) {
-                window.location.href = link.href;
-            }
-        }
-    });
-});
-        
-            // Clicking outside of dropdowns closes them on desktop
-            document.addEventListener('click', event => {
-                if (!event.target.closest('.dropdown') && window.innerWidth > 767) {
-                    dropdowns.forEach(dropdown => {
-                        dropdown.classList.remove('active');
-                    });
-                }
-            });
-        
-            // Initialize parallax effects on desktop only
-            if (window.innerWidth > 768) {
-                applyParallaxEffect();
-            }
-        
-            // Reapply parallax effects on window resize if it crosses the threshold
-            window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) {
-                    applyParallaxEffect();
-                }
-            });
-        
-        function applyParallaxEffect() {
-            document.addEventListener('scroll', () => {
-                const backgrounds = [
-                    { element: document.querySelector('.backgroundimg'), startScroll: 100 },
-                    { element: document.querySelector('.backgroundimg2'), startScroll: 500 },
-                    { element: document.querySelector('.backgroundimg3'), startScroll: 1200 }
-                ];
-        
-                backgrounds.forEach(bg => {
-                    if (bg.element) {
-                        const scrollPosition = window.pageYOffset;
-                        const scale = scrollPosition > bg.startScroll ? 1 + (scrollPosition - bg.startScroll) * -0.0002 : 1;
-                        bg.element.style.transform = `scale(${scale})`;
+                    const link = item.querySelector('a');
+                    if (link) {
+                        link.click();
                     }
-                });
+                }
             });
+        });
+        
+    });
+}
+
+
+// MOBILE
+function setupDropdownZZ(dropdowns) {
+    dropdowns.forEach(dropdown => {
+        const mainLink = dropdown.querySelector('a:first-child');
+        const dropdownContent = dropdown.querySelector('.dropdown-content');
+
+        mainLink.addEventListener('click', function(event) {
+            if (window.innerWidth <= 768) {
+                event.preventDefault(); // Prevent navigation
+                const isExpanded = dropdownContent.style.maxHeight !== '';
+                mainLink.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+                dropdownContent.style.maxHeight = isExpanded ? '' : dropdownContent.scrollHeight + 'px';
+            }
+        });
+
+        // Clicking outside to close dropdown
+        document.addEventListener('click', function(event) {
+            if (!dropdown.contains(event.target)) {
+                mainLink.setAttribute('aria-expanded', 'false');
+                dropdownContent.style.maxHeight = '';
+            }
+        });
+    });
+}
+
+function setupAccessibility() {
+    // Enhance accessibility for keyboard navigation
+    document.querySelector('header').addEventListener('keydown', (event) => {
+        if (event.key === "Enter" || event.keyCode === 13) {
+            const link = event.target.querySelector('a');
+            if (link) {
+                link.click();
+            }
         }
-    </script>
+    });
+}
+
+function initializeParallaxEffects() {
+    if (window.innerWidth > 768) {
+        applyParallaxEffect();
+    }
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            applyParallaxEffect();
+        } else {
+            resetParallaxEffect();
+        }
+    });
+}
+
+function applyParallaxEffect() {
+    document.addEventListener('scroll', () => {
+        const backgrounds = [
+            { element: document.querySelector('.backgroundimg'), startScroll: 100 },
+            { element: document.querySelector('.backgroundimg2'), startScroll: 500 },
+            { element: document.querySelector('.backgroundimg3'), startScroll: 1200 }
+        ];
+
+        backgrounds.forEach(bg => {
+            if (bg.element) {
+                const scrollPosition = window.pageYOffset;
+                const scale = scrollPosition > bg.startScroll ? 1 + (scrollPosition - bg.startScroll) * -0.0002 : 1;
+                bg.element.style.transform = `scale(${scale})`;
+            }
+        });
+    });
+}
+
+function resetParallaxEffect() {
+    const backgrounds = [document.querySelector('.backgroundimg'), document.querySelector('.backgroundimg2'), document.querySelector('.backgroundimg3')];
+    backgrounds.forEach(bg => {
+        if (bg) {
+            bg.style.transform = 'scale(1)';
+        }
+    });
+}
+</script>
 </body>
 </html>
