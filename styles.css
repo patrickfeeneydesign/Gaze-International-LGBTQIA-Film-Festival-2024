@@ -1,6 +1,8 @@
 /* Desktop styles */
 @media (min-width: 768px) {
 
+
+
     body {
         font-family: tt-commons-pro, sans-serif;
         margin: 0;
@@ -11,6 +13,17 @@
     body, a, button, input {
         cursor: none; /* Hide the default cursor for the body and all interactive elements */
     }
+
+
+
+
+/* HIDDEN ON DESKTOP */
+
+.desktophide {
+    display:none;
+}
+
+
 
 /* SKIP LINK STYLE */
 
@@ -94,6 +107,19 @@ header {
     z-index: 1000;
 }
 
+    /* MAIN HEADER */
+    header.firstpage {
+        position: fixed;
+        width: 19vw;
+        color: white;
+        text-align: left;
+        background-color: transparent; /* Ensure this is not overridden */
+        border-bottom: 1px solid white;
+        margin: 0;
+        padding: 0;
+        z-index: 4000;
+    }
+
 header img {
     height: 3.5vw;
     width: auto;
@@ -110,6 +136,9 @@ header img {
 }
 
 
+
+
+
 /* Button to toggle the menu */
 .menu-toggle {
     position: fixed;
@@ -119,17 +148,17 @@ header img {
     height: 3vw;
     background-color: #161717;
     color: white;
-    font-size: 2vw;
+    font-size: 1.7vw;
     z-index: 3000; /* Adjust if necessary to be above other elements */
     cursor: pointer;
     border: none;
-    padding: 0 1vw 0 1vw;
+    padding: 0 1vw 0 0.5vw;
     transition: width 0.3s ease; /* Smooth width transition */
 }
 
 .menu-toggle:before {
     content: '☰'; /* Hamburger icon */
-    font-size: 2vw;
+    font-size: 1.7vw;
     display: block;
     text-align: center;
 }
@@ -137,10 +166,13 @@ header img {
 .menu-toggle.expanded:before {
     content: 'MENU'; /* Close icon */
     text-align: left;
+    font-size: 1.7vw;
+    padding: 0 1vw 0 1vw;
+
 }
 
 .menu-toggle.expanded {
-    width: 17vw; /* Expanded width */
+    width: 19vw; /* Expanded width */
     border: none;
     background-color: #8bd3f6;
     color: #161717;
@@ -157,7 +189,7 @@ nav {
     left: -20vw;  /* Explicitly start off-screen */
     opacity: 0;  /* Start fully transparent */
     z-index: 1100;
-    transition: left 0.3s ease, opacity 0.3s ease;  /* Smooth slide and fade transition */
+    transition: left 0.3s ease-in-out, opacity 0.3s ease-in-out;  /* Smooth slide and fade transition */
     box-shadow: 5px 0 15px rgba(0,0,0,0.2); /* Shadow for depth */
 }
 
@@ -174,7 +206,7 @@ nav ul li {
 
 nav ul li a {
     color: #f7f7f7;
-    padding: 0.7vw 2.5vw 0.7vw 1.5vw;
+    padding: 15px 20px 15px 20px;
     font-size: 1.5vw;
     font-weight: 200;
     display: block;
@@ -202,7 +234,7 @@ nav ul li a:hover {
 .dropdown-content {
     display: block;
     position: absolute;
-    left: 12vw;
+    left: 13vw;
     top: 0;
     white-space: nowrap;
     background-color: #f7f7f7;
@@ -214,7 +246,7 @@ nav ul li a:hover {
 }
 
 .dropdown-content li {
-    display: inline-block;
+    display: block;
     text-align: left;
     margin-right: -4px;
 }
@@ -224,8 +256,7 @@ nav ul li a:hover {
     border-left: none;
     color: #161717;
     padding: 0.5vw 0.6vw 0.5vw 0.6vw;
-    padding-left: 1.5vw;
-    padding-right: 1.5vw;
+    padding: 15px;
 }
 
 .dropdown-content a:hover {
@@ -234,14 +265,13 @@ nav ul li a:hover {
     z-index: 1100;
 } 
 .dropdown:focus .dropdown-content {
-    left: 17vw;
     top: 0;
     opacity: 1; /* Fully visible */
     transform: translateX(0); /* Move to final vertical position */
     visibility: visible; /* Make visible and interactable */
 }
 .dropdown:hover .dropdown-content {
-    left: 12vw;
+    left: 13vw;
     top: 0;
     opacity: 1; /* Fully visible */
     transform: translateX(0); /* Move to final vertical position */
@@ -253,7 +283,6 @@ nav ul li a:hover {
 .dropdown:focus-within .dropdown-content {
     display: block;
     z-index: 1100;
-    left: 12vw;
     top: 0;
     opacity: 1; /* Fully visible */
     transform: translateX(0); /* Move to final vertical position */
@@ -269,9 +298,16 @@ nav ul li a:hover {
 }
    
     
+
+
+
+
+
+/* MAIN */
+
     /* SECTION */
     
-    section {        background-color: #f7f7f7;
+    section {        background-color: #161717;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -283,43 +319,44 @@ nav ul li a:hover {
     section p {
         line-height: 7vw;
         font-size: 10vh;
-        color: #161717;
+        color: #8bd3f6;
         font-weight: 600;
     }
+
+section p a {
+    text-decoration: none;
+    color: #f7f7f7;
+}
+section p a:hover {
+    text-decoration: none;
+    color: #ffa2e2;
     
-    .blue {
-        background-color: #8bd3f6;
-    }
-
-    .green {
-        background-color: #c7e87b;
-    }
-
-    .pink {
-        background-color: #f084e6;
-    }
+}
 
     /* This area contains styling for the sections which have images in the bacgkround */ 
 
 
     .backgroundimg {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/Yonghong02.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/ARM2.jpg');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+        height: 80vh;
         /* Initial scale for the background image */
         transform: scale(1);
         transition: transform 0.2s ease-out; /* Smooth transition */
         z-index: 1;
-    }
+        }
     
     .backgroundimg p {
         color: #f7f7f7;
+        line-height: 9vw;
+        font-size: 7vw;
     }
     
         
     .backgroundimg2 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_EDEN_Marlen_Stahlhuth_10124.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/BLURONE.png');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -327,6 +364,7 @@ nav ul li a:hover {
         transform: scale(1);
         transition: transform 0.2s ease-out; /* Smooth transition */
         z-index: 1;
+
     }
     
     .backgroundimg2 p {
@@ -334,7 +372,7 @@ nav ul li a:hover {
     }
 
     .backgroundimg3 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS__80s-shoot_by-Ivan-Resnik_00013.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/MALEONE.png');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -342,6 +380,7 @@ nav ul li a:hover {
         transform: scale(1);
         transition: transform 0.2s ease-out; /* Smooth transition */
         z-index: 1;
+
     }
     
     .backgroundimg3 p {
@@ -361,8 +400,8 @@ nav ul li a:hover {
     }
 
     h2 {
-        background-color: #8bd3f6;
-        color: #161717;
+        background-color: #161717;
+        color: #f7f7f7;
         text-align: left;
         font-size: 10vw;
         line-height: 12vw;
@@ -374,8 +413,8 @@ nav ul li a:hover {
     }
 
     h3 {
-        background-color: #8bd3f6;
-        color: #161717;
+        background-color: #161717;
+        color: #8bd3f6;
         font-size: 3vw;
         font-weight: 300;
         padding-left: 24vw;
@@ -441,7 +480,7 @@ nav ul li a:hover {
         z-index: 1000;
     }
 
-    footer.white-background {
+    footer.black-background {
         background-color: #161717;
         color: white;
 
@@ -460,7 +499,7 @@ nav ul li a:hover {
         filter: invert(100%);
     }
 
-    footer.white-background .social-icons a img {
+    footer.black-background .social-icons a img {
         filter: invert(0%);
     }
 
@@ -471,12 +510,20 @@ nav ul li a:hover {
         padding-left: 2vw;
         font-weight: 300;
     }
-    footer.white-background .footer-text {
+    footer.black-background .footer-text {
         color: white; /* Sets the text color to white when within a 'white-background' footer */
     }
     
     }
     
+
+
+
+
+
+
+
+
 
 
 
@@ -522,6 +569,16 @@ nav ul li a:hover {
         padding: 0;
         background-color: #161717;
     }
+
+
+/* HIDDEN ON mobile */
+
+.mobilehide {
+    display:none;
+}
+
+
+
 
     /* SKIP LINK STYLE */
 
@@ -610,7 +667,7 @@ li.dropdown.active {
     
     /* SECTION */
     section {
-        background-color: #f7f7f7;
+        background-color: #161717;
         display: flex;
         flex-direction: column; /* Ensures text and other elements are stacked vertically */
         align-items: center;
@@ -619,21 +676,22 @@ li.dropdown.active {
     }
     
     section p {
-        line-height: 7vh;
-        font-size: 7vh; /* Adjust this value to change the text size */
-        color: #161717;
+        line-height: 13vw;
+        font-size: 12vw; /* Adjust this value to change the text size */
+        color: #8bd3f6;
         font-weight: 600;
-    }
-    
-    .blue {
-        background-color: #8bd3f6;
+        padding: 5vw;
     }
     
 
+    section p a {
+        text-decoration: underline;
+        color: #f7f7f7;
+    }
 
     .backgroundimg {
         /* LINEAR GRADIENT TO TINT THE IMAGE DARKER */ 
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/Yonghong02.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/ARM2.jpg');
         background-size: cover;
     }
     
@@ -644,7 +702,7 @@ li.dropdown.active {
 
 
     .backgroundimg2 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_EDEN_Marlen_Stahlhuth_10124.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/BLURONE.png');
         background-size:cover;
     }
 
@@ -653,7 +711,7 @@ li.dropdown.active {
     }
 
     .backgroundimg3 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS__80s-shoot_by-Ivan-Resnik_00013.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/MALEONE.png');
         background-size:cover;
 
     }
@@ -662,17 +720,8 @@ li.dropdown.active {
         color: #f7f7f7;
     }
 
-    
-    .blue {
-        background-color: #8bd3f6;
-    }
-
-    .green {
-        background-color: #c7e87b;
-    }
-
     .pink {
-        background-color: #f084e6;
+        background-color: #161717;
         /* ADDING A MARGIN BECUASE OF FOOTER OVERLAP */
         margin-bottom: 10vw;
     }
@@ -754,7 +803,7 @@ article p {
     margin-left: 7vw;
     margin-top: 0;
     margin-right: 0;
-    margin-bottom: 0;
+    margin-bottom: 7vw;
 }
     
 /* Footer */

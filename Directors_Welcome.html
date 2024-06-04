@@ -19,11 +19,11 @@
 </head>
 <body>
     <!-- SKIP TO CONTENT -->
-    <a href="#maincontent" role="button" tabindex="0" class="skip-link">Director's Welcome Message. Press enter to skip to page content, or press tab to navigate menu</a>
+    <a href="#maincontent" role="link" tabindex="0" class="skip-link">Director's Welcome Message. Press enter to skip to page content, or press tab to navigate menu</a>
     <!-- Main Title -->
     <header tabindex="0" aria-label="Home Button">
         <a href="index.html" style="display: inline-block; cursor: pointer;">
-            <img alt="Gaze Film Festival Logo, Page Header" src="img/gaze_logo.png">
+            <img src="img/gaze_logo.png">
         </a>
     </header>
     <!-- BUTTON TOGGLE MENU -->
@@ -31,11 +31,12 @@
     <!-- Menu -->
     <nav>
         <ul>
-            <li class="dropdown" tabindex="0" aria-label="Menu Section, About">
+            <li class="dropdown" tabindex="0" aria-label="Main Menu Header, About">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">ABOUT</a>
                 <ul class="dropdown-content">
+                    <li tabindex="0" aria-label=" Who are we?" role="button"><a href="whoarewe.html">Who Are We?</a></li>
                     <li tabindex="0" aria-label=" Director's Welcome message" role="button"><a href="Directors_Welcome.html">Director's Welcome</a></li>
-                    <li tabindex="0" aria-label=" Manager's Welcome message" role="button"><a href="chair.html">Chairperson's Welcome</a></li>
+                    <li tabindex="0" aria-label=" Manager's Welcome message" role="button"><a href="chair.html">Chair's Welcome</a></li>
                 </ul>
             </li>
 
@@ -109,15 +110,15 @@
 
     </main>
    <!-- Footer -->
-<footer class="white-background">
+   <footer class="black-background">
     <div class="social-icons">
-        <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" role="link">
+        <a href="https://www.instagram.com/gazefilmfest/" target="_blank" aria-label="Instagram" role="link">
             <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
         </a>
-        <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" role="link">
+        <a href="https://www.facebook.com/gazefilmfest/" target="_blank" aria-label="Facebook" role="link">
             <img src="img/facebook-app-round-white-icon.png" alt="Link to Facebook page" tabindex="0">
         </a>
-        <a href="https://www.twitter.com" target="_blank" aria-label="Twitter" role="link">
+        <a href="https://x.com/GAZEfilmfest" target="_blank" aria-label="Twitter" role="link">
             <img src="img/x-social-media-white-icon.png" alt="Link to Twitter page" tabindex="0">
         </a>
     </div>
@@ -322,8 +323,8 @@ function applyParallaxEffect() {
 document.addEventListener('scroll', () => {
     const backgrounds = [
         { element: document.querySelector('.backgroundimg'), startScroll: 100 },
-        { element: document.querySelector('.backgroundimg2'), startScroll: 500 },
-        { element: document.querySelector('.backgroundimg3'), startScroll: 1200 }
+        { element: document.querySelector('.backgroundimg2'), startScroll: 700 },
+        { element: document.querySelector('.backgroundimg3'), startScroll: 2000 }
     ];
 
     backgrounds.forEach(bg => {

@@ -19,23 +19,25 @@
 </head>
 <body>
     <!-- SKIP TO CONTENT -->
-    <a href="#maincontent" role="button" tabindex="0" class="skip-link">GAZE International L G B T Q I A Film Festival Home Page, press enter to skip to main content or press tab to continue.</a>
+    <a href="#maincontent" role="link" tabindex="0" class="skip-link">GAZE International L G B T Q I A Film Festival Home Page, press enter to skip to main content or press tab to continue.</a>
     <!-- Main Title -->
-    <header tabindex="0" aria-label="Home Button">
+    <header tabindex="0" aria-label="Home Button" class="firstpage">
         <a href="index.html" style="display: inline-block; cursor: pointer;">
-            <img alt="Gaze Film Festival Logo, Page Header" src="img/gaze_logo.png">
+            <img class="mobilehide" src="img/gaze_logo_white.png">
+            <img class="desktophide" src="img/gaze_logo.png">
         </a>
     </header>
     <!-- BUTTON TOGGLE MENU -->
-    <button class="menu-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="The main menu is now open, press tab to navigate"></button>
+    <button class="menu-toggle" class="pageone" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="The main menu is now open, press tab to navigate"></button>
     <!-- Menu -->
     <nav>
         <ul>
             <li class="dropdown" tabindex="0" aria-label="Main Menu Header, About">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">ABOUT</a>
                 <ul class="dropdown-content">
+                    <li tabindex="0" aria-label=" Who are we?" role="button"><a href="whoarewe.html">Who Are We?</a></li>
                     <li tabindex="0" aria-label=" Director's Welcome message" role="button"><a href="Directors_Welcome.html">Director's Welcome</a></li>
-                    <li tabindex="0" aria-label=" Manager's Welcome message" role="button"><a href="chair.html">Chairperson's Welcome</a></li>
+                    <li tabindex="0" aria-label=" Manager's Welcome message" role="button"><a href="chair.html">Chair's Welcome</a></li>
                 </ul>
             </li>
 
@@ -76,15 +78,15 @@
     <!-- Main Body -->
     <main id="maincontent">
 
-        <section class="backgroundimg" title="A distorted, image of a person in a striped shirt with wet hair and a blue tongue.">
+        <section class="backgroundimg" aria-label="A distorted, image of a person in a striped shirt with wet hair and a blue tongue.">
             <p tabindex="0" role="heading">for the<br>girls, gaze, <br>and theys.</p>
         </section>
 
         <section class="blue">
-            <p tabindex="0" role="heading">at the light house cinema and irish film institute.</p>
+            <p tabindex="0" role="heading">at the <a href="https://www.lighthousecinema.ie/" target="_blank">light house cinema</a> and <a href="https://ifi.ie/" target="_blank">irish film institute.</a></p>
         </section>
 
-        <section class="backgroundimg2" title="A blurred, artistic image of a person with dark skin and short black hair, wearing green and yellow accents.">
+        <section class="backgroundimg2" aria-label="A blurred, artistic image of a person with dark skin and short black hair, wearing green and yellow accents.">
             <p tabindex="0" role="heading">feast your eyes...</p>
         </section>
 
@@ -92,7 +94,7 @@
             <p tabindex="0" role="heading">fix your gaze...</p>
         </section>
 
-        <section class="backgroundimg3" title="Two women sitting on a sofa with legs crossed, wearing sheer pantyhose and high-heels">
+        <section class="backgroundimg3" aria-label="Two women sitting on a sofa with legs crossed, wearing sheer pantyhose and high-heels">
             <p tabindex="0" role="heading">August 2024</p>
         </section>
 
@@ -104,13 +106,13 @@
     <!-- Footer -->
     <footer>
         <div class="social-icons">
-            <a href="https://www.instagram.com" target="_blank" aria-label="Instagram" role="link">
+            <a href="https://www.instagram.com/gazefilmfest/" target="_blank" aria-label="Instagram" role="link">
                 <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
             </a>
-            <a href="https://www.facebook.com" target="_blank" aria-label="Facebook" role="link">
+            <a href="https://www.facebook.com/gazefilmfest/" target="_blank" aria-label="Facebook" role="link">
                 <img src="img/facebook-app-round-white-icon.png" alt="Link to Facebook page" tabindex="0">
             </a>
-            <a href="https://www.twitter.com" target="_blank" aria-label="Twitter" role="link">
+            <a href="https://x.com/GAZEfilmfest" target="_blank" aria-label="Twitter" role="link">
                 <img src="img/x-social-media-white-icon.png" alt="Link to Twitter page" tabindex="0">
             </a>
         </div>
@@ -315,14 +317,14 @@ function applyParallaxEffect() {
     document.addEventListener('scroll', () => {
         const backgrounds = [
             { element: document.querySelector('.backgroundimg'), startScroll: 100 },
-            { element: document.querySelector('.backgroundimg2'), startScroll: 500 },
-            { element: document.querySelector('.backgroundimg3'), startScroll: 1200 }
+            { element: document.querySelector('.backgroundimg2'), startScroll: 700 },
+            { element: document.querySelector('.backgroundimg3'), startScroll: 2000 }
         ];
 
         backgrounds.forEach(bg => {
             if (bg.element) {
                 const scrollPosition = window.pageYOffset;
-                const scale = scrollPosition > bg.startScroll ? 1 + (scrollPosition - bg.startScroll) * -0.0002 : 1;
+                const scale = scrollPosition > bg.startScroll ? 1 + (scrollPosition - bg.startScroll) * 0.0001 : 1;
                 bg.element.style.transform = `scale(${scale})`;
             }
         });
