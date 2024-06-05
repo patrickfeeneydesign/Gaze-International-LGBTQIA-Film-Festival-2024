@@ -56,8 +56,8 @@
             <li class="dropdown" tabindex="0" aria-label="Main Menu Header, Support">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">SUPPORT</a>
                 <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" Subscribe to newsletter" role="button"><a href="index.html">Subscribe</a></li>
-                    <li tabindex="0" aria-label=" Become a Festival Friend" role="button"><a href="index.html">Festival Friends</a></li>
+                    <li tabindex="0" aria-label=" Subscribe to newsletter" role="button"><a href="Subscribe.html">Subscribe</a></li>
+                    <li tabindex="0" aria-label=" Become a Festival Friend" role="button"><a href="friend.html">Become a Friend</a></li>
                 </ul>
             </li>
             <li class="dropdown" tabindex="0" aria-label="Main Menu Header, GAZE Archive">
@@ -122,7 +122,7 @@
     </footer>
    <script>
     
-   document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('nav');
     const toggleButton = document.querySelector('.menu-toggle');
     const dropdowns = document.querySelectorAll('.dropdown');
@@ -317,6 +317,7 @@ function applyParallaxEffect() {
     document.addEventListener('scroll', () => {
         const backgrounds = [
             { element: document.querySelector('.backgroundimg'), startScroll: 100 },
+            { element: document.querySelector('.animate'), startScroll: 0 },
             { element: document.querySelector('.backgroundimg2'), startScroll: 700 },
             { element: document.querySelector('.backgroundimg3'), startScroll: 2000 }
         ];
@@ -332,7 +333,7 @@ function applyParallaxEffect() {
 }
 
 function resetParallaxEffect() {
-    const backgrounds = [document.querySelector('.backgroundimg'), document.querySelector('.backgroundimg2'), document.querySelector('.backgroundimg3')];
+    const backgrounds = [document.querySelector('.backgroundimg'), document.querySelector('.animate'), document.querySelector('.backgroundimg2'), document.querySelector('.backgroundimg3')];
     backgrounds.forEach(bg => {
         if (bg) {
             bg.style.transform = 'scale(1)';

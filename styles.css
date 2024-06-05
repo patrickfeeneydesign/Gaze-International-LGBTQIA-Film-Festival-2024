@@ -5,6 +5,7 @@
 html, body {
 
     overflow-x: hidden;
+    
 }
     body {
         font-family: tt-commons-pro, sans-serif;
@@ -101,7 +102,8 @@ html, body {
     /* MAIN HEADER */
 header {
     position: fixed;
-    width: 19vw;
+    width: max(18vw, 230px);
+    min-height: 100px;
     color: white;
     text-align: left;
      background-color: white; /* Ensure this is not overridden */
@@ -126,6 +128,8 @@ header {
 header img {
     height: 3.5vw;
     width: auto;
+    min-width: 50px;
+    min-height: 50px;
     padding: 2vw;
     -moz-transition: all 0.3s; /* Mozilla specific transition */
     transition: all 0.3s;
@@ -140,19 +144,20 @@ header img {
 
 
 
-
-
 /* Button to toggle the menu */
 .menu-toggle {
     position: fixed;
-    top: 7.93vw;
+    top: max(7.93vw, 100px);
     left: 0; /* Ensure it starts from the edge */
     width: 4vw;
     height: 3vw;
+    min-width: 50px;
+    min-height: 40px;
     background-color: #161717;
+    z-index: 3500; /* Adjust if necessary to be above other elements */
+
     color: white;
-    font-size: 1.7vw;
-    z-index: 3000; /* Adjust if necessary to be above other elements */
+    font-size: max(1.7vw, 30px);
     cursor: pointer;
     border: none;
     padding: 0 1vw 0 0.5vw;
@@ -161,7 +166,8 @@ header img {
 
 .menu-toggle:before {
     content: '☰'; /* Hamburger icon */
-    font-size: 1.7vw;
+    font-size: max(1.7vw, 20px);
+    z-index: 3000; /* Adjust if necessary to be above other elements */
     display: block;
     text-align: center;
 }
@@ -169,7 +175,9 @@ header img {
 .menu-toggle.expanded:before {
     content: 'MENU'; /* Close icon */
     text-align: left;
-    font-size: 1.7vw;
+    z-index: 5000; /* Adjust if necessary to be above other elements */
+
+    font-size: max(1.7vw, 20px);
     padding: 0 1vw 0 1vw;
 
 }
@@ -177,6 +185,8 @@ header img {
 .menu-toggle.expanded {
     width: 19vw; /* Expanded width */
     border: none;
+    z-index: 5000; /* Adjust if necessary to be above other elements */
+
     background-color: #8bd3f6;
     color: #161717;
 }
@@ -187,7 +197,7 @@ header img {
 /* Initial state of the navigation */
 nav {
     position: fixed;
-    top: 10.9vw;
+    top: max(10.9vw, 140px);
     width: 14vw;
     left: -20vw;  /* Explicitly start off-screen */
     opacity: 0;  /* Start fully transparent */
@@ -210,7 +220,7 @@ nav ul li {
 nav ul li a {
     color: #f7f7f7;
     padding: 15px 20px 15px 20px;
-    font-size: 1.5vw;
+    font-size: max(1.5vw, 19px);
     font-weight: 200;
     display: block;
     text-decoration: none;
@@ -255,7 +265,7 @@ nav ul li a:hover {
 }
 
 .dropdown-content li a {
-    font-size: 1vw;
+    font-size: max(1vw, 13px);
     border-left: none;
     color: #161717;
     padding: 0.5vw 0.6vw 0.5vw 0.6vw;
@@ -320,7 +330,7 @@ nav ul li a:hover {
     }
     
     section p {
-        line-height: 7vw;
+        line-height: 10vh;
         font-size: 10vh;
         color: #8bd3f6;
         font-weight: 600;
@@ -332,7 +342,7 @@ section p a {
 }
 section p a:hover {
     text-decoration: none;
-    color: #ffa2e2;
+    color: #82ed97;
     
 }
 
@@ -359,7 +369,7 @@ section p a:hover {
     
         
     .backgroundimg2 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/BLURONE.png');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_TOUCHING_GRASS__JELLY_LUISE_9948.jpg');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -375,7 +385,7 @@ section p a:hover {
     }
 
     .backgroundimg3 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/MALEONE.png');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_TOUCHING_GRASS__JELLY_LUISE_9927.jpg');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -445,8 +455,8 @@ section p a:hover {
         right: 0;
     }
     h4 {
-        padding: 4vw 28vw 2vw 4vw;
-        font-size: 1.5vw;
+        padding: 4vw 36vw 2vw 8vw;
+        font-size: max(1.5vw, 30px);
         font-weight: 500;
         margin: 0;
 
@@ -454,8 +464,8 @@ section p a:hover {
 
 
     h5 {
-        padding: 2vw 5vw 2vw 4vw;
-        font-size: 1.5vw;
+        padding: 2vw 5vw 2vw 8vw;
+        font-size: max(1.5vw, 30px);
         font-weight: 300;
         margin: 0;
         font-style: italic;
@@ -463,12 +473,117 @@ section p a:hover {
     }
 
     article p {
-        padding: 2vw 28vw 2vw 4vw;
-        font-size: 1.3vw;
+        padding: 2vw 28vw 2vw 8vw;
+        font-size: max(1.3vw, 20px);
         font-weight: 200;
         margin: 0;
     }
     
+
+
+    
+
+
+
+
+
+
+
+/* FORM SUBSCRIBE */
+/* FORM SUBSCRIBE */
+#mc_embed_signup {
+    
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    padding: 20px;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_TOUCHING_GRASS__JELLY_LUISE_9948.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+fieldset {
+    margin-top: 6vw;
+
+    margin-bottom: 20px;
+    width: 50vw;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 1vw;
+    color: #f7f7f7;
+}
+
+legend:focus {
+    outline: 2px dashed white; /* white outline */
+    outline-offset: 2px;       /* Space between outline and element */
+    z-index: 1000;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #f7f7f7;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 36vw;
+    height: 3vw;
+    background-color: #161717;
+    color: #f7f7f7;
+    font-size: medium;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    outline: 2px dashed white; /* white outline */
+    outline-offset: 2px;       /* Space between outline and element */
+    z-index: 1000;
+}
+
+input[type="submit"] {
+    background-color: #161717;
+    border-radius: 2vw;
+    margin-top: 6vw;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 2em;
+    height: 5vw;
+    width: 12vw;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:focus {
+    outline: 2px dashed white; /* white outline */
+    outline-offset: 2px;       /* Space between outline and element */
+    z-index: 1000;
+}
+
+input[type="submit"]:hover {
+    background-color: #333;
+}
+
+
+
+
+
+
+
+
+
+
     /* Footer */
     footer {
         background-color: #f7f7f7;
@@ -705,7 +820,7 @@ li.dropdown.active {
 
 
     .backgroundimg2 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/BLURONE.png');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_TOUCHING_GRASS__JELLY_LUISE_9948.jpg');
         background-size:cover;
     }
 
@@ -714,7 +829,7 @@ li.dropdown.active {
     }
 
     .backgroundimg3 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/MALEONE.png');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_TOUCHING_GRASS__JELLY_LUISE_9927.jpg');
         background-size:cover;
 
     }
@@ -739,7 +854,7 @@ article {
 }
 
 h2 {
-    background-color: #8bd3f6;
+    background-color: #e0e0e0;
     color: #161717;
     font-size: 8vw;
     padding-left: 3vw;
@@ -809,6 +924,102 @@ article p {
     margin-bottom: 7vw;
 }
     
+
+
+
+
+
+
+
+
+/* FORM SUBSCRIBE */
+/* FORM SUBSCRIBE */
+#mc_embed_signup {
+    
+    width: 100vw;
+    height: 100vh;
+    margin: auto;
+    padding: 20px;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_TOUCHING_GRASS__JELLY_LUISE_9948.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+fieldset {
+    margin-top: 60vw;
+
+    margin-bottom: 30vw;
+    width: 70vw;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 1vw;
+    color: #f7f7f7;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #f7f7f7;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 58vw;
+    height: 10vw;
+    background-color: #161717;
+    color: #f7f7f7;
+    font-size: medium;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: #161717;
+    border-radius: 2vw;
+    margin-top: 6vw;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 2em;
+    height: 15vw;
+    width: 30vw;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #8bd3f6;
+    color: #161717;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Footer */
 footer {
     background-color: #161717;
