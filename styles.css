@@ -2,7 +2,10 @@
 @media (min-width: 768px) {
 
 
+html, body {
 
+    overflow-x: hidden;
+}
     body {
         font-family: tt-commons-pro, sans-serif;
         margin: 0;
