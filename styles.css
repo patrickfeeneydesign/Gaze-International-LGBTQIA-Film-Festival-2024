@@ -39,7 +39,7 @@ html, body {
         z-index: 10000;
       }
       
-      .skip-link:focus {
+      .skip-link:focus-visible {
         top: 0;
         position: absolute;
         background-color: #161717;
@@ -50,26 +50,26 @@ html, body {
 
 
     /* FOCUS STYELS */
-    header:focus {
+    header:focus-visible {
         outline: 2px dashed white; /* white outline */
         outline-offset: 2px;       /* Space between outline and element */
         z-index: 3000;
     }
 
-    li:focus {
+    li:focus-visible {
         outline: 2px dashed white; /* white outline */
         outline-offset: 2px;       /* Space between outline and element */
         z-index: 1000;
     }
 
-    section p:focus {
+    section p:focus-visible {
         outline: 4px dashed white; /* white outline */
         border-radius: 10px;
         outline-offset: 20px;       /* Space between outline and element */
         z-index: 1000;
     }
 
-    .social-icons img:focus {
+    .social-icons img:focus-visible {
         outline: 2px dashed white; /* white outline */
         outline-offset: 2px -1px 2px -1px;       /* Space between outline and element */
         z-index: 3000;
@@ -479,6 +479,99 @@ section p a:hover {
         margin: 0;
     }
     
+
+
+
+
+
+
+    /* GALLERY */
+
+
+.keydown:focus-visible {
+    outline: 3px dashed white; /* white outline */
+    outline-offset: 2px;       /* Space between outline and element */
+    z-index: 1000;
+}
+.gallery {
+    column-count: 4;
+    column-gap: 3vw;
+    width: 94%;
+    padding: 3vw;
+}
+
+.gallery .image-container {
+    break-inside: avoid-column;
+    margin-bottom: 3vw;
+    width: 100%;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    border-radius: 3px; /* Default border-radius */
+    transition: border-radius 0.2s ease-in-out; /* Smooth transition */
+}
+
+.image-container:hover {
+    border-radius: 5vw;
+}
+
+.image-container.highlighted {
+    border-radius: 5vw; /* Constantly enlarged border radius for highlighted items */
+}
+
+.gallery img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 162, 255, 1); /* Blue background */
+    color: white;
+    font-size: 3vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    text-align: center;
+    transition:  0.5s ease;
+
+}
+
+.overlay:hover {
+    transition:  0.5s ease;
+    font-size: 3.8vw;
+}
+
+.image-container:hover .overlay,
+.overlay.always-show {
+    opacity: 1; /* Make the overlay always visible on hover or if class always-show is present */
+}
+
+.image-container.highlighted .overlay {
+    opacity: 1; /* Ensure the overlay is always visible */
+}
+
+.image-container.highlighted .overlay:hover {
+    background-color: #e0e0e0;
+    color:#161717;
+    transition:  0.5s ease;
+    font-size: 3.3vw;
+
+}
+
+
+
+
+
+
+
+
 
 
     
@@ -926,6 +1019,69 @@ article p {
     
 
 
+/* ARCHIVE */
+
+
+
+    /* GALLERY */
+
+
+
+    .gallery {
+        column-count: 3; /* Creates five columns */
+        column-gap: 5vw; /* Space between columns */
+        width: 94%; /* Full width of the container */
+        padding: 3vw;
+    }
+    
+    .gallery .image-container {
+        break-inside: avoid-column; /* Prevents breaking the container across columns */
+        margin-bottom: 5vw; /* Consistent spacing between items */
+        width: 100%; /* Takes up full column width */
+        display: inline-block; /* Ensures the block fills the column width */
+        position: relative; /* For positioning the overlay */
+        overflow: hidden; /* Keeps everything neat */
+        border-radius: 4px;
+    }
+    
+    .gallery img {
+        width: 100%; /* Ensures the image fills its container */
+        height: auto; /* Maintains aspect ratio */
+        display: block; /* Remove extra space below the image */
+    }
+    
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
+        color:#f7f7f7;
+        font-size: 4vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        transition: opacity 0.5s ease;
+        text-align: center;
+        
+    }
+    
+    .image-container:hover .overlay {
+        opacity: 1;
+    }
+    
+
+
+
+
+
+
+
+
+
+    
 
 
 
