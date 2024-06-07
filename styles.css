@@ -346,6 +346,15 @@ section p a:hover {
     
 }
 
+main a {
+    color: #50bef5;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+main a:hover {
+    color: #52d26c;
+}
     /* This area contains styling for the sections which have images in the bacgkround */ 
 
 
@@ -938,6 +947,20 @@ li.dropdown.active {
         margin-bottom: 10vw;
     }
 
+
+
+
+
+
+main a {
+    color: #50bef5;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+main a:hover {
+    color: #52d26c;
+}
 
 /* Article / lsiting  */
 
