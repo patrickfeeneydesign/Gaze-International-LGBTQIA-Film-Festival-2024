@@ -689,21 +689,24 @@ input[type="submit"]:hover {
 
     /* Footer */
     footer {
-        background-color: #f7f7f7;
+        background-color: none;
         height: 3.5vw;
         width: 32vw;
         position: fixed;
-        bottom: 0;
+        top: 0;
        right: 0;
+       border-bottom: 1px solid white;;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 1000;
+        color: white;
     }
 
     footer.black-background {
-        background-color: #161717;
-        color: white;
+        background-color: #f7f7f7;
+        color: #161717;
+        border-bottom: none;
 
     }
     
@@ -717,22 +720,22 @@ input[type="submit"]:hover {
         width: auto;
         padding-left: 1vw;
         padding-right: 1vw;
-        filter: invert(100%);
+        /* filter: invert(100%); */
     }
 
     footer.black-background .social-icons a img {
-        filter: invert(0%);
+        filter: invert(100%);
     }
 
     .footer-text {
-        color: black; /* Text color for readability on dark background */
+        color: white; /* Text color for readability on dark background */
         font-size: 0.7vw; /* Adjusted to fit the smaller footer height on desktop */
         text-align: right; /* Text aligned to the left */
         padding-left: 2vw;
         font-weight: 300;
     }
     footer.black-background .footer-text {
-        color: white; /* Sets the text color to white when within a 'white-background' footer */
+        color: #161717; /* Sets the text color to white when within a 'white-background' footer */
     }
     
     }
