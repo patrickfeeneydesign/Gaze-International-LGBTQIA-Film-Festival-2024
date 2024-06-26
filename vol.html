@@ -19,16 +19,15 @@
 </head>
 <body>
     <!-- SKIP TO CONTENT -->
-    <a href="#maincontent" role="link" tabindex="0" class="skip-link">GAZE International L G B T Q I A Film Festival Home Page, press enter to skip to main content or press tab to continue.</a>
+    <a href="#maincontent" role="link" tabindex="0" class="skip-link">Director's Welcome Message. Press enter to skip to page content, or press tab to navigate menu</a>
     <!-- Main Title -->
-    <header tabindex="0" aria-label="Home Button" class="firstpage">
+    <header tabindex="0" aria-label="Home Button">
         <a href="index.html" style="display: inline-block; cursor: pointer;">
-            <img class="mobilehide" src="img/gaze_logo_white.png">
-            <img class="desktophide" src="img/gaze_logo.png">
+            <img src="img/gaze_logo.png">
         </a>
     </header>
     <!-- BUTTON TOGGLE MENU -->
-    <button class="menu-toggle" class="pageone" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="The main menu is now open, press tab to navigate"></button>
+    <button class="menu-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="The main menu is now open, press tab to navigate"></button>
     <!-- Menu -->
     <nav>
         <ul>
@@ -72,34 +71,40 @@
     </nav>
     <!-- Main Body -->
     <main id="maincontent">
+        <article>
 
-        <section class="backgroundimg" aria-label="A distorted, image of a person in a striped shirt with wet hair and a blue tongue.">
-            <p tabindex="0" role="heading">gaze film fest.</p>
-        </section>
+            <h2 tabindex="0"  role="heading" aria-label="FESTIVAL DIRECTOR'S WELCOME">Volunteer</h2>
 
-        <section class="blue">
-            <p tabindex="0" role="heading">at the <a href="https://www.lighthousecinema.ie/" target="_blank">light house cinema</a> and <a href="https://ifi.ie/" target="_blank">irish film institute.</a></p>
-        </section>
+            <h3 tabindex="0" role="heading" aria-label="Greg Thorpe">Open Call</h3>
 
-        <section class="backgroundimg2" aria-label="A blurred, artistic image of a person with dark skin and short black hair, wearing green and yellow accents.">
-            <p tabindex="0" role="heading">feast your eyes...</p>
-        </section>
 
-        <section class="green">
-            <p tabindex="0" role="heading">fix your gaze...</p>
-        </section>
+                <img alt="Image. Inside a cinema" src="img/gaze-2023-dates.png">
 
-        <section class="backgroundimg3" aria-label="Two women sitting on a sofa with legs crossed, wearing sheer pantyhose and high-heels">
-            <p tabindex="0" role="heading">August 2024</p>
-        </section>
 
-        <section class="pink">
-            <p tabindex="0" role="heading">#gazefilmfest</p>
-        </section>
+            <h4 tabindex="0" role="heading" aria-label="On behalf of the board of GAZE, I'm fiercely proud and buzzing with excitement 
+            to introduce you to this year's festival programme.">Our Volunteers are the everyday family members of our community.</h4>
+
+            <p tabindex="0">
+                Mothers, brothers, sisters, sons, grandmothers, friends, mentors, lovers or sponsors - found in all ages, occupations, identities 
+                & backgrounds, generously lending themselves to staffing various departments and venues for the festival period. Their passion can 
+                be felt everywhere from the lobbies welcoming the patrons, to assisting with back-of-house duties with the festival venues and marketing 
+                and production roles, to liaising with our guests in hospitality. The Family That Plays Together, Stays Together!
+                <br><br>
+                Volunteering is more than just a fantastic way to experience the cinematic celebration that the festival brings to Dublin each year, but 
+                it presents a chance for those involved to become a 'community' that evolves far beyond the dates of the festival into the social and 
+                professional circles of The Arts & LGBTQIA Scene. At GAZE we support you for being you, your choice, your journey, and your right to be 
+                yourself regardless of social or familial barriers - we count ourselves and the volunteering programme as one of the vital step stones 
+                for you to meet like-minded fellow peers who you can share your experiences, knowledge and questions with.
+                <br><br>
+                <em>At GAZE we look out for each other and bring the best that you can be out in you. If you're interested in volunteering with GAZE then 
+                contact us at <a href="mailto:info@gaze.ie" target="_blank">info@gaze.ie</a>.</em>
+                </p>
+                <br><br>
+        </article>
 
     </main>
     <!-- Footer -->
-    <footer>
+    <footer class="black-background">
         <div class="social-icons">
             <a href="https://www.instagram.com/gazefilmfest/" target="_blank" aria-label="Instagram" role="link">
                 <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
@@ -116,8 +121,8 @@
         </div>
     </footer>
    <script>
-    
-    document.addEventListener('DOMContentLoaded', function() {
+        
+        document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('nav');
     const toggleButton = document.querySelector('.menu-toggle');
     const dropdowns = document.querySelectorAll('.dropdown');
