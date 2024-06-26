@@ -18,7 +18,19 @@ html, body {
         cursor: none; /* Hide the default cursor for the body and all interactive elements */
     }
 
+/* This applies only in Firefox */
+@supports (-moz-appearance: none) {
+    p {
+        line-height: 1.8vw;
+    }
+    article {
+        padding-bottom: 7vw;
+    }
+    li {
+        line-height: 1.8vw;
 
+    }
+  }
 
 
 /* HIDDEN ON DESKTOP */
@@ -187,7 +199,7 @@ header img {
     border: none;
     z-index: 5000; /* Adjust if necessary to be above other elements */
 
-    background-color: #8bd3f6;
+    background-color: #66cdff;
     color: #161717;
 }
 
@@ -229,7 +241,7 @@ nav ul li a {
 }
 
 nav ul li a span {
-    color: #8bd3f6;
+    color: #66cdff;
     font-weight: 900;
 }
 
@@ -332,7 +344,7 @@ nav ul li a:hover {
     section p {
         line-height: 10vh;
         font-size: 10vh;
-        color: #8bd3f6;
+        color: #66cdff;
         font-weight: 600;
     }
 
@@ -359,7 +371,7 @@ main a:hover {
 
 
     .backgroundimg {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/ARM2.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('img/updated/Background.gif');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -374,12 +386,12 @@ main a:hover {
         color: #f7f7f7;
         line-height: 9vw;
         font-size: 7vw;
-        margin-top: -0.5vw;
+        margin-top: 5vw;
     }
     
         
     .backgroundimg2 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_TOUCHING_GRASS__JELLY_LUISE_9948.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/updated/Terratoma05_02.png');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -395,7 +407,7 @@ main a:hover {
     }
 
     .backgroundimg3 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_TOUCHING_GRASS__JELLY_LUISE_9927.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/updated/realness.jpg');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -428,8 +440,8 @@ main a:hover {
         text-align: left;
         font-size: 10vw;
         line-height: 12vw;
-        padding-left: 23vw;
-        padding-top: 4vw;
+        padding-left: 8vw;
+        padding-top: 8vw;
         padding-right: 25vw;
         margin: 0;
         font-weight: 600;
@@ -437,11 +449,11 @@ main a:hover {
 
     h3 {
         background-color: #161717;
-        color: #8bd3f6;
+        color: #66cdff;
         font-size: 3vw;
         font-weight: 300;
-        padding-left: 24vw;
-        padding-bottom: 4vw;
+        padding-left: 8vw;
+        padding-bottom: 8vw;
         margin: 0;
 
     }
@@ -483,15 +495,51 @@ main a:hover {
     }
 
     article p {
-        padding: 2vw 28vw 2vw 8vw;
+        padding: 2vw 20vw 2vw 8vw;
         font-size: max(1.3vw, 20px);
         font-weight: 200;
         margin: 0;
-    }
+        columns: 2;
+        column-gap: 3vw;
+        text-align: justify;    }
     
+    article img {
+        height: fit-content;
+        width: 64%;
+        margin-left: 8vw;
+        overflow: hidden;
+        margin-top: 3vw;
+    }
 
 
+.ticketbutton {
+    width: 11vw;
+    height: 3vw;
+    background-color: #50bef5;
+    color:#161717;
+    font-weight: 400;
+    margin-left: 8vw;
+    align-content: center;
+    padding: 1vw;
+    transition: all 0.3 ease;
 
+}
+
+.ticketbutton:hover {
+background-color: #161717;
+}
+
+.ticketbutton:hover a {
+    color:#66cdff;
+}
+
+.ticketbutton a {
+    padding: 0;
+    padding-left: 1vw;
+    color:#161717;
+    font-size: 1.4vw;
+    font-weight: 600;
+}
 
 
 
@@ -505,14 +553,14 @@ main a:hover {
 }
 .gallery {
     column-count: 4;
-    column-gap: 3vw;
+    column-gap: 2vw;
     width: 94%;
-    padding: 3vw;
+    padding-left: 3vw;
 }
 
 .gallery .image-container {
     break-inside: avoid-column;
-    margin-bottom: 3vw;
+    margin-bottom: 2vw;
     width: 100%;
     display: inline-block;
     position: relative;
@@ -522,11 +570,11 @@ main a:hover {
 }
 
 .image-container:hover {
-    border-radius: 5vw;
+    border-radius: 3vw;
 }
 
 .image-container.highlighted {
-    border-radius: 5vw; /* Constantly enlarged border radius for highlighted items */
+    border-radius: 3vw; /* Constantly enlarged border radius for highlighted items */
 }
 
 .gallery img {
@@ -541,7 +589,7 @@ main a:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 162, 255, 1); /* Blue background */
+    background: rgb(0, 119, 255); /* Blue background */
     color: white;
     font-size: 3vw;
     display: flex;
@@ -556,6 +604,8 @@ main a:hover {
 .overlay:hover {
     transition:  0.5s ease;
     font-size: 3.8vw;
+    background: rgba(0, 162, 255, 1); /* Blue background */
+
 }
 
 .image-container:hover .overlay,
@@ -575,9 +625,50 @@ main a:hover {
 
 }
 
+/* FOR THE TIEMTABLE PAGE */
+
+.overlay span {
+    font-size: 0.7vw;
+    font-weight: 200;
+}
+
+.overlay:hover span {
+    font-size: 1vw;
+    font-weight: 200;
+    transition:  0.5s ease-in-out;
 
 
+}
 
+.overlay em {
+    font-size: 1.2vw;
+    font-weight: 200;
+    font-style: normal;
+    line-height: 1vw;
+
+}
+
+.overlay:hover em {
+    font-size: 1.5vw;
+    font-weight: 200;
+    font-style: normal;
+    line-height: 2vw;
+    transition:  0.4s ease-in-out;
+
+
+}
+
+.overlay strong {
+    font-size: 1.8vw;
+
+}
+
+.overlay:hover strong {
+    font-size: 2vw;
+    transition:  0.3s ease-in-out;
+    line-height: 2.4vw;
+
+}
 
 
 
@@ -802,8 +893,6 @@ input[type="submit"]:hover {
 }
 
 
-
-
     /* SKIP LINK STYLE */
 
     .skip-link {
@@ -902,7 +991,7 @@ li.dropdown.active {
     section p {
         line-height: 13vw;
         font-size: 12vw; /* Adjust this value to change the text size */
-        color: #8bd3f6;
+        color: #66cdff;
         font-weight: 600;
         padding: 5vw;
     }
@@ -915,18 +1004,20 @@ li.dropdown.active {
 
     .backgroundimg {
         /* LINEAR GRADIENT TO TINT THE IMAGE DARKER */ 
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/ARM2.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('img/updated/Background.gif');
         background-size: cover;
     }
     
     .backgroundimg p {
         color: #f7f7f7;
+        padding-top: 12vw;
+        padding-bottom: 12vw;
     }
 
 
 
     .backgroundimg2 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_TOUCHING_GRASS__JELLY_LUISE_9948.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/updated/Terratoma05_02.png');
         background-size:cover;
     }
 
@@ -935,7 +1026,7 @@ li.dropdown.active {
     }
 
     .backgroundimg3 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/DTS_TOUCHING_GRASS__JELLY_LUISE_9927.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/updated/realness.jpg');
         background-size:cover;
 
     }
@@ -974,8 +1065,8 @@ article {
 }
 
 h2 {
-    background-color: #e0e0e0;
-    color: #161717;
+    background-color: #2c2c2c;
+    color: #f7f7f7;
     font-size: 8vw;
     padding-left: 3vw;
     margin: 0;
@@ -983,8 +1074,8 @@ h2 {
 }
 
 h3 {
-    background-color: #e0e0e0;
-    color: #161717;
+    background-color: #2c2c2c;
+    color: #f7f7f7;
     font-size: 4.5vw;
     font-weight: 500;
     padding-left: 3vw;
@@ -1045,6 +1136,36 @@ article p {
 }
     
 
+.ticketbutton {
+    width: 40vw;
+    height: 15vw;
+    background-color: #50bef5;
+    color:#161717;
+    font-weight: 400;
+    margin-left: 8vw;
+    align-content: center;
+    padding: 1vw;
+    transition: all 0.3 ease;
+
+}
+
+.ticketbutton a {
+    padding: 0;
+    padding-left: 5vw;
+    color:#161717;
+    font-size: 5vw;
+    font-weight: 600;
+}
+
+.ticketbutton a:hover {
+    padding: 0;
+    padding-left: 5vw;
+    color:#161717;
+    font-size: 5vw;
+    font-weight: 600;
+}
+
+
 
 /* ARCHIVE */
 
@@ -1056,19 +1177,19 @@ article p {
 
     .gallery {
         column-count: 3; /* Creates five columns */
-        column-gap: 5vw; /* Space between columns */
+        column-gap: 2vw; /* Space between columns */
         width: 94%; /* Full width of the container */
-        padding: 3vw;
+        padding-left: 3.8vw;
     }
     
     .gallery .image-container {
         break-inside: avoid-column; /* Prevents breaking the container across columns */
-        margin-bottom: 5vw; /* Consistent spacing between items */
+        margin-bottom: 2vw; /* Consistent spacing between items */
         width: 100%; /* Takes up full column width */
         display: inline-block; /* Ensures the block fills the column width */
         position: relative; /* For positioning the overlay */
         overflow: hidden; /* Keeps everything neat */
-        border-radius: 4px;
+        border-radius: 10px;
     }
     
     .gallery img {
@@ -1083,7 +1204,7 @@ article p {
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
+        background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
         color:#f7f7f7;
         font-size: 4vw;
         display: flex;
@@ -1091,7 +1212,8 @@ article p {
         justify-content: center;
         opacity: 1;
         transition: opacity 0.5s ease;
-        text-align: center;
+        text-align: left;
+        padding-left: 2vw;
         
     }
     
@@ -1100,6 +1222,29 @@ article p {
     }
     
 
+/* FOR THE TIEMTABLE PAGE */
+
+.overlay span {
+    font-size: 2vw;
+    font-weight: 200;
+    line-height: 3vw;
+
+}
+
+
+.overlay em {
+    font-size: 3vw;
+    font-weight: 200;
+    font-style: normal;
+    line-height: 3vw;
+
+}
+
+
+.overlay strong {
+    font-size: 4vw;
+
+}
 
 
 
@@ -1179,7 +1324,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #8bd3f6;
+    background-color: #66cdff;
     color: #161717;
 
 }
