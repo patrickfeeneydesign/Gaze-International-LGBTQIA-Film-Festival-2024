@@ -375,7 +375,7 @@ main a:hover {
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
-        height: 80vh;
+        height: 75vh;
         /* Initial scale for the background image */
         transform: scale(1);
         transition: transform 0.2s ease-out; /* Smooth transition */
@@ -782,11 +782,12 @@ input[type="submit"]:hover {
     footer {
         background-color: none;
         height: 3.5vw;
+        padding-top: 0.4vw;
         width: 36vw;
         position: fixed;
-        top: 0;
+        bottom: 0;
        right: 0;
-       border-bottom: 1px solid white;;
+       border-top: 1px solid white;;
         display: flex;
         justify-content: center;
         align-items: center;
