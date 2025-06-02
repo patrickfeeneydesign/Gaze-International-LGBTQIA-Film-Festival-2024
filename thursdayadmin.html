@@ -138,7 +138,7 @@
     /* ─── Fetch + render ─── */
     async function loadListings(){
       listings.textContent = 'Loading…';
-      const { data:films, error } = await supabase.from('friday').select('*').order('order',{ascending:true});
+      const { data:films, error } = await supabase.from('thursday').select('*').order('order',{ascending:true});
       if(error){ listings.textContent='Error loading films'; console.error(error); return; }
       listings.innerHTML = '';
       films.forEach((film,i)=>{ listings.appendChild(buildFilmCard(film,i,films)); });
