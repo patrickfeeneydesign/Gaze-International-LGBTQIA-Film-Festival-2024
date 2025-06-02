@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GAZE Film Fest • Early Release Tickets</title>
+
+  <!-- Inline styles only, per request -->
+  <style>
+    /* ========== Base typography & colours (existing) ========== */
+    :root {
+      --accent: #c92c2c;
+      --text:   #222;
+      --meta:   #555;
+      font-family: system-ui, sans-serif;
+    }
+    body { margin: 0; color: var(--text); line-height: 1.5; }
+
+    /* ========== NEW: Header + primary navigation ========== */
+    .site-header {
+      background: #000; color:#fff;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:.5rem 1rem; position:sticky; top:0; z-index:1000;
+    }
+    .site-header .logo img { height:50px; width:auto; }
+    .menu-toggle {
+      display:none; background:none; border:none;
+      font-size:1.9rem; color:#fff; cursor:pointer;
+    }
+    nav.main-nav ul { list-style:none; margin:0; padding:0; }
+    nav.main-nav a { color:#fff; text-decoration:none; font-weight:600; }
+
+    /* Desktop layout */
+    @media (min-width:769px){
+      nav.main-nav .menu { display:flex; gap:2rem; }
+      nav.main-nav li { position:relative; }
+      nav.main-nav .submenu {
+        position:absolute; top:100%; left:0; min-width:180px;
+        background:#111; padding:0; margin:0; list-style:none; display:none;
+      }
+      nav.main-nav li:hover>.submenu,
+      nav.main-nav li:focus-within>.submenu { display:block; }
+      nav.main-nav .submenu li a { display:block; padding:.6rem 1rem; white-space:nowrap; }
+      nav.main-nav .submenu li a:hover { background:#222; }
+    }
+
+    /* Mobile layout */
+    @media (max-width:768px){
+      .menu-toggle{ display:block; }
+      nav.main-nav{ display:none; width:100%; }
+      nav.main-nav.open{ display:block; background:#000; }
+      nav.main-nav .menu{ display:flex; flex-direction:column; }
+      nav.main-nav .menu>li{ border-bottom:1px solid #222; }
+      nav.main-nav .menu>li>a{ display:block; padding:.75rem 1rem; }
+      nav.main-nav .submenu{ display:none; flex-direction:column; }
+      nav.main-nav li.open>.submenu{ display:flex; }
+      nav.main-nav .submenu li a{ padding:.6rem 1.5rem; background:#111; }
+    }
+
+    /* ========== Existing article-style listings ========== */
+    main#listing{ padding:2rem 1rem; }
+    article{ max-width:720px; margin:0 auto 4rem; }
+    article img{ width:100%; height:auto; border-radius:8px; display:block; }
+    h2{ font-size:clamp(1.8rem,3vw+1rem,3rem); margin:.8rem 0 .5rem; }
+    .meta{ font-weight:600; color:var(--meta); margin-bottom:1rem; }
+    .desc{ margin-bottom:1rem; }
+    .credits{ font-size:.9rem; color:var(--meta); margin-bottom:1.5rem; }
+    a.button{
+      display:inline-block; background:var(--accent); color:#fff;
+      padding:.65rem 1.25rem; border-radius:4px; text-decoration:none; font-weight:600;
+    }
+    a.button:hover{ filter:brightness(1.1); }
+  </style>
+</head>
+<body>
+  <!-- ========== Header & nav ========== -->
+  <header class="site-header">
+    <a class="logo" href="index.html"><img src="img/gaze_logo_white.png" alt="GAZE Film Festival logo"></a>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main menu">
+      <ul class="menu">
+        <li class="dropdown"><a href="#" aria-haspopup="true">ABOUT</a>
+          <ul class="submenu">
+            <li><a href="archive.html">Archive</a></li>
+            <li><a href="https://filmfreeway.com/gaze-ireland" target="_blank">Submit a Film</a></li>
+          </ul></li>
+        <li class="dropdown"><a href="#" aria-haspopup="true">TICKETS</a>
+          <ul class="submenu">
+            <li><a href="https://events.ticketbooth.eu/event/gaze-festival-pass-2025" target="_blank">Festival Pass</a></li>
+            <li><a href="early.html">Early Release</a></li>
+          </ul></li>
+        <li class="dropdown"><a href="#" aria-haspopup="true">SUPPORT</a>
+          <ul class="submenu">
+            <li><a href="https://mailchi.mp/gaze/gaze-newsletter-sign-up" target="_blank">Subscribe</a></li>
+            <li><a href="friend.html">Festival Friend</a></li>
+            <li><a href="vol.html">Volunteer</a></li>
+            <li><a href="stargaze.html">StarGAZE</a></li>
+          </ul></li>
+        <li class="dropdown"><a href="#" aria-haspopup="true">ACCESSIBILITY</a>
+          <ul class="submenu">
+            <li><a href="https://youtu.be/PHfYZgj4Y2o" target="_blank">Video Guide</a></li>
+            <li><a href="img/archive/GAZE Easy Read July 2024.pdf" target="_blank">Easy Read Guide</a></li>
+            <li><a href="img/archive/starGAZE easy read document (2).pdf" target="_blank">StarGAZE</a></li>
+            <li><a href="img/archive/GAZE large print programme 2024.pdf" target="_blank">Programme</a></li>
+          </ul></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Dynamic film listings (unchanged) -->
+  <main id="listing">Loading programme…</main>
+
+  <!-- ========== JS: toggle menu & fetch films ========== -->
+  <script>
+    // Mobile hamburger + dropdown toggles
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const toggle = document.querySelector('.menu-toggle');
+      const nav    = document.getElementById('mainNav');
+      toggle.addEventListener('click', ()=>{
+        const open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+      });
+      nav.querySelectorAll('.dropdown > a').forEach(link=>{
+        link.addEventListener('click', e=>{
+          if(window.innerWidth < 769){
+            e.preventDefault();
+            link.parentElement.classList.toggle('open');
+          }
+        });
+      });
+    });
+  </script>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabaseUrl = 'https://pcqmducomykhcumkchjm.supabase.co'; // ← replace
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjcW1kdWNvbXlraGN1bWtjaGptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDU4NjcsImV4cCI6MjA2NDQyMTg2N30.esmrg8uQpQQHfuzmYmNwxciv3x2ExRqV03thXVSOC38';                     // ← replace
+    const supabase    = createClient(supabaseUrl, supabaseKey);
+
+    async function loadFilms(){
+      const container = document.getElementById('listing');
+      const { data: films, error } = await supabase
+        .from('Early Release')
+        .select('*')
+        // Sort by the new numeric "order" column (1,2,3…)
+        .order('order', { ascending: true });
+
+      if(error){ console.error(error); container.textContent='Sorry, something went wrong.'; return; }
+      if(!films || !films.length){ container.textContent='Programme coming soon.'; return; }
+      container.innerHTML = films.map(film=>{
+        const meta = [film.venue,
+          film.screening_date ? new Date(film.screening_date).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short',year:'numeric'}) : null,
+          film.screening_time, film.length, film.country,
+          film.director ? `Dir. ${film.director}` : null].filter(Boolean).join(', ');
+        return `<article>
+          <img src="${film.image_url}" alt="${film.title}">
+          <h2>${film.title}</h2>
+          <p class="meta">${meta}</p>
+          <p class="desc">${film.description ?? ''}</p>
+          <p class="credits">
+            ${film.writers ? `Writers: ${film.writers}<br>` : ''}
+            ${film.producers ? `Producers: ${film.producers}` : ''}
+          </p>
+          ${film.ticket_url ? `<a class="button" href="${film.ticket_url}" target="_blank" rel="noopener">Book Tickets</a>` : ''}
+        </article>`;
+      }).join('');
+    }
+    document.addEventListener('DOMContentLoaded', loadFilms);
+  </script>
+</body>
+</html>

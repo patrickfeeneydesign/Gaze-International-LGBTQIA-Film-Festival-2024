@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GAZE • Admin</title>
+  <style>
+    :root{font-family:system-ui,sans-serif;--accent:#fa6755;--bg:#f7f7f7;}
+    body{margin:0;padding:2rem;background:var(--bg);}    
+    a {padding:0.5vw; background-color: #fa6755; text-decoration: none; color: white; border-radius: 10px;font-size:.85rem;}
+    h1{margin-top:0;}    
+    .hidden{display:none;}    
+    .btn{background:var(--accent);color:#fff;border:none;padding:.5rem 1rem;border-radius:4px;cursor:pointer;font-weight:600;}
+    .btn:hover{filter:brightness(1.1);}    
+    .btn.small{padding:.3rem .6rem;font-size:.8rem;}
+    input,textarea,select{padding:.4rem .5rem;border:1px solid #ccc;border-radius:4px;width:100%;box-sizing:border-box;}
+    label{font-size:.85rem;font-weight:600;display:block;margin-top:.75rem;}
+    .listing{background:#fff;border:1px solid #ddd;border-radius:6px;margin-bottom:1rem;padding:1rem;}
+    .listing header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;gap:.5rem;flex-wrap:wrap;}
+    .edit-form{background:#fafafa;border:1px solid #eee;border-radius:4px;padding:1rem;margin-top:.75rem;}
+    .field-row{display:grid;grid-template-columns:150px 1fr;gap:1rem;align-items:center;margin-bottom:.5rem;}
+    .field-row textarea{min-height:80px;}
+    .flex{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;}
+    /* ─── Modal for image picker ─── */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:2000;}
+    .modal-content{background:#fff;max-width:90vw;max-height:80vh;overflow:auto;border-radius:6px;padding:1rem;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:1rem;}
+    .grid img{width:100%;height:auto;cursor:pointer;border-radius:4px;}
+  </style>
+</head>
+<body>
+  <h1>GAZE Film Festival Thursday 4th September</h1>
+  <a href="admin.html">Home</a>
+  <br><br>
+  <!-- ░░░ 1. PASSWORD GATE ░░░ -->
+  <div id="loginGate">
+    <label for="pw">Password</label>
+    <div class="flex"><input id="pw" type="password" autocomplete="off"><button class="btn" id="loginBtn">Enter</button></div>
+  </div>
+
+  <!-- ░░░ 2. ADMIN UI ░░░ -->
+  <div id="adminUI" class="hidden">
+    <!-- ↳ Upload new record (collapsible) -->
+    <section id="uploadFormContainer" class="listing"><!-- filled via JS --></section>
+
+    <!-- Toolbar moved below upload form -->
+    <div class="flex" id="reorderToolbar" style="margin:1rem 0;">
+      <button class="btn" id="reorderBtn">Re-order</button>
+    </div>
+
+    <!-- ↳ Existing listings -->
+    <section id="listings"></section>
+  </div>
+
+  <!-- ░░░ 3. LOGIC ░░░ -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    /* ↳  Replace with your own Supabase creds  */
+    const supabaseUrl = 'https://pcqmducomykhcumkchjm.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjcW1kdWNvbXlraGN1bWtjaGptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDU4NjcsImV4cCI6MjA2NDQyMTg2N30.esmrg8uQpQQHfuzmYmNwxciv3x2ExRqV03thXVSOC38';
+    const supabase   = createClient(supabaseUrl, supabaseKey);
+
+    /* Bucket that holds poster/still images */
+    const bucketName = 'posters';   // ← change if your bucket is named differently
+
+    /* Simple front‑end password */
+    const PASSWORD = 'gaze';
+
+    /* DOM refs */
+    const loginGate = document.getElementById('loginGate');
+    const adminUI   = document.getElementById('adminUI');
+    const listings  = document.getElementById('listings');
+    const uploadContainer = document.getElementById('uploadFormContainer');
+    const reorderBtn = document.getElementById('reorderBtn');
+
+    /* State */
+    let reorderMode = false; // toggled by button
+
+    document.getElementById('loginBtn').addEventListener('click',()=>{
+      const ok = document.getElementById('pw').value === PASSWORD;
+      if(!ok){ alert('Wrong password'); return; }
+      loginGate.classList.add('hidden');
+      adminUI.classList.remove('hidden');
+      renderUploadForm();
+      loadListings();
+    });
+
+    reorderBtn.addEventListener('click',()=>{
+      reorderMode = !reorderMode;
+      reorderBtn.textContent = reorderMode ? 'Save Changes' : 'Re-order';
+      loadListings();
+    });
+
+    /* ─── Upload new record (collapsible) ─── */
+    function renderUploadForm(){
+      uploadContainer.innerHTML = `
+        <header class="flex">
+          <strong>Add New Film</strong>
+          <button type="button" class="btn small" id="toggleUpload">+</button>
+        </header>`;
+
+      const form = document.createElement('form');
+      form.className = 'edit-form hidden';
+      form.addEventListener('submit', submitNew);
+      form.innerHTML = fieldsHTML({}) + `<div class="flex" style="margin-top:1rem;"><button type="submit" class="btn">Upload</button><button type="reset" class="btn" style="background:#666;">Clear</button></div>`;
+      uploadContainer.appendChild(form);
+      attachBrowseHandler(form);
+
+      /* Toggle reveal */
+      const toggleBtn = document.getElementById('toggleUpload');
+      toggleBtn.addEventListener('click',()=>{
+        const hidden = form.classList.toggle('hidden');
+        toggleBtn.textContent = hidden ? '+' : 'Hide Form';
+      });
+    }
+
+    async function submitNew(evt){
+      evt.preventDefault();
+      const fd = new FormData(evt.target);
+      const insertObj = Object.fromEntries(fd.entries());
+      /* determine next order value */
+      const { data:maxRows, error:maxErr } = await supabase.from('thursday').select('order').order('order',{ascending:false}).limit(1);
+      if(maxErr){ alert('Could not fetch current order'); console.error(maxErr); return; }
+      const nextOrder = maxRows && maxRows.length ? (maxRows[0].order || 0) + 1 : 1;
+      insertObj.order = nextOrder;
+
+      const { error } = await supabase.from('thursday').insert(insertObj);
+      if(error){ alert('Upload failed'); console.error(error); return; }
+      alert('Uploaded!');
+      evt.target.reset();
+      // collapse and reset toggle button
+      evt.target.classList.add('hidden');
+      document.getElementById('toggleUpload').textContent = 'Show Form';
+      loadListings();
+    }
+
+    /* ─── Fetch + render ─── */
+    async function loadListings(){
+      listings.textContent = 'Loading…';
+      const { data:films, error } = await supabase.from('friday').select('*').order('order',{ascending:true});
+      if(error){ listings.textContent='Error loading films'; console.error(error); return; }
+      listings.innerHTML = '';
+      films.forEach((film,i)=>{ listings.appendChild(buildFilmCard(film,i,films)); });
+    }
+
+    /* Build a listing card */
+    function buildFilmCard(film, idx, allFilms){
+      const card = document.createElement('div'); card.className='listing';
+      const head = document.createElement('header');
+      card.appendChild(head);
+
+      /* Delete handler (shared) */
+      const handleDelete = async ()=>{
+        if(!confirm('Delete this listing?')) return;
+        const { error } = await supabase.from('thursday').delete().eq('id',film.id);
+        if(error){ alert('Delete failed'); console.error(error); return; }
+        loadListings();
+      };
+
+      if(reorderMode){
+        head.innerHTML = `<strong>${film.order}. ${film.title}</strong>`;
+        const controls = document.createElement('div'); controls.className='flex';
+        const upBtn = document.createElement('button'); upBtn.className='btn small'; upBtn.textContent='↑';
+        const downBtn = document.createElement('button'); downBtn.className='btn small'; downBtn.textContent='↓';
+        const delBtn = document.createElement('button'); delBtn.className='btn small'; delBtn.style.background='#a00'; delBtn.textContent='🗑';
+        controls.appendChild(upBtn); controls.appendChild(downBtn); controls.appendChild(delBtn);
+        head.appendChild(controls);
+
+        /* up/down listeners */
+        if(idx===0) upBtn.disabled=true; else upBtn.addEventListener('click',()=>swapOrder(film, allFilms[idx-1]));
+        if(idx===allFilms.length-1) downBtn.disabled=true; else downBtn.addEventListener('click',()=>swapOrder(film, allFilms[idx+1]));
+        delBtn.addEventListener('click', handleDelete);
+      }
+      else{
+        head.innerHTML = `<strong>${film.title}</strong>`;
+        const controls = document.createElement('div'); controls.className='flex';
+        const editBtn = document.createElement('button'); editBtn.className='btn small'; editBtn.textContent='Edit';
+        const delBtn = document.createElement('button'); delBtn.className='btn small'; delBtn.style.background='#a00'; delBtn.textContent='Delete';
+        controls.appendChild(editBtn); controls.appendChild(delBtn);
+        head.appendChild(controls);
+
+        delBtn.addEventListener('click', handleDelete);
+      }
+
+      // Details paragraph (read‑only)
+      const p = document.createElement('p');
+      p.textContent = `${film.venue || ''} • ${film.screening_date || ''} ${film.screening_time || ''}`;
+      card.appendChild(p);
+
+      // Hidden inline edit form (only outside reorder mode)
+      if(!reorderMode){
+        const form = document.createElement('form'); form.className='edit-form hidden'; form.addEventListener('submit',e=>submitEdit(e,film.id));
+        form.innerHTML = fieldsHTML(film) + `<div class="flex" style="margin-top:1rem;"><button type="submit" class="btn">Save</button><button type="button" class="btn cancel" style="background:#666;">Cancel</button></div>`;
+        card.appendChild(form);
+        const editBtn = head.querySelector('button'); // first button is edit
+        editBtn.addEventListener('click',()=>{ form.classList.toggle('hidden'); });
+        form.querySelector('.cancel').addEventListener('click',()=>form.classList.add('hidden'));
+        attachBrowseHandler(form);
+      }
+
+      return card;
+    }
+
+    /* Swap the order values of two rows */
+    async function swapOrder(a,b){
+      try{
+        await Promise.all([
+          supabase.from('thursday').update({order:b.order}).eq('id',a.id),
+          supabase.from('thursday').update({order:a.order}).eq('id',b.id)
+        ]);
+        loadListings();
+      }catch(err){ console.error(err); alert('Re‑order failed'); }
+    }
+
+    /* Generate inputs */
+    function fieldsHTML(f){
+      const rows=[
+        ['image_url','Image URL','text'],['title','Title','text'],['venue','Venue','text'],
+        ['screening_date','Date (yyyy-mm-dd)','date'],['screening_time','Time','text'],['length','Length','text'],
+        ['country','Country','text'],['director','Director','text'],['description','Description','textarea'],
+        ['writers','Writers','text'],['producers','Producers','text'],['ticket_url','Ticket URL','text']
+      ];
+      return rows.map(([key,label,type])=>{
+        if(key==='image_url'){
+          return `<div class="field-row"><label>${label}</label><div class="flex"><input type="text" name="image_url" value="${f[key]??''}"><button type="button" class="btn browse">Browse</button></div></div>`;
+        }
+        return `<div class="field-row"><label>${label}</label>${type==='textarea'?`<textarea name="${key}">${f[key]??''}</textarea>`:`<input type="${type}" name="${key}" value="${f[key]??''}">`}</div>`;
+      }).join('');
+    }
+
+    /* Attach image‑picker to the Browse button */
+    function attachBrowseHandler(form){
+      const browseBtn = form.querySelector('.browse');
+      if(!browseBtn) return;
+      browseBtn.addEventListener('click', async ()=>{
+        // Build modal skeleton
+        const modal = document.createElement('div'); modal.className='modal';
+        modal.innerHTML = `<div class="modal-content"><p>Loading images…</p></div>`;
+        document.body.appendChild(modal);
+        // Fetch file list
+        const { data: files, error } = await supabase.storage.from(bucketName).list('', { limit:1000 });
+        if(error){ modal.querySelector('p').textContent = 'Error loading images'; console.error(error); return; }
+        if(!files || !files.length){ modal.querySelector('p').textContent = 'No images found.'; return; }
+        const grid = document.createElement('div'); grid.className='grid';
+        for(const file of files){
+          const { data:{ publicUrl } } = supabase.storage.from(bucketName).getPublicUrl(file.name);
+          /* ─── Wrapper to include caption under preview ─── */
+          const wrapper = document.createElement('div'); wrapper.style.textAlign='center';
+          const img = document.createElement('img'); img.src = publicUrl; img.alt = file.name; img.style.display='block';
+          img.addEventListener('click',()=>{
+            form.querySelector('input[name="image_url"]').value = publicUrl;
+            document.body.removeChild(modal);
+          });
+          const caption = document.createElement('div'); caption.textContent = file.name; caption.style.fontSize='0.75rem'; caption.style.marginTop='0.25rem'; caption.style.wordBreak='break-all';
+          wrapper.appendChild(img);
+          wrapper.appendChild(caption);
+          grid.appendChild(wrapper);
+        }
+        modal.querySelector('.modal-content').innerHTML = '<h3>Select an image</h3>';
+        modal.querySelector('.modal-content').appendChild(grid);
+        // Close on outside click
+        modal.addEventListener('click',e=>{ if(e.target===modal) document.body.removeChild(modal); });
+      });
+    }
+
+    /* Update row via inline form */
+    async function submitEdit(evt,id){
+      evt.preventDefault();
+      const fd = new FormData(evt.target);
+      const updateObj = Object.fromEntries(fd.entries());
+      const { error } = await supabase.from('thursday').update(updateObj).eq('id',id);
+      if(error){ alert('Update failed'); console.error(error); return; }
+      alert('Saved!');
+      loadListings();
+    }
+  </script>
+</body>
+</html>
