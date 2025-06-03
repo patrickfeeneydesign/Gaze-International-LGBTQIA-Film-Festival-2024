@@ -3,79 +3,157 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://use.typekit.net/opq3sul.css">
   <title>GAZE Film Fest • Early Release Tickets</title>
 
   <!-- Inline styles only, per request -->
   <style>
-    /* ========== Base typography & colours (existing) ========== */
-    :root {
-      --accent: #c92c2c;
-      --text:   #222;
-      --meta:   #555;
-      font-family: system-ui, sans-serif;
-    }
-    body { margin: 0; color: var(--text); line-height: 1.5; }
+   /* ========== Base typography & colours (unchanged) ========== */
+:root{
+  --accent:#fa6755;
+  --text:#222;
+  --meta:#555;
+  font-family:tt-commons-pro,sans-serif;
+}
+body{margin:0;color:var(--text);line-height:1.5;padding:0}
 
-    /* ========== NEW: Header + primary navigation ========== */
-    .site-header {
-      background: #000; color:#fff;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:.5rem 1rem; position:sticky; top:0; z-index:1000;
-    }
-    .site-header .logo img { height:50px; width:auto; }
-    .menu-toggle {
-      display:none; background:none; border:none;
-      font-size:1.9rem; color:#fff; cursor:pointer;
-    }
-    nav.main-nav ul { list-style:none; margin:0; padding:0; }
-    nav.main-nav a { color:#fff; text-decoration:none; font-weight:600; }
+/* ========== Header + primary navigation ========== */
+.site-header{
+  background:#000;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:.5rem 1rem;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+.site-header .logo img{height:48px;width:auto;padding:10px 6px}
 
-    /* Desktop layout */
-    @media (min-width:769px){
-      nav.main-nav .menu { display:flex; gap:2rem; }
-      nav.main-nav li { position:relative; }
-      nav.main-nav .submenu {
-        position:absolute; top:100%; left:0; min-width:180px;
-        background:#111; padding:0; margin:0; list-style:none; display:none;
-      }
-      nav.main-nav li:hover>.submenu,
-      nav.main-nav li:focus-within>.submenu { display:block; }
-      nav.main-nav .submenu li a { display:block; padding:.6rem 1rem; white-space:nowrap; }
-      nav.main-nav .submenu li a:hover { background:#222; }
-    }
+/* Hamburger button */
+.menu-toggle{
+  display:none;
+  position:relative;
+  background:none;
+  border:none;
+  font-size:2rem;
+  line-height:1;
+  cursor:pointer;
+  color:transparent;          /* hide the literal ☰ char in the markup */
+}
+.menu-toggle:focus{outline:2px solid var(--accent);outline-offset:2px}
+.menu-toggle::before{         /* actual icon */
+  content:"☰";
+  position:absolute;
+  color: white;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.menu-toggle[aria-expanded="true"]::before{content:"✕"}
 
-    /* Mobile layout */
-    @media (max-width:768px){
-      .menu-toggle{ display:block; }
-      nav.main-nav{ display:none; width:100%; }
-      nav.main-nav.open{ display:block; background:#000; }
-      nav.main-nav .menu{ display:flex; flex-direction:column; }
-      nav.main-nav .menu>li{ border-bottom:1px solid #222; }
-      nav.main-nav .menu>li>a{ display:block; padding:.75rem 1rem; }
-      nav.main-nav .submenu{ display:none; flex-direction:column; }
-      nav.main-nav li.open>.submenu{ display:flex; }
-      nav.main-nav .submenu li a{ padding:.6rem 1.5rem; background:#111; }
-    }
+nav.main-nav{position:relative}
+nav.main-nav ul{list-style:none;margin:0;padding:0}
+nav.main-nav a{color:#fff;text-decoration:none;font-weight:500;display:block}
 
-    /* ========== Existing article-style listings ========== */
-    main#listing{ padding:2rem 1rem; }
-    article{ max-width:720px; margin:0 auto 4rem; }
-    article img{ width:100%; height:auto; border-radius:8px; display:block; }
-    h2{ font-size:clamp(1.8rem,3vw+1rem,3rem); margin:.8rem 0 .5rem; }
-    .meta{ font-weight:600; color:var(--meta); margin-bottom:1rem; }
-    .desc{ margin-bottom:1rem; }
-    .credits{ font-size:.9rem; color:var(--meta); margin-bottom:1.5rem; }
-    a.button{
-      display:inline-block; background:var(--accent); color:#fff;
-      padding:.65rem 1.25rem; border-radius:4px; text-decoration:none; font-weight:600;
-    }
-    a.button:hover{ filter:brightness(1.1); }
+/* Desktop layout */
+@media (min-width:769px){
+  nav.main-nav .menu{display:flex;gap:2rem}
+  nav.main-nav li{position:relative}
+  nav.main-nav .submenu{
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:180px;
+    background:#111;
+    padding:0;
+    margin:0;
+    list-style:none;
+    display:none;
+  }
+  nav.main-nav li:hover>.submenu,
+  nav.main-nav li:focus-within>.submenu{display:block}
+  nav.main-nav .submenu li a{padding:.6rem 1rem;white-space:nowrap}
+  nav.main-nav .submenu li a:hover{background:#222}
+
+  /* Article layout */
+  main#listing{padding:0}
+  article{
+    max-width:100vw;
+    margin:0;
+    display:flex;
+    flex-direction:row;
+    align-items:flex-start;
+    gap:1.5rem;
+  }
+  article img{width:60vw;height:auto;flex-shrink:0;display:block}
+  article .info{flex:1;padding:1.5vw 3.5vw 1.5vw 1.5vw;height:fit-content}
+  h2{font-size:4vw;margin:.8rem 0;font-weight:600;line-height:1}
+  .meta{font-weight:500;font-size:1vw;margin-bottom:1rem}
+}
+
+/* Mobile layout */
+@media (max-width:768px){
+  /* Header & nav */
+  .menu-toggle{display:block;}
+  nav.main-nav{
+    position:absolute;
+    top:100%;
+    left:0;
+    width:100%;
+    background:#000;
+    overflow:hidden;
+    max-height:0;
+    transition:max-height .3s ease-in-out;
+  }
+  nav.main-nav.open{max-height:90vh}       /* slides down */
+  nav.main-nav .menu{display:flex;flex-direction:column}
+  nav.main-nav .menu>li{border-bottom:1px solid #222}
+  nav.main-nav .menu>li>a{padding:.85rem 1.25rem}
+
+  /* Caret indicator for dropdown items */
+  .dropdown>a::after{
+    content:"▾";
+    margin-left:.4rem;
+    font-size:.8em;
+    transition:transform .2s ease;
+  }
+  .dropdown.open>a::after{transform:rotate(180deg)}
+
+  nav.main-nav .submenu{display:none;flex-direction:column;background:#111}
+  nav.main-nav li.open>.submenu{display:flex}
+  nav.main-nav .submenu li a{padding:.7rem 2rem}
+
+  /* Content layout */
+  main#listing{padding:0}
+  article{flex-direction:column}
+  article img{width:100%;height:auto}
+  article .info{padding:6vw 8vw 10vw}
+  h2{font-size:8vw;margin:1rem 0 .5rem}
+  .meta{font-size:3.5vw;margin-bottom:1rem}
+}
+
+/* Shared elements */
+.desc{margin-bottom:1rem}
+.credits{font-size:.9rem;color:var(--meta);margin-bottom:1.5rem}
+a.button{
+  display:inline-block;
+  background-color:#222;
+  color:#fff;
+  padding:.65rem 1.25rem;
+  text-decoration:none;
+  font-weight:600;
+}
+a.button:hover{background-color:#555}
+
   </style>
 </head>
 <body>
   <!-- ========== Header & nav ========== -->
   <header class="site-header">
-    <a class="logo" href="index.html"><img src="img/gaze_logo_white.png" alt="GAZE Film Festival logo"></a>
+    <a class="logo" href="index.html"><img src="img/gaze_logo_white.png" alt="GAZE Film Festival logo"></a> <p style="font-size: 2vw; font-weight: 600; padding:0; margin:0; text-align: left;">TICKETS</p>
     <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
     <nav class="main-nav" id="mainNav" aria-label="Main menu">
       <ul class="menu">
@@ -107,7 +185,7 @@
     </nav>
   </header>
 
-  <!-- Dynamic film listings (unchanged) -->
+  <!-- Dynamic film listings -->
   <main id="listing">Loading programme…</main>
 
   <!-- ========== JS: toggle menu & fetch films ========== -->
@@ -134,35 +212,59 @@
   <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-    const supabaseUrl = 'https://pcqmducomykhcumkchjm.supabase.co'; // ← replace
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjcW1kdWNvbXlraGN1bWtjaGptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDU4NjcsImV4cCI6MjA2NDQyMTg2N30.esmrg8uQpQQHfuzmYmNwxciv3x2ExRqV03thXVSOC38';                     // ← replace
+    const supabaseUrl = 'https://pcqmducomykhcumkchjm.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjcW1kdWNvbXlraGN1bWtjaGptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDU4NjcsImV4cCI6MjA2NDQyMTg2N30.esmrg8uQpQQHfuzmYmNwxciv3x2ExRqV03thXVSOC38';
     const supabase    = createClient(supabaseUrl, supabaseKey);
+
+    function ordinal(n){
+      const s = ["th","st","nd","rd"];
+      const v = n % 100;
+      return n + (s[(v-20)%10] || s[v] || s[0]);
+    }
 
     async function loadFilms(){
       const container = document.getElementById('listing');
       const { data: films, error } = await supabase
         .from('Early Release')
         .select('*')
-        // Sort by the new numeric "order" column (1,2,3…)
         .order('order', { ascending: true });
 
       if(error){ console.error(error); container.textContent='Sorry, something went wrong.'; return; }
       if(!films || !films.length){ container.textContent='Programme coming soon.'; return; }
+
       container.innerHTML = films.map(film=>{
-        const meta = [film.venue,
-          film.screening_date ? new Date(film.screening_date).toLocaleDateString(undefined,{weekday:'short',day:'numeric',month:'short',year:'numeric'}) : null,
-          film.screening_time, film.length, film.country,
-          film.director ? `Dir. ${film.director}` : null].filter(Boolean).join(', ');
+        const dateObj  = new Date(film.screening_date);
+        const weekday  = dateObj.toLocaleDateString(undefined,{ weekday:'long' });
+        const month    = dateObj.toLocaleDateString(undefined,{ month:'long' });
+        const dateStr  = `${weekday} ${month} ${ordinal(dateObj.getDate())} ${dateObj.getFullYear()}`;
+
+        const firstLineParts = [
+          dateStr,
+          film.screening_time,
+          film.country
+        ].filter(Boolean).join(' • ');
+
+        const secondLineParts = [
+          film.length ? `${film.length} min` : null,
+          film.venue,
+          film.director ? `Dir. ${film.director}` : null
+        ].filter(Boolean).join(' • ');
+
         return `<article>
           <img src="${film.image_url}" alt="${film.title}">
-          <h2>${film.title}</h2>
-          <p class="meta">${meta}</p>
-          <p class="desc">${film.description ?? ''}</p>
-          <p class="credits">
-            ${film.writers ? `Writers: ${film.writers}<br>` : ''}
-            ${film.producers ? `Producers: ${film.producers}` : ''}
-          </p>
-          ${film.ticket_url ? `<a class="button" href="${film.ticket_url}" target="_blank" rel="noopener">Book Tickets</a>` : ''}
+          <div class="info">
+            <h2>${film.title}</h2>
+            <p class="meta">
+              <span class="primary">${firstLineParts}</span><br>
+              <span class="secondary">${secondLineParts}</span>
+            </p>
+            <p class="desc">${film.description ?? ''}</p>
+            <p class="credits">
+              ${film.writers ? `Writers: ${film.writers}<br>` : ''}
+              ${film.producers ? `Producers: ${film.producers}` : ''}
+            </p>
+            ${film.ticket_url ? `<a class="button" href="${film.ticket_url}" target="_blank" rel="noopener">Book Tickets</a>` : ''}
+          </div>
         </article>`;
       }).join('');
     }
