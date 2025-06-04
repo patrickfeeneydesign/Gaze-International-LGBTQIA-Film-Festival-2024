@@ -114,7 +114,7 @@ html, body {
     /* MAIN HEADER */
 header {
     position: fixed;
-    width: max(18vw, 230px);
+    width: fit-content;
     min-height: 100px;
     color: white;
     text-align: left;
@@ -131,14 +131,13 @@ header {
         color: white;
         text-align: left;
         background-color: transparent; /* Ensure this is not overridden */
-        border-bottom: 1px solid white;
         margin: 0;
         padding: 0;
         z-index: 4000;
     }
 
 header img {
-    height: 3.5vw;
+    height: 4.5vw;
     width: auto;
     min-width: 50px;
     min-height: 50px;
@@ -165,14 +164,14 @@ header img {
     height: 3vw;
     min-width: 50px;
     min-height: 40px;
-    background-color: #161717;
+    background-color: #fa6755;
     z-index: 3500; /* Adjust if necessary to be above other elements */
 
-    color: white;
+    color: black;
     font-size: max(1.7vw, 30px);
     cursor: pointer;
     border: none;
-    padding: 0 1vw 0 0.5vw;
+    padding: 0 0.8vw 0 0.5vw;
     transition: width 0.3s ease; /* Smooth width transition */
 }
 
@@ -199,7 +198,7 @@ header img {
     border: none;
     z-index: 5000; /* Adjust if necessary to be above other elements */
 
-    background-color: #66cdff;
+    background-color: #fa6755;
     color: #161717;
 }
 
@@ -344,7 +343,7 @@ nav ul li a:hover {
     section p {
         line-height: 10vh;
         font-size: 10vh;
-        color: #66cdff;
+        color: #fa6755;
         font-weight: 600;
     }
 
@@ -354,24 +353,24 @@ section p a {
 }
 section p a:hover {
     text-decoration: none;
-    color: #82ed97;
+    color: #ffa093;
     
 }
 
 main a {
-    color: #50bef5;
+    color: #fa6755;
     text-decoration: none;
     font-weight: 600;
 }
 
 main a:hover {
-    color: #52d26c;
+    color: #fa6755;
 }
     /* This area contains styling for the sections which have images in the bacgkround */ 
 
 
     .backgroundimg {
-        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('img/updated/Background.gif');
+        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('img/DIN_Hero.webp');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -391,7 +390,7 @@ main a:hover {
     
         
     .backgroundimg2 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/updated/Terratoma05_02.png');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/LSP_Hero.webp');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -407,7 +406,7 @@ main a:hover {
     }
 
     .backgroundimg3 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/updated/realness.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/SJ_Herowebp.webp');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -449,7 +448,7 @@ main a:hover {
 
     h3 {
         background-color: #161717;
-        color: #66cdff;
+        color: #fa6755;
         font-size: 3vw;
         font-weight: 300;
         padding-left: 8vw;
@@ -499,7 +498,7 @@ main a:hover {
         font-size: max(1.3vw, 20px);
         font-weight: 200;
         margin: 0;
-        columns: 2;
+        columns: 1;
         column-gap: 3vw;
         text-align: justify;    }
     
@@ -515,7 +514,7 @@ main a:hover {
 .ticketbutton {
     width: 11vw;
     height: 3vw;
-    background-color: #50bef5;
+    background-color: #fa6755;
     color:#161717;
     font-weight: 400;
     margin-left: 8vw;
@@ -530,7 +529,7 @@ background-color: #161717;
 }
 
 .ticketbutton:hover a {
-    color:#66cdff;
+    color:#fa6755;
 }
 
 .ticketbutton a {
@@ -589,7 +588,7 @@ background-color: #161717;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgb(0, 119, 255); /* Blue background */
+    background: #fa6755; /* Blue background */
     color: white;
     font-size: 3vw;
     display: flex;
@@ -604,7 +603,7 @@ background-color: #161717;
 .overlay:hover {
     transition:  0.5s ease;
     font-size: 3.8vw;
-    background: rgba(0, 162, 255, 1); /* Blue background */
+    background: #fc978a; /* Blue background */
 
 }
 
@@ -992,7 +991,7 @@ li.dropdown.active {
     section p {
         line-height: 13vw;
         font-size: 12vw; /* Adjust this value to change the text size */
-        color: #66cdff;
+        color: #fa6755;
         font-weight: 600;
         padding: 5vw;
     }
@@ -1000,12 +999,12 @@ li.dropdown.active {
 
     section p a {
         text-decoration: underline;
-        color: #f7f7f7;
+        color: #ffaea3;
     }
 
     .backgroundimg {
         /* LINEAR GRADIENT TO TINT THE IMAGE DARKER */ 
-        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('img/updated/Background.gif');
+        background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), url('img/DIN_Hero.webp');
         background-size: cover;
     }
     
@@ -1018,7 +1017,7 @@ li.dropdown.active {
 
 
     .backgroundimg2 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/updated/Terratoma05_02.png');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/LSP_Hero.webp');
         background-size:cover;
     }
 
@@ -1027,7 +1026,7 @@ li.dropdown.active {
     }
 
     .backgroundimg3 {
-        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/updated/realness.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('img/SJ_Herowebp.webp');
         background-size:cover;
 
     }
@@ -1048,13 +1047,13 @@ li.dropdown.active {
 
 
 main a {
-    color: #50bef5;
+    color: #fa6755;
     text-decoration: none;
     font-weight: 600;
 }
 
 main a:hover {
-    color: #52d26c;
+    color: #ffa59a;
 }
 
 /* Article / lsiting  */
@@ -1140,7 +1139,7 @@ article p {
 .ticketbutton {
     width: 40vw;
     height: 15vw;
-    background-color: #50bef5;
+    background-color: #fa6755;
     color:#161717;
     font-weight: 400;
     margin-left: 8vw;
@@ -1325,7 +1324,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #66cdff;
+    background-color: #fa6755;
     color: #161717;
 
 }
