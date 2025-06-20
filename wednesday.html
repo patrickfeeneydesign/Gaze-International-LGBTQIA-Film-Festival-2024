@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://use.typekit.net/opq3sul.css">
+  <title>GAZE Film Fest • Wednesday 30th July</title>
+
+  <!-- Inline styles only, per request -->
+  <style>
+   /* ========== Base typography & colours (unchanged) ========== */
+:root{
+  --accent:#fa6755;
+  --text:#222;
+  --meta:#555;
+  font-family:tt-commons-pro,sans-serif;
+}
+body{margin:0;color:var(--text);line-height:1.5;padding:0}
+
+/* ========== Header + primary navigation ========== */
+.site-header{
+  background:#000;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:.5rem 1rem;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+.site-header .logo img{height:48px;width:auto;padding:10px 6px}
+
+/* Hamburger button */
+.menu-toggle{
+  display:none;
+  position:relative;
+  background:none;
+  border:none;
+  font-size:2rem;
+  line-height:1;
+  cursor:pointer;
+  color:transparent;          /* hide the literal ☰ char in the markup */
+}
+.menu-toggle:focus{outline:2px solid var(--accent);outline-offset:2px}
+.menu-toggle::before{         /* actual icon */
+  content:"☰";
+  position:absolute;
+  color: white;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.menu-toggle[aria-expanded="true"]::before{content:"✕"}
+
+nav.main-nav{position:relative}
+nav.main-nav ul{list-style:none;margin:0;padding:0}
+nav.main-nav a{color:#fff;text-decoration:none;font-weight:500;display:block}
+
+/* Desktop layout */
+@media (min-width:769px){
+  nav.main-nav .menu{display:flex;gap:2rem}
+  nav.main-nav li{position:relative}
+  nav.main-nav .submenu{
+    position:absolute;
+    top:100%;
+    left:0;
+    min-width:180px;
+    background:#111;
+    padding:0;
+    margin:0;
+    list-style:none;
+    display:none;
+  }
+  nav.main-nav li:hover>.submenu,
+  nav.main-nav li:focus-within>.submenu{display:block}
+  nav.main-nav .submenu li a{padding:.6rem 1rem;white-space:nowrap}
+  nav.main-nav .submenu li a:hover{background:#222}
+
+  /* Article cards */
+  main#listing{padding:0}
+
+  article{
+    /* two columns: 60 vw picture + flexible text */
+    display:grid;
+    grid-template-columns:minmax(260px,60vw) 1fr;
+    gap:1.5rem;
+    max-width:100vw;
+    margin:0;
+  }
+
+  article img{
+    width:100%;
+    height:100%;         /* exactly as tall as the row */
+    object-fit:cover;    /* crop-zoom, never squash */
+    display:block;
+  }
+
+  article .info{
+    padding:1.5vw 3.5vw 1.5vw 1.5vw;
+  }
+  h2{font-size:4vw;margin:.8rem 0;font-weight:600;line-height:1}
+  .meta{font-weight:500;font-size:1vw;margin-bottom:1rem}
+  /* === Meta line hierarchy ===================================== */
+/* first line (“Saturday … Australia”) */
+.meta .primary{
+  display:block;        /* forces it onto its own line */
+  font-size:1.2em;      /* 20 % larger than the base .meta size   */
+  font-weight:600;
+}
+
+/* second line (“1 h 44 min …”) */
+.meta .secondary{
+  font-size:1em;        /* inherits the base .meta size           */
+  opacity:.85;          /* subtle visual step-down (optional)     */
+}
+}
+
+/* Mobile layout */
+@media (max-width:768px){
+  /* Header & nav */
+  .menu-toggle{display:block;}
+  nav.main-nav{
+    position:absolute;
+    top:100%;
+    left:0;
+    width:100%;
+    background:#000;
+    overflow:hidden;
+    max-height:0;
+    transition:max-height .3s ease-in-out;
+  }
+  nav.main-nav.open{max-height:90vh}       /* slides down */
+  nav.main-nav .menu{display:flex;flex-direction:column}
+  nav.main-nav .menu>li{border-bottom:1px solid #222}
+  nav.main-nav .menu>li>a{padding:.85rem 1.25rem}
+
+  /* Caret indicator for dropdown items */
+  .dropdown>a::after{
+    content:"▾";
+    margin-left:.4rem;
+    font-size:.8em;
+    transition:transform .2s ease;
+  }
+  .dropdown.open>a::after{transform:rotate(180deg)}
+
+  nav.main-nav .submenu{display:none;flex-direction:column;background:#111}
+  nav.main-nav li.open>.submenu{display:flex}
+  nav.main-nav .submenu li a{padding:.7rem 2rem}
+
+  /* Content layout */
+  main#listing{padding:0}
+  article{flex-direction:column}
+  article img{width:100%;height:auto}
+  article .info{padding:6vw 8vw 10vw}
+  h2{font-size:8vw;margin:1rem 0 .5rem; line-height: 1;}
+  .meta{font-size:3.5vw;margin-bottom:1rem}
+  .meta .primary{
+  display:block;        /* forces it onto its own line */
+  font-size:1.2em;      /* 20 % larger than the base .meta size   */
+  font-weight:600;
+}
+
+/* second line (“1 h 44 min …”) */
+.meta .secondary{
+  font-size:1em;        /* inherits the base .meta size           */
+  opacity:.85;          /* subtle visual step-down (optional)     */
+}
+}
+
+/* Shared elements */
+.desc{margin-bottom:1rem}
+.credits{font-size:.9rem;color:var(--meta);margin-bottom:1.5rem}
+a.button{
+  display:inline-block;
+  background-color:#222;
+  color:#fff;
+  padding:.65rem 1.25rem;
+  text-decoration:none;
+  font-weight:600;
+  margin-bottom: 2vw;
+}
+a.button:hover{background-color:#fa6755; color: #ffffff;}
+
+  </style>
+</head>
+<body>
+  <!-- ========== Header & nav ========== -->
+  <header class="site-header">
+    <a class="logo" href="index.html"><img src="img/gaze_logo_white.png" alt="GAZE Film Festival logo"></a> <p style="font-size: 2vw; font-weight: 600; padding:0; margin:0; text-align: left;">Wednesday 30th July</p>
+    <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <nav class="main-nav" id="mainNav" aria-label="Main menu">
+      <ul class="menu">
+        <li class="dropdown"><a href="#" aria-haspopup="true">ABOUT</a>
+          <ul class="submenu">
+            <li><a href="archive.html">Archive</a></li>
+            <li><a href="https://filmfreeway.com/gaze-ireland" target="_blank">Submit a Film</a></li>
+          </ul></li>
+        <li class="dropdown"><a href="#" aria-haspopup="true">TICKETS</a>
+          <ul class="submenu">
+            <li><a href="https://events.ticketbooth.eu/event/gaze-festival-pass-2025" target="_blank">Festival Pass</a></li>
+                        <li><a href="tuesday.html">Tuesday 29th July</a></li>
+            <li><a href="wednesday.html">Wednesday 30th July</a></li>
+            <li><a href="thursday.html">Thursday 31st July</a></li>
+            <li><a href="friday.html">Friday 1st August</a></li>
+            <li><a href="saturday.html">Saturday 2nd August</a></li>
+            <li><a href="sunday.html">Sunday 3rd August</a></li>
+            <li><a href="monday.html">Monday 4th August</a></li>
+          </ul></li>
+        <li class="dropdown"><a href="#" aria-haspopup="true">SUPPORT</a>
+          <ul class="submenu">
+            <li><a href="https://mailchi.mp/gaze/gaze-newsletter-sign-up" target="_blank">Subscribe</a></li>
+            <li><a href="friend.html">Festival Friend</a></li>
+            <li><a href="vol.html">Volunteer</a></li>
+            <li><a href="stargaze.html">StarGAZE</a></li>
+          </ul></li>
+        <li class="dropdown"><a href="#" aria-haspopup="true">ACCESSIBILITY</a>
+          <ul class="submenu">
+            <li><a href="https://youtu.be/PHfYZgj4Y2o" target="_blank">Video Guide</a></li>
+            <li><a href="img/archive/GAZE Easy Read July 2024.pdf" target="_blank">Easy Read Guide</a></li>
+            <li><a href="img/archive/starGAZE easy read document (2).pdf" target="_blank">StarGAZE</a></li>
+            <li><a href="img/archive/GAZE large print programme 2024.pdf" target="_blank">Programme</a></li>
+          </ul></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Dynamic film listings -->
+  <main id="listing">Loading programme…</main>
+
+  <!-- ========== JS: toggle menu & fetch films ========== -->
+  <script>
+    // Mobile hamburger + dropdown toggles
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const toggle = document.querySelector('.menu-toggle');
+      const nav    = document.getElementById('mainNav');
+      toggle.addEventListener('click', ()=>{
+        const open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open);
+      });
+      nav.querySelectorAll('.dropdown > a').forEach(link=>{
+        link.addEventListener('click', e=>{
+          if(window.innerWidth < 769){
+            e.preventDefault();
+            link.parentElement.classList.toggle('open');
+          }
+        });
+      });
+    });
+  </script>
+
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabaseUrl = 'https://pcqmducomykhcumkchjm.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjcW1kdWNvbXlraGN1bWtjaGptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDU4NjcsImV4cCI6MjA2NDQyMTg2N30.esmrg8uQpQQHfuzmYmNwxciv3x2ExRqV03thXVSOC38';
+    const supabase    = createClient(supabaseUrl, supabaseKey);
+
+    function ordinal(n){
+      const s = ["th","st","nd","rd"];
+      const v = n % 100;
+      return n + (s[(v-20)%10] || s[v] || s[0]);
+    }
+
+    async function loadFilms(){
+      const container = document.getElementById('listing');
+      const { data: films, error } = await supabase
+        .from('wednesday')
+        .select('*')
+        .order('order', { ascending: true });
+
+      if(error){ console.error(error); container.textContent='Sorry, something went wrong.'; return; }
+      if(!films || !films.length){ container.textContent='Programme coming soon.'; return; }
+
+      container.innerHTML = films.map(film=>{
+        const dateObj  = new Date(film.screening_date);
+        const weekday  = dateObj.toLocaleDateString(undefined,{ weekday:'long' });
+        const month    = dateObj.toLocaleDateString(undefined,{ month:'long' });
+        const dateStr  = `${weekday} ${month} ${ordinal(dateObj.getDate())} ${dateObj.getFullYear()}`;
+
+        const firstLineParts = [
+          dateStr,
+          film.screening_time,
+          film.country
+        ].filter(Boolean).join(' • ');
+
+        const secondLineParts = [
+          film.length ? `${film.length}` : null,
+          film.venue,
+          film.director ? `Dir. ${film.director}` : null
+        ].filter(Boolean).join(' • ');
+
+        return `<article>
+          <img src="${film.image_url}" alt="${film.title}">
+          <div class="info">
+            <h2>${film.title}</h2>
+            <p class="meta">
+              <span class="primary">${firstLineParts}</span>
+              <span class="secondary">${secondLineParts}</span>
+            </p>
+            <p class="desc">${film.description ?? ''}</p>
+            <p class="credits">
+              ${film.writers ? `Writers: ${film.writers}<br>` : ''}
+              ${film.producers ? `Producers: ${film.producers}` : ''}
+            </p>
+            ${film.ticket_url ? `<a class="button" href="${film.ticket_url}" target="_blank" rel="noopener">Book Tickets</a>` : ''}
+          </div>
+        </article>`;
+      }).join('');
+    }
+    document.addEventListener('DOMContentLoaded', loadFilms);
+  </script>
+</body>
+</html>
