@@ -21,50 +21,80 @@
       gtag('js', new Date());
       gtag('config', 'UA-XXXXX-Y');
     </script>
-    <style>
-      body{background: #181818 !important;;margin:0;font-family:tt-commons-pro,sans-serif; color: #fff;}
+<style>
+      body{background:#181818 !important;margin:0;font-family:tt-commons-pro,sans-serif;color:#fff;}
 
-    #tt-timetable{
-        padding:0;
+      #tt-timetable{padding:0;margin:0;}
+
+      .tt-date-group{margin:0;padding:0;}
+      .tt-date-heading{
         margin:0;
-    }
+        margin-top:2vw;
+        padding:0;
+        font-size:4vw;
+        color:#ffffff;
+        font-weight:600;
+        text-align:left;
+      }
 
-    .tt-date-group{margin:0; padding:0;}
-    .tt-date-heading{
-      margin:0;
-      margin-top: 2vw;
-            padding:0;
-      font-size:4vw;
-      color:#ffffff;
-      font-weight:600;
-      text-align: left;
-    }
-    .tt-show{
-      width: 90vw; display:flex;align-items:center;gap:0.2rem;
-      padding:1vw;border-bottom:0.5px solid #ff7461; border-top:0.5px solid #ff7461}
-    .tt-time{font-weight:600;min-width:5rem}
-    .tt-title{flex:1; font-size: 1.5vw;font-weight:600;}
-    .tt-book{
-      background:#222;color:#fff;
-      padding:.8rem 1.8rem;font-weight:600;text-decoration:none}
-    .tt-book:hover{background:#ffaea3;color:#161717}
+      .tt-show{
+        width:90vw;
+        display:flex;
+        align-items:center;
+        gap:0.4rem;          /* slightly wider gap to fit new button */
+        padding:1vw;
+        border-bottom:0.5px solid #ff7461;
+        border-top:0.5px solid #ff7461;
+      }
 
-@media (max-width: 768px) {
-    .tt-date-heading{
-        background: none;
-        margin: 4vw;
-        padding-top: 4vw;
-        font-size: 6vw;
-    }
-     .tt-title{flex:1; font-size: large;}
-  .tt-show{ 
-padding:3vw;
+      .tt-time{font-weight:600;min-width:5rem;}
+      .tt-title{flex:1;font-size:1.5vw;font-weight:600;}
 
-  }
+      /* --- existing ticket button --- */
+      .tt-book{
+        background:#222;
+        color:#fff;
+        padding:.8rem 1.8rem;
+        font-weight:600;
+        text-decoration:none;
+                border-radius:4px;
+      }
+      .tt-book:hover{background:#ffaea3;color:#161717;}
 
+      /* --- NEW strand button --- */
+      .tt-strand{
+        background:#ff7461;
+        color:#161717;
+        padding:.5rem 1.2rem;
+        font-weight:600;
+        text-decoration:none;
+        border:none;
+        border-radius:4px;
+        white-space:nowrap;
+      }
+      .tt-strand:hover{background:#ffaea3;color:#161717;}
 
- }
+      /* ---------- MOBILE ---------- */
+      @media (max-width:768px){
+        .tt-date-heading{
+          background:none;
+          margin:4vw;
+          padding-top:4vw;
+          font-size:6vw;
+        }
+        .tt-title{flex:1;font-size:medium;}
+        .tt-show{padding:3vw;flex-wrap:wrap;}  /* allow wrapping on small screens */
+        .tt-strand{
+          margin-top:2vw;
+          font-size:2vw;
+        }
+        .tt-book{
+          margin-top:2vw;
+                    font-size:2vw;
+                            border-radius:4px;
 
+        }
+      }
     </style>
 </head>
 <body>
@@ -141,6 +171,20 @@ padding:3vw;
         </ul>
     </nav>
 
+    <div class="quick-nav" aria-label="Section shortcuts">
+  <ul>
+    <li><a href="timetable.html"><span style="color: #fa6755; font-weight: 600;">Timetable</span></a></li>
+    <li><a href="featured.html">Featured</a></li>
+    <li><a href="irish.html">Irish</a></li>
+    <li><a href="first.html">First Timers</a></li>
+    <li><a href="genre.html">Genre</a></li>
+    <li><a href="3x3.html">3x3</a></li>
+    <li><a href="animation.html">Animation</a></li>
+    <li><a href="doc.html">Documentary</a></li>
+    <li><a href="intense.html">Intense Connections</a></li>
+    <li><a href="messy.html">Messy People</a></li>
+  </ul>
+</div>
 <!-- DYNAMIC CONNTENT -->
   <main id="tt-timetable" aria-live="polite" id="maincontent">Loading timetable…</main>
   <br>  <br>
@@ -171,109 +215,113 @@ padding:3vw;
         </div>
     </footer>
 
-    <!-- -------------- TIMETABLE SCRIPT (tt-*) -------------- -->
-  <!-- -------------- TIMETABLE SCRIPT (tt-*) -------------- -->
-<script type="module">
-  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+   <script type="module">
+      import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-  /* Supabase credentials (same as before) */
-  const supabaseUrl = 'https://pcqmducomykhcumkchjm.supabase.co';
-  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjcW1kdWNvbXlraGN1bWtjaGptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDU4NjcsImV4cCI6MjA2NDQyMTg2N30.esmrg8uQpQQHfuzmYmNwxciv3x2ExRqV03thXVSOC38';
-  const supabase    = createClient(supabaseUrl, supabaseKey);
+      /* Supabase credentials (same as before) */
+      const supabaseUrl = 'https://pcqmducomykhcumkchjm.supabase.co';
+      const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjcW1kdWNvbXlraGN1bWtjaGptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDU4NjcsImV4cCI6MjA2NDQyMTg2N30.esmrg8uQpQQHfuzmYmNwxciv3x2ExRqV03thXVSOC38';
+      const supabase    = createClient(supabaseUrl, supabaseKey);
 
-  /* helper for 1st / 2nd / 3rd */
-  const ordinal = n=>{
-    const s = ['th','st','nd','rd'], v = n % 100;
-    return n + (s[(v-20) % 10] || s[v] || s[0]);
-  };
+      /* helper for 1st / 2nd / 3rd */
+      const ordinal = n=>{
+        const s = ['th','st','nd','rd'], v = n % 100;
+        return n + (s[(v-20) % 10] || s[v] || s[0]);
+      };
 
-  async function loadTimetable(){
-    const container = document.getElementById('tt-timetable');
+      /* --- NEW: map strand-name → page --- */
+      const strandLinks = {
+        'Featured Event'      : 'featured.html',
+        'Irish Film'          : 'irish.html',
+        'First Timers'        : 'first.html',
+        'Genre Film'          : 'genre.html',
+        '3x3'                 : '3x3.html',
+        'Animation'           : 'animation.html',
+        'Documentary'         : 'doc.html',
+        'Intense Connections' : 'intense.html',
+        'Messy People'        : 'messy.html'
+      };
 
-    /* tables to merge */
-    const tables = ['tuesday','wednesday','thursday','friday','saturday','sunday','monday'];
+      async function loadTimetable(){
+        const container = document.getElementById('tt-timetable');
 
-    try{
-      const results = await Promise.all(
-        tables.map(t => supabase.from(t).select('*'))
-      );
+        /* tables to merge */
+        const tables = ['tuesday','wednesday','thursday','friday','saturday','sunday','monday'];
 
-      /* flatten + filter */
-      let shows = [];
-      results.forEach(({data,error})=>{
-        if(error){ console.error(error); return; }
-        if(data) shows.push(...data);
-      });
-      shows = shows.filter(s => s.screening_date);
+        try{
+          const results = await Promise.all(
+            tables.map(t => supabase.from(t).select('*'))
+          );
 
-      /* quick date-only sort so the day-blocks stay in calendar order */
-      shows.sort((a,b)=> new Date(a.screening_date) - new Date(b.screening_date));
+          /* flatten + filter */
+          let shows = [];
+          results.forEach(({data,error})=>{
+            if(error){ console.error(error); return; }
+            if(data) shows.push(...data);
+          });
+          shows = shows.filter(s => s.screening_date);
 
-      /* group by day */
-      const byDay = new Map();
-      shows.forEach(s=>{
-        const key = new Date(s.screening_date).toISOString().split('T')[0];
-        (byDay.get(key) || byDay.set(key,[]).get(key)).push(s);
-      });
+          /* keep day–order */
+          shows.sort((a,b)=> new Date(a.screening_date) - new Date(b.screening_date));
 
-      /* ---- NEW: sort each day’s shows earliest → latest ---- */
-      for (const arr of byDay.values()){
-        // Simple version – works if times are always "HH:MM" 24-hour
-        arr.sort((a,b)=> (a.screening_time||'').localeCompare(b.screening_time||''));
+          /* group by day */
+          const byDay = new Map();
+          shows.forEach(s=>{
+            const key = new Date(s.screening_date).toISOString().split('T')[0];
+            (byDay.get(key) || byDay.set(key,[]).get(key)).push(s);
+          });
 
-        /*  Robust fallback – uncomment if some times are "1 PM", "7pm", etc.
-        arr.sort((a,b)=>{
-          const toMins = t=>{
-            if(!t) return 0;
-            const m = t.match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm)?/i);
-            if(!m) return 0;
-            let h = +m[1], min = +(m[2]||0), mer = (m[3]||'').toLowerCase();
-            if(mer==='pm' && h!==12) h += 12;
-            if(mer==='am' && h===12)  h  = 0;
-            return h*60 + min;
-          };
-          return toMins(a.screening_time) - toMins(b.screening_time);
-        });
-        */
+          /* sort shows by screening_time within each day */
+          for (const arr of byDay.values()){
+            arr.sort((a,b)=> (a.screening_time||'').localeCompare(b.screening_time||''));
+          }
+
+          if(!byDay.size){
+            container.textContent = 'Programme coming soon.';
+            return;
+          }
+
+          /* build HTML */
+          container.innerHTML = [...byDay.keys()].sort().map(dateStr=>{
+            const d = new Date(dateStr);
+            const heading =
+              `${d.toLocaleDateString(undefined,{weekday:'long'})} ` +
+              `${d.toLocaleDateString(undefined,{month:'long'})} ` +
+              `${ordinal(d.getDate())}`;
+
+            const list = byDay.get(dateStr).map(show=>{
+              const strand      = show.strand || '';
+              const strandHref  = strandLinks[strand] || '#';
+
+              return `
+                <div class="tt-show">
+                  <span class="tt-time">${show.screening_time || ''}</span>
+                  <span class="tt-title">${show.title}</span>
+
+                  ${strand
+                    ? `<a class="tt-strand" href="${strandHref}">${strand}</a>`
+                    : ''}
+
+                  ${show.ticket_url
+                    ? `<a class="tt-book" href="${show.ticket_url}" target="_blank" rel="noopener">Tickets</a>`
+                    : ''}
+                </div>`;
+            }).join('');
+
+            return `<section class="tt-date-group">
+                      <h2 class="tt-date-heading">${heading}</h2>
+                      ${list}
+                    </section>`;
+          }).join('');
+
+        }catch(err){
+          console.error(err);
+          container.textContent = 'Sorry, something went wrong.';
+        }
       }
-      /* ------------------------------------------------------ */
 
-      if(!byDay.size){
-        container.textContent = 'Programme coming soon.';
-        return;
-      }
-
-      /* build HTML */
-      container.innerHTML = [...byDay.keys()].sort().map(dateStr=>{
-        const d = new Date(dateStr);
-        const heading =
-          `${d.toLocaleDateString(undefined,{weekday:'long'})} ` +
-          `${d.toLocaleDateString(undefined,{month:'long'})} ` +
-          `${ordinal(d.getDate())}`;
-
-        const list = byDay.get(dateStr).map(show=>`
-          <div class="tt-show">
-            <span class="tt-time">${show.screening_time || ''}</span>
-            <span class="tt-title">${show.title}</span>
-            ${show.ticket_url
-              ? `<a class="tt-book" href="${show.ticket_url}" target="_blank" rel="noopener">Tickets</a>`
-              : ''}
-          </div>`).join('');
-
-        return `<section class="tt-date-group">
-                  <h2 class="tt-date-heading">${heading}</h2>
-                  ${list}
-                </section>`;
-      }).join('');
-
-    }catch(err){
-      console.error(err);
-      container.textContent = 'Sorry, something went wrong.';
-    }
-  }
-
-  document.addEventListener('DOMContentLoaded', loadTimetable);
-</script>
+      document.addEventListener('DOMContentLoaded', loadTimetable);
+    </script>
 
 
 
