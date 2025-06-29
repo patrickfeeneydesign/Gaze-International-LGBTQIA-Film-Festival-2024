@@ -211,7 +211,7 @@ background-color: #fff;
     <li><a href="3x3.html">3 x 3</a></li>
     <li><a href="animation.html">Animation</a></li>
     <li><a href="doc.html">Documentary</a></li>
-    <li><a href="intense.html">Intense Connections</a></li>
+    <li><a href="intense.html"><span style="color: #ffaea3;">Intense Connections</span></a></li>
     <li><a href="messy.html">Messy People</a></li>
   </ul>
 </div>
@@ -241,68 +241,95 @@ background-color: #fff;
         </div>
     </footer>
 
-    <script type="module">
+ <script type="module">
   import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
   const supabaseUrl = 'https://pcqmducomykhcumkchjm.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjcW1kdWNvbXlraGN1bWtjaGptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDU4NjcsImV4cCI6MjA2NDQyMTg2N30.esmrg8uQpQQHfuzmYmNwxciv3x2ExRqV03thXVSOC38';
-    const supabase    = createClient(supabaseUrl, supabaseKey);
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjcW1kdWNvbXlraGN1bWtjaGptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDU4NjcsImV4cCI6MjA2NDQyMTg2N30.esmrg8uQpQQHfuzmYmNwxciv3x2ExRqV03thXVSOC38';
+  const supabase    = createClient(supabaseUrl, supabaseKey);
 
+  /* NEW: every programme table you want to merge */
+  const tables = ['tuesday','wednesday','thursday','friday','saturday','sunday','monday'];
+
+  /* unchanged helper */
   function ordinal(n) {
-    const s = ["th","st","nd","rd"];
+    const s = ['th','st','nd','rd'];
     const v = n % 100;
     return n + (s[(v-20)%10] || s[v] || s[0]);
   }
 
+  /* REPLACED ↓↓↓ */
   async function loadFilms() {
     const container = document.getElementById('sf-listing');
-    const { data: films, error } = await supabase
-      .from('intense')
-      .select('*')
-      .order('order', { ascending: true });
+    try {
+      /* fetch all tables in parallel, keeping only “Featured Event” rows */
+      const results = await Promise.all(
+        tables.map(t =>
+          supabase
+            .from(t)
+            .select('*')
+            .eq('strand', 'Intense Connections')      // <-- new column filter
+        )
+      );
 
-    if (error) {
-      console.error(error);
-      container.textContent = 'Sorry, something went wrong.';
-      return;
-    }
-    if (!films || films.length === 0) {
-      container.textContent = 'Programme coming soon.';
-      return;
-    }
+      /* surface any query error immediately */
+      const firstError = results.find(r => r.error)?.error;
+      if (firstError) throw firstError;
 
-    container.innerHTML = films.map(film => {
-      const d = new Date(film.screening_date);
-      const weekday = d.toLocaleDateString(undefined, { weekday: 'long' });
-      const month   = d.toLocaleDateString(undefined, { month: 'long' });
-      const dateStr = `${weekday} ${month} ${ordinal(d.getDate())} ${d.getFullYear()}`;
+      /* flatten the successful data arrays */
+      const films = results.flatMap(r => r.data ?? []);
 
-      const line1 = [ dateStr, film.screening_time, film.country ].filter(Boolean).join(' • ');
-      const line2 = [ film.length && `${film.length}`, film.venue, film.director && `Dir. ${film.director}` ]
-                      .filter(Boolean).join(' • ');
+      if (!films.length) {
+        container.textContent = 'Programme coming soon.';
+        return;
+      }
 
-      return `
-        <div class="sf-film-item">
-          <img class="sf-film-image" src="${film.image_url}" alt="${film.title}">
-          <div class="sf-film-info">
-            <h2 class="sf-film-title">${film.title}</h2>
-            <div class="sf-film-meta">
-              <span class="sf-film-meta-primary">${line1}</span>
-              <span class="sf-film-meta-secondary">${line2}</span>
+      /* sort: use explicit “order” field if present, else by screening date/time */
+      films.sort((a, b) => {
+        if (a.order != null && b.order != null) return a.order - b.order;
+        return new Date(a.screening_date + ' ' + a.screening_time)
+             - new Date(b.screening_date + ' ' + b.screening_time);
+      });
+
+      /* build markup exactly as before */
+      container.innerHTML = films.map(film => {
+        const d = new Date(film.screening_date);
+        const weekday = d.toLocaleDateString(undefined, { weekday: 'long' });
+        const month   = d.toLocaleDateString(undefined, { month: 'long' });
+        const dateStr = `${weekday} ${month} ${ordinal(d.getDate())} ${d.getFullYear()}`;
+
+        const line1 = [dateStr, film.screening_time, film.country ]
+                        .filter(Boolean).join(' • ');
+        const line2 = [film.length && `${film.length}`,
+                       film.venue,
+                       film.director && `Dir. ${film.director}`]
+                        .filter(Boolean).join(' • ');
+
+        return `
+          <div class="sf-film-item">
+            <img class="sf-film-image" src="${film.image_url}" alt="${film.title}">
+            <div class="sf-film-info">
+              <h2 class="sf-film-title">${film.title}</h2>
+              <div class="sf-film-meta">
+                <span class="sf-film-meta-primary">${line1}</span>
+                <span class="sf-film-meta-secondary">${line2}</span>
+              </div>
+              <p class="sf-film-desc">${film.description || ''}</p>
+              <p class="sf-film-credits">
+                ${film.writers   ? `Writers: ${film.writers}<br>` : ''}
+                ${film.producers ? `Producers: ${film.producers}` : ''}
+              </p>
+              ${film.ticket_url
+                  ? `<a class="sf-film-button" href="${film.ticket_url}" target="_blank" rel="noopener">Book Tickets</a>`
+                  : ''}
             </div>
-            <p class="sf-film-desc">${film.description || ''}</p>
-            <p class="sf-film-credits">
-              ${film.writers   ? `Writers: ${film.writers}<br>`   : ''}
-              ${film.producers ? `Producers: ${film.producers}`   : ''}
-            </p>
-            ${film.ticket_url
-              ? `<a class="sf-film-button" href="${film.ticket_url}"
-                   target="_blank" rel="noopener">Book Tickets</a>`
-              : ''
-            }
-          </div>
-        </div>`;
-    }).join('');
+          </div>`;
+      }).join('');
+
+    } catch (err) {
+      console.error(err);
+      container.textContent = 'Sorry, something went wrong.';
+    }
   }
 
   document.addEventListener('DOMContentLoaded', loadFilms);
