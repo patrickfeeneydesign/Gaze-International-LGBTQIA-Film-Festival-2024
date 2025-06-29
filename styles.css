@@ -353,15 +353,17 @@ nav ul li a:hover {
     }
     
     section p {
-        line-height: 12vh;
-        font-size: 10vh;
+        line-height: 11.5vh;
+        font-size: 7vh;
         color: #fa6755;
-        font-weight: 600;
+        font-weight: 300;
     }
 
 section p a {
     text-decoration: none;
     color: #f7f7f7;
+            font-size: 10vh;
+            font-weight: 600;
 }
 section p a:hover {
     text-decoration: none;
@@ -1001,17 +1003,21 @@ li.dropdown.active {
     }
     
     section p {
-        line-height: 10vw;
-        font-size: 5.5vw; /* Adjust this value to change the text size */
+        line-height: 11vw;
+
+        font-size: 5vw; /* Adjust this value to change the text size */
         color: #fa6755;
-        font-weight: 600;
+        font-weight: 300;
         padding: 5vw;
     }
     
 
     section p a {
-        text-decoration: underline;
         color: #ffffff;
+                font-size: 10vw; /* Adjust this value to change the text size */
+
+                font-weight: 600;
+
     }
 
     .backgroundimg {
