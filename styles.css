@@ -201,7 +201,19 @@ header img {
     background-color: #fa6755;
     color: #161717;
 }
-
+/* — Quick-Nav — */
+  .quick-nav{
+    position:fixed; bottom:0; left:0;
+    z-index:9999;
+    color: #ffffff;
+    background:rgba(21, 21, 21, 0.95);
+    backdrop-filter:blur(4px);
+    padding:1.5rem 2.5rem;
+    font-family:inherit;
+  }
+  .quick-nav ul{margin:0;padding:0;list-style:none;display:flex;gap:1rem;flex-wrap:wrap;}
+  .quick-nav a{font-size:clamp(.75rem,1vw,1rem);font-weight:500;color:#ffffff;text-decoration:none;transition:color .2s;}
+  .quick-nav a:hover,.quick-nav a:focus{color:#ffaea3;outline:none;}
 /* PARENT NAV */
 
 
@@ -341,7 +353,7 @@ nav ul li a:hover {
     }
     
     section p {
-        line-height: 10vh;
+        line-height: 12vh;
         font-size: 10vh;
         color: #fa6755;
         font-weight: 600;
@@ -780,13 +792,13 @@ input[type="submit"]:hover {
     /* Footer */
     footer {
         background-color: none;
+            backdrop-filter:blur(4px);
         height: 3.5vw;
         padding-top: 0.4vw;
         width: 36vw;
         position: fixed;
         bottom: 0;
        right: 0;
-       border-top: 1px solid white;;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -795,7 +807,7 @@ input[type="submit"]:hover {
     }
 
     footer.black-background {
-        background-color: #f7f7f7;
+        background-color: white;
         color: #161717;
         border-bottom: none;
 
@@ -989,8 +1001,8 @@ li.dropdown.active {
     }
     
     section p {
-        line-height: 13vw;
-        font-size: 12vw; /* Adjust this value to change the text size */
+        line-height: 10vw;
+        font-size: 5.5vw; /* Adjust this value to change the text size */
         color: #fa6755;
         font-weight: 600;
         padding: 5vw;
@@ -999,7 +1011,7 @@ li.dropdown.active {
 
     section p a {
         text-decoration: underline;
-        color: #ffaea3;
+        color: #ffffff;
     }
 
     .backgroundimg {
@@ -1041,7 +1053,22 @@ li.dropdown.active {
         margin-bottom: 10vw;
     }
 
-
+/* — Quick-Nav — */
+  .quick-nav{
+    position:fixed; bottom:0; left:0;
+    z-index:9999;
+    color: #ffffff;
+    background:rgba(21, 21, 21, 0.95);
+    backdrop-filter:blur(4px);
+    padding:1.5rem 2.5rem;
+    font-family:inherit;
+  }
+  .quick-nav ul{margin:0;padding:0;list-style:none;display:flex;gap:1rem;flex-wrap:wrap;}
+  .quick-nav a{font-size:clamp(.75rem,1vw,1rem);font-weight:500;color:#ffffff;text-decoration:none;transition:color .2s;}
+  .quick-nav a:hover,.quick-nav a:focus{color:#ffaea3;outline:none;}    .quick-nav{bottom:0;left:0;padding:1rem 1.2rem;}
+    .quick-nav ul{flex-direction:row;gap: .6rem 1.8rem;align-items:flex-end;}
+    .quick-nav a{font-size:3vw;}
+  
 
 
 

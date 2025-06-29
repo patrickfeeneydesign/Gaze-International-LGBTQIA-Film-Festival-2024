@@ -16,6 +16,27 @@
       gtag('js', new Date());
       gtag('config', 'UA-XXXXX-Y');
     </script>
+    <style>
+/* — Quick-Nav — */
+  .quick-nav{
+    position:fixed; bottom:0; left:0;
+    z-index:9999;
+    color: #ffffff;
+    background:rgba(21, 21, 21, 0);
+    backdrop-filter:blur(4px);
+    padding:1.5rem 2rem;
+    font-family:inherit;
+  }
+  .quick-nav ul{margin:0;padding:0;list-style:none;display:flex;gap:1rem;flex-wrap:wrap;}
+  .quick-nav a{font-size:clamp(.75rem,1vw,1rem);font-weight:500;color:#ffffff;text-decoration:none;transition:color .2s;}
+  .quick-nav a:hover,.quick-nav a:focus{color:#ffaea3;outline:none;}
+
+  /* mobile */
+  @media(max-width:767px){
+    .quick-nav{bottom:0;left:0;padding:1rem 1.2rem;}
+    .quick-nav ul{flex-direction:row;gap: .6rem 1.8rem;align-items:flex-end;}
+    .quick-nav a{font-size:3vw;}
+  }</style>
 </head>
 <body>
     <!-- SKIP TO CONTENT -->
@@ -48,14 +69,11 @@
             <li class="dropdown" tabindex="0" aria-label="Menu Section, Tickets">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">TICKETS</a>
                 <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="https://events.ticketbooth.eu/event/gaze-festival-pass-2025" target="_blank">Festival Pass</a></li>
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="tuesday.html">Tuesday 29th July</a></li>
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="wednesday.html">Wednesday 30th July</a></li>
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="thursday.html">Thursday 31st July</a></li>
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="friday.html">Friday 1st August</a></li>
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="saturday.html">Saturday 2nd August</a></li>
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="sunday.html">Sunday 3rd August</a></li>
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="monday.html">Monday 4th August</a></li>
+                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="themes.html">Festival Programme</a></li>
+                     <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="https://events.ticketbooth.eu/event/gaze-festival-pass-2025" target="_blank">Festival Pass</a></li>
+                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="featured.html">Featured Events</a></li>
+                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="timetable.html">Timetable</a></li>
+
                     <!--
                     <li tabindex="0" aria-label=" View timetable" role="button"><a href="Timetable.html">Timetable</a></li>
                     <li tabindex="0" aria-label="Best Judys" role="button"><a href="judy.html">Best Judys</a></li>
@@ -95,6 +113,24 @@
             </li>        
         </ul>
     </nav>
+
+<div class="mobilehide">
+
+    <div class="quick-nav" aria-label="Section shortcuts">
+        <ul>
+                <li><a href="featured.html">Featured Events</a></li>
+            <li><a href="irish.html">Irish Film</a></li>
+            <li><a href="first.html">First Timers</a></li>
+            <li><a href="genre.html">Genre Film</a></li>
+            <li><a href="3x3.html">3 x 3</a></li>
+            <li><a href="animation.html">Animation</a></li>
+            <li><a href="doc.html">Documentary</a></li>
+            <li><a href="intense.html">Intense Connections</a></li>
+            <li><a href="messy.html">Messy People</a></li>
+        </ul>
+    </div>
+
+</div>
     <!-- Main Body -->
     <main id="maincontent">
 

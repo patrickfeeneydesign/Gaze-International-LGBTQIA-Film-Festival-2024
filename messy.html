@@ -16,10 +16,117 @@
       gtag('js', new Date());
       gtag('config', 'UA-XXXXX-Y');
     </script>
+    <style>
+        /* ===== Dynamic film listings (bespoke sf- classes) ===== */
+body {
+    background-color: #fff;
+}
+#sf-listing {
+  padding: 0;
+}
+
+.sf-film-item {
+  display: grid;
+  grid-template-columns: minmax(260px, 60vw) 1fr;
+  gap: 1.5rem;
+  max-width: 100vw;
+  margin: 0;
+}
+
+.sf-film-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.sf-film-info {
+  padding: 3vw 3.5vw 2vw 2vw;
+}
+
+.sf-film-title {
+  font-size: 4vw;
+    padding: 0;
+    color: #222;
+background-color: #fff;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.sf-film-meta {
+  font-weight: 500;
+  font-size: 1vw;
+  margin-bottom: 1rem;
+}
+
+.sf-film-meta-primary {
+  display: block;
+  font-size: 1.2em;
+  margin-top: 0.5vw;
+  font-weight: 600;
+}
+
+.sf-film-meta-secondary {
+  font-size: 1em;
+  opacity: .85;
+}
+
+.sf-film-desc {
+  margin-bottom: 1rem;
+    margin-top: 2vw;
+}
+
+.sf-film-credits {
+  font-size: .9rem;
+  color: var(--meta);
+  margin-bottom: 1.5rem;
+}
+
+.sf-film-button {
+  display: inline-block;
+  background-color: #222;
+  color: #fff;
+  padding: .65rem 1.25rem;
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 4vw;
+  margin-top: 1vw;
+}
+.sf-film-button:hover {
+  background-color: var(--accent);
+  color: black;
+    background-color: #ffaea3;
+}
+
+/* ---- Mobile adjustments ---- */
+@media (max-width: 768px) {
+  .sf-film-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .sf-film-image {
+    height: auto;
+  }
+  .sf-film-info {
+    padding: 6vw 8vw 10vw;
+  }
+  .sf-film-title {
+    font-size: 8vw;
+    margin: 1rem 0 .5rem;
+  }
+  .sf-film-meta {
+    font-size: 3.5vw;
+    margin-bottom: 1rem;
+  }
+    .sf-film-button {margin-bottom: 8vw;}
+
+}
+
+    </style>
 </head>
 <body>
     <!-- SKIP TO CONTENT -->
-    <a href="#maincontent" role="link" tabindex="0" class="skip-link">GAZE Archive. Press enter to skip to page content, or press tab to navigate menu</a>
+    <a href="#maincontent" role="link" tabindex="0" class="skip-link">Volunteer. Press enter to skip to page content, or press tab to navigate menu</a>
     <!-- Main Title -->
     <header tabindex="0" aria-label="Home Button">
         <a href="index.html" style="display: inline-block; cursor: pointer;">
@@ -28,8 +135,8 @@
     </header>
     <!-- BUTTON TOGGLE MENU -->
     <button class="menu-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="The main menu is now open, press tab to navigate"></button>
-      <!-- Menu -->
-      <nav>
+    <!-- Menu -->
+    <nav>
         <ul>
             <li class="dropdown" tabindex="0" aria-label="Main Menu Header, About">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">ABOUT</a>
@@ -90,178 +197,114 @@
             </li>        
         </ul>
     </nav>
-    <!-- Main Body -->
-    <main id="maincontent">
-<br><br>
-        <div class="gallery">
-            <!-- Example with 25 linked images (5x5 grid) -->
+        <div class="quick-nav" aria-label="Section shortcuts">
+  <ul>
+        <li><a href="featured.html">Featured Events</a></li>
+    <li><a href="irish.html">Irish Film</a></li>
+    <li><a href="first.html">First Timers</a></li>
+    <li><a href="genre.html">Genre Film</a></li>
+    <li><a href="3x3.html">3 x 3</a></li>
+    <li><a href="animation.html">Animation</a></li>
+    <li><a href="doc.html">Documentary</a></li>
+    <li><a href="intense.html">Intense Connections</a></li>
+    <li><a href="messy.html">Messy People</a></li>
+  </ul>
+</div>
+<!-- DYNAMIC CONNTENT -->
+<main id="sf-listing">Loading programme…</main>
 
-            <div tabindex="0" class="keydown">
-                <a role="link" href="mailto:info@gaze.ie" class="image-container highlighted" target="_blank">
-                    <img src="img/archive/submityourown.jpg" alt="Submit a programme to the gaze archive, email link">
-                    <div class="overlay always-show">Archive Submissions</div>
-                </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-                <a role="link" href="img/archive/2024.pdf" class="image-container" target="_blank">
-                    <img src="img/archive/2024.png" alt="GAZE Programme ">
-                    <div class="overlay"> <br> <span><strong>2024</strong><em><br>Small Format</em></span></div>
-                </a>
-                </div>
-
-            <div tabindex="0" class="keydown">
-            <a role="link" href="img/archive/2023.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2023.png" alt="GAZE Programme ">
-                <div class="overlay">2023</div>
+    <!-- Footer -->
+    <footer class="black-background">
+        <div class="social-icons">
+            <a href="https://www.instagram.com/gazefilmfest/" target="_blank" aria-label="Instagram" role="link">
+                <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
             </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2022.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2022.png" alt="GAZE Programme ">
-                <div class="overlay">2022</div>
+            <a href="https://www.facebook.com/gazefilmfest/" target="_blank" aria-label="Facebook" role="link">
+                <img src="img/facebook-app-round-white-icon.png" alt="Link to Facebook page" tabindex="0">
             </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2021.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2021.png" alt="GAZE Programme ">
-                <div class="overlay">2021</div>
+            <a href="https://x.com/GAZEfilmfest" target="_blank" aria-label="Twitter" role="link">
+                <img src="img/x-social-media-white-icon.png" alt="Link to Twitter page" tabindex="0">
             </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2020.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2020.png" alt="GAZE Programme ">
-                <div class="overlay">2020</div>
+            <a href="https://www.tiktok.com/@gazefilmfest?is_from_webapp=1&sender_device=pc" target="_blank" aria-label="Tiktok" role="link">
+                <img src="img/tiktok.png" alt="Link to Tiktok page" tabindex="0">
             </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2019.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2019.png" alt="GAZE Programme ">
-                <div class="overlay">2019</div>
-            </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2018.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2018.png" alt="GAZE Programme ">
-                <div class="overlay">2018</div>
-            </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2017.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2017.png" alt="GAZE Programme ">
-                <div class="overlay">2017</div>
-            </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2016.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2016.png" alt="GAZE Programme ">
-                <div class="overlay">2016</div>
-            </a>
-             </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2015.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2015.png" alt="GAZE Programme ">
-                <div class="overlay">2015</div>
-            </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2014.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2014.png" alt="GAZE Programme ">
-                <div class="overlay">2014</div>
-            </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2013.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2013.png" alt="GAZE Programme ">
-                <div class="overlay">2013</div>
-            </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2012.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2012.png" alt="GAZE Programme ">
-                <div class="overlay">2012</div>
-            </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2011.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2011.png" alt="GAZE Programme ">
-                <div class="overlay">2011</div>
-            </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2010.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2010.png" alt="GAZE Programme ">
-                <div class="overlay">2010</div>
-            </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2007.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2007.png" alt="GAZE Programme ">
-                <div class="overlay">2007</div>
-            </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2005.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2005.png" alt="GAZE Programme ">
-                <div class="overlay">2005</div>
-            </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2005.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2003.png" alt="GAZE Programme ">
-                <div class="overlay">2003</div>
-            </a>
-            </div>
-
-            <div tabindex="0" class="keydown">
-            <a href="img/archive/2002.pdf" class="image-container" target="_blank">
-                <img src="img/archive/2002.png" alt="GAZE Programme ">
-                <div class="overlay">2002</div>
-            </a>
-            </div>
-
         </div>
+        <div class="footer-text">
+            &copy; GAZE Film Festival 2024 | All rights reserved
+        </div>
+    </footer>
 
-    </main>
-   <!-- Footer -->
-   <footer class="black-background">
-    <div class="social-icons">
-        <a href="https://www.instagram.com/gazefilmfest/" target="_blank" aria-label="Instagram" role="link">
-            <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
-        </a>
-        <a href="https://www.facebook.com/gazefilmfest/" target="_blank" aria-label="Facebook" role="link">
-            <img src="img/facebook-app-round-white-icon.png" alt="Link to Facebook page" tabindex="0">
-        </a>
-        <a href="https://x.com/GAZEfilmfest" target="_blank" aria-label="Twitter" role="link">
-            <img src="img/x-social-media-white-icon.png" alt="Link to Twitter page" tabindex="0">
-        </a>
-        <a href="https://www.tiktok.com/@gazefilmfest?is_from_webapp=1&sender_device=pc" target="_blank" aria-label="Tiktok" role="link">
-            <img src="img/tiktok.png" alt="Link to Tiktok page" tabindex="0">
-        </a>
-    </div>
-    <div class="footer-text">
-        &copy; GAZE Film Festival 2024 | All rights reserved
-    </div>
-</footer>
-<script>
-  
-  document.addEventListener('DOMContentLoaded', function() {
+    <script type="module">
+  import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+  const supabaseUrl = 'https://pcqmducomykhcumkchjm.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjcW1kdWNvbXlraGN1bWtjaGptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDU4NjcsImV4cCI6MjA2NDQyMTg2N30.esmrg8uQpQQHfuzmYmNwxciv3x2ExRqV03thXVSOC38';
+    const supabase    = createClient(supabaseUrl, supabaseKey);
+
+  function ordinal(n) {
+    const s = ["th","st","nd","rd"];
+    const v = n % 100;
+    return n + (s[(v-20)%10] || s[v] || s[0]);
+  }
+
+  async function loadFilms() {
+    const container = document.getElementById('sf-listing');
+    const { data: films, error } = await supabase
+      .from('messy')
+      .select('*')
+      .order('order', { ascending: true });
+
+    if (error) {
+      console.error(error);
+      container.textContent = 'Sorry, something went wrong.';
+      return;
+    }
+    if (!films || films.length === 0) {
+      container.textContent = 'Programme coming soon.';
+      return;
+    }
+
+    container.innerHTML = films.map(film => {
+      const d = new Date(film.screening_date);
+      const weekday = d.toLocaleDateString(undefined, { weekday: 'long' });
+      const month   = d.toLocaleDateString(undefined, { month: 'long' });
+      const dateStr = `${weekday} ${month} ${ordinal(d.getDate())} ${d.getFullYear()}`;
+
+      const line1 = [ dateStr, film.screening_time, film.country ].filter(Boolean).join(' • ');
+      const line2 = [ film.length && `${film.length}`, film.venue, film.director && `Dir. ${film.director}` ]
+                      .filter(Boolean).join(' • ');
+
+      return `
+        <div class="sf-film-item">
+          <img class="sf-film-image" src="${film.image_url}" alt="${film.title}">
+          <div class="sf-film-info">
+            <h2 class="sf-film-title">${film.title}</h2>
+            <div class="sf-film-meta">
+              <span class="sf-film-meta-primary">${line1}</span>
+              <span class="sf-film-meta-secondary">${line2}</span>
+            </div>
+            <p class="sf-film-desc">${film.description || ''}</p>
+            <p class="sf-film-credits">
+              ${film.writers   ? `Writers: ${film.writers}<br>`   : ''}
+              ${film.producers ? `Producers: ${film.producers}`   : ''}
+            </p>
+            ${film.ticket_url
+              ? `<a class="sf-film-button" href="${film.ticket_url}"
+                   target="_blank" rel="noopener">Book Tickets</a>`
+              : ''
+            }
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  document.addEventListener('DOMContentLoaded', loadFilms);
+</script>
+
+
+   <script>
+        
+        document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('nav');
     const toggleButton = document.querySelector('.menu-toggle');
     const dropdowns = document.querySelectorAll('.dropdown');
@@ -477,30 +520,6 @@ function resetParallaxEffect() {
         if (bg) {
             bg.style.transform = 'scale(1)';
         }
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    setupKeyActions();
-    setupPageInteractions();
-});
-
-function setupKeyActions() {
-    var keydownElements = document.querySelectorAll('.keydown');
-
-    keydownElements.forEach(function(element) {
-        element.addEventListener('keydown', function(event) {
-            // Check if the key pressed is the Enter key
-            if (event.key === 'Enter' || event.keyCode === 13) {
-                // Prevent default action to avoid any unintended behavior
-                event.preventDefault();
-                // Trigger the link within this container
-                var link = element.querySelector('a');
-                if (link) {
-                    window.location.href = link.href; // Navigate to the link's URL
-                }
-            }
-        });
     });
 }
 </script>
