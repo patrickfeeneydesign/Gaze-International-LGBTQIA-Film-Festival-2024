@@ -31,14 +31,14 @@
             padding:0;
       font-size:4vw;
       color:#ffffff;
-      font-weight:700;
+      font-weight:600;
       text-align: left;
     }
     .tt-show{
       width: 90vw; display:flex;align-items:center;gap:0.2rem;
-      padding:1vw;border-bottom:1px solid #fa6755; border-top:1px solid #fa6755}
+      padding:1vw;border-bottom:0.5px solid #ff7461; border-top:0.5px solid #ff7461}
     .tt-time{font-weight:600;min-width:5rem}
-    .tt-title{flex:1; font-size: 1.5vw;}
+    .tt-title{flex:1; font-size: 1.5vw;font-weight:600;}
     .tt-book{
       background:#222;color:#fff;
       padding:.8rem 1.8rem;font-weight:600;text-decoration:none}
@@ -136,19 +136,6 @@ padding:3vw;
         </ul>
     </nav>
 
-        <div class="quick-nav" aria-label="Section shortcuts">
-  <ul>
-        <li><a href="featured.html">Featured Events</a></li>
-    <li><a href="irish.html">Irish Film</a></li>
-    <li><a href="first.html">First Timers</a></li>
-    <li><a href="genre.html">Genre Film</a></li>
-    <li><a href="3x3.html">3 x 3</a></li>
-    <li><a href="animation.html">Animation</a></li>
-    <li><a href="doc.html">Documentary</a></li>
-    <li><a href="intense.html">Intense Connections</a></li>
-    <li><a href="messy.html">Messy People</a></li>
-  </ul>
-</div>
 <!-- DYNAMIC CONNTENT -->
   <main id="tt-timetable" aria-live="polite" id="maincontent">Loading timetable…</main>
   <br>  <br>
@@ -159,7 +146,7 @@ padding:3vw;
 
 
     <!-- Footer -->
-    <footer class="black-background" style="background-color: #ffaea3; border: none;">
+    <footer class="black-background" style="background-color: white; border: none;">
         <div class="social-icons">
             <a href="https://www.instagram.com/gazefilmfest/" target="_blank" aria-label="Instagram" role="link">
                 <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
@@ -199,7 +186,7 @@ padding:3vw;
     const container = document.getElementById('tt-timetable');
 
     /* tables to merge */
-    const tables = ['featured','irish','first','genre','3x3','animation','doc','intense','messy'];
+    const tables = ['tuesday','wednesday','thursday','friday','saturday','sunday','monday'];
 
     try{
       const results = await Promise.all(
