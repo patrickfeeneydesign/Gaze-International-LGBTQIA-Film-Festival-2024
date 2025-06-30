@@ -22,6 +22,9 @@
       gtag('config', 'UA-XXXXX-Y');
     </script>
 <style>
+      /********************
+       *  DESKTOP STYLES *
+       *******************/
       body{background:#181818 !important;margin:0;font-family:tt-commons-pro,sans-serif;color:#fff;}
 
       #tt-timetable{padding:0;margin:0;}
@@ -41,27 +44,32 @@
         width:90vw;
         display:flex;
         align-items:center;
-        gap:0.4rem;          /* slightly wider gap to fit new button */
+        gap:0.4rem;
         padding:1vw;
         border-bottom:0.5px solid #ff7461;
         border-top:0.5px solid #ff7461;
+        flex-wrap:wrap; /* desktop wrap tolerance */
       }
 
       .tt-time{font-weight:600;min-width:5rem;}
       .tt-title{flex:1;font-size:1.5vw;font-weight:600;}
+      .tt-venue{
+        font-size:1vw;
+        font-style:italic;
+        color:#cfcfcf;
+        margin-left:auto;
+      }
 
-      /* --- existing ticket button --- */
       .tt-book{
         background:#222;
         color:#fff;
         padding:.8rem 1.8rem;
         font-weight:600;
         text-decoration:none;
-                border-radius:4px;
+        border-radius:4px;
       }
       .tt-book:hover{background:#ffaea3;color:#161717;}
 
-      /* --- NEW strand button --- */
       .tt-strand{
         background:#ff7461;
         color:#161717;
@@ -74,28 +82,69 @@
       }
       .tt-strand:hover{background:#ffaea3;color:#161717;}
 
-      /* ---------- MOBILE ---------- */
+      /*****************
+       *  MOBILE ONLY *
+       *****************/
       @media (max-width:768px){
+        /* keep date heading look */
         .tt-date-heading{
           background:none;
           margin:4vw;
-          padding-top:4vw;
-          font-size:6vw;
+          color:#ffffff;
+          padding-top:20vw;
+          font-size:8vw;
         }
-        .tt-title{flex:1;font-size:medium;}
-        .tt-show{padding:3vw;flex-wrap:wrap;}  /* allow wrapping on small screens */
+
+        /* --- three‑line centred grid --- */
+        .tt-show{
+          width:100%;
+          padding:4vw 3vw;
+          display:grid;
+          grid-template-columns:auto auto;
+          grid-template-areas:
+            "time venue"
+            "title title"
+            "strand book";
+          justify-content:center;
+          align-items:center;
+          text-align:center;
+          row-gap:3vw;
+        }
+
+        /* first line */
+        .tt-time{
+          grid-area:time;
+          font-size:3vw;
+          font-weight:600;
+        }
+        .tt-venue{
+          grid-area:venue;
+          font-size:3vw;
+          margin-left:1vw; /* small gap between time & venue */
+        }
+
+        /* second line */
+        .tt-title{
+          grid-area:title;
+          width:100%;
+          font-size:6vw;
+          font-weight:500;
+          margin-bottom: 1.5vw;
+        }
+
+        /* third line */
         .tt-strand{
-          margin-top:2vw;
-          font-size:2vw;
+          grid-area:strand;
+          font-size:2.8vw;
+          margin-right:2vw;
         }
         .tt-book{
-          margin-top:2vw;
-                    font-size:2vw;
-                            border-radius:4px;
-
+          grid-area:book;
+          font-size:2.8vw;
         }
       }
     </style>
+
 </head>
 <body>
     <!-- SKIP TO CONTENT -->
@@ -215,10 +264,10 @@
         </div>
     </footer>
 
-   <script type="module">
+    <script type="module">
       import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-      /* Supabase credentials (same as before) */
+      /* Supabase credentials (unchanged) */
       const supabaseUrl = 'https://pcqmducomykhcumkchjm.supabase.co';
       const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjcW1kdWNvbXlraGN1bWtjaGptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDU4NjcsImV4cCI6MjA2NDQyMTg2N30.esmrg8uQpQQHfuzmYmNwxciv3x2ExRqV03thXVSOC38';
       const supabase    = createClient(supabaseUrl, supabaseKey);
@@ -229,7 +278,7 @@
         return n + (s[(v-20) % 10] || s[v] || s[0]);
       };
 
-      /* --- NEW: map strand-name → page --- */
+      /* --- map strand-name → page --- */
       const strandLinks = {
         'Featured Event'      : 'featured.html',
         'Irish Film'          : 'irish.html',
@@ -296,6 +345,8 @@
               return `
                 <div class="tt-show">
                   <span class="tt-time">${show.screening_time || ''}</span>
+                  ${show.venue ? `<span class="tt-venue">${show.venue}</span>` : ''}
+
                   <span class="tt-title">${show.title}</span>
 
                   ${strand
