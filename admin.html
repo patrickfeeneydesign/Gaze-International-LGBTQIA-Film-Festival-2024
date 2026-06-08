@@ -3,47 +3,857 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Admin – Day Selection</title>
+  <title>GAZE • Admin</title>
+  <link rel="stylesheet" href="https://use.typekit.net/opq3sul.css">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
   <style>
-    body {
-      font-family: system-ui, sans-serif;
-      background-color: #f7f7f7;
-      margin: 0;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-    .btn {
-      background-color: #fa6755;
-      color: #fff;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: 600;
-      width: 200px;
-      text-align: center;
-      text-decoration: none;
-    }
-    .btn:hover {
-      filter: brightness(1.1);
+    :root{font-family:system-ui,sans-serif;--accent:#fa6755;--bg:#f7f7f7;}
+    *{box-sizing:border-box;}
+    body{margin:0;background:var(--bg);color:#222;}
+    h1{margin:0;font-size:1.15rem;}
+    .hidden{display:none !important;}
+    .btn{background:var(--accent);color:#fff;border:none;padding:.5rem 1rem;border-radius:4px;cursor:pointer;font-weight:600;font-size:.9rem;}
+    .btn:hover{filter:brightness(1.1);}
+    .btn.small{padding:.3rem .6rem;font-size:.8rem;}
+    .btn.grey{background:#666;}
+    .btn.danger{background:#a00;}
+    .btn:disabled{opacity:.5;cursor:default;}
+    input,textarea,select{padding:.45rem .55rem;border:1px solid #ccc;border-radius:4px;width:100%;font:inherit;}
+    textarea{min-height:90px;resize:vertical;}
+    label{font-size:.85rem;font-weight:600;display:block;margin-top:.75rem;}
+    .flex{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;}
+
+    /* ─── Login ─── */
+    #loginGate{max-width:340px;margin:18vh auto 0;background:#fff;border:1px solid #ddd;border-radius:8px;padding:2rem;}
+    #loginGate img{width:120px;display:block;margin:0 auto 1rem;}
+
+    /* ─── App shell ─── */
+    #app{display:grid;grid-template-columns:220px 1fr;min-height:100vh;}
+    aside{background:#fff;border-right:1px solid #e2e2e2;padding:1rem;}
+    aside .brand{display:flex;align-items:center;gap:.5rem;margin-bottom:1.25rem;}
+    aside .brand img{width:34px;}
+    .nav-group-label{font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:#999;margin:1rem 0 .35rem;}
+    .nav-item{display:block;width:100%;text-align:left;background:none;border:none;border-radius:6px;padding:.5rem .65rem;cursor:pointer;font:inherit;font-size:.92rem;color:#333;}
+    .nav-item:hover{background:#f1f1f1;}
+    .nav-item.active{background:var(--accent);color:#fff;font-weight:600;}
+
+    main{padding:1.5rem 2rem;}
+    .page-head{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;max-width:900px;}
+    .page-hint{color:#888;font-size:.8rem;}
+    #uploadFormContainer{max-width:900px;}
+
+    .listing{background:#fff;border:1px solid #ddd;border-radius:6px;margin-bottom:1rem;padding:1rem;}
+    .edit-form{background:#fafafa;border:1px solid #eee;border-radius:4px;padding:1rem;margin-top:.75rem;}
+    .field-row{display:grid;grid-template-columns:160px 1fr;gap:1rem;align-items:start;margin-bottom:.6rem;}
+    .field-row label{margin-top:.4rem;}
+
+    /* ─── Image picker modal ─── */
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;z-index:2000;}
+    .modal-content{background:#fff;max-width:90vw;max-height:82vh;overflow:auto;border-radius:6px;padding:1rem;width:760px;}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:1rem;margin-top:.75rem;}
+    .grid figure{margin:0;text-align:center;cursor:pointer;}
+    .grid img{width:100%;height:auto;border-radius:4px;display:block;}
+    .grid figcaption{font-size:.7rem;margin-top:.25rem;word-break:break-all;color:#555;}
+
+    /* ─── Rich-text editor ─── */
+    .richtext{width:100%;}
+    .richtext .ql-toolbar{border-radius:4px 4px 0 0;border-color:#ccc;background:#fff;}
+    .richtext .ql-container{min-height:110px;border-radius:0 0 4px 4px;border-color:#ccc;font:inherit;background:#fff;}
+
+    /* ─── Live edit cards ─── */
+    .live-card{border:1px solid #e2e2e2;border-radius:8px;margin-bottom:1.5rem;background:#fff;overflow:hidden;}
+    .card-controls{display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;padding:.6rem .8rem;background:#fafafa;border-bottom:1px solid #eee;}
+    .card-controls .day-badge{background:#222;color:#fff;border-radius:4px;padding:.2rem .5rem;font-size:.72rem;font-weight:700;margin-right:auto;letter-spacing:.02em;}
+    /* Line Up filter bar */
+    .filter-bar{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;background:#fff;border:1px solid #ddd;border-radius:6px;padding:.75rem 1rem;margin-bottom:1rem;}
+    .filter-bar label{font-size:.8rem;font-weight:600;color:#555;display:flex;align-items:center;gap:.4rem;margin:0;}
+    .filter-bar select{width:auto;min-width:160px;}
+    .filter-bar .f-count{color:#888;font-size:.8rem;margin-left:auto;}
+    .editable{outline:1px dashed transparent;border-radius:3px;}
+    .editable:hover{outline-color:#d9b7b1;}
+    .editable:focus{outline:2px solid var(--accent);outline-offset:2px;}
+    .img-wrap{position:relative;cursor:pointer;}
+    .img-wrap .img-cta{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45);color:#fff;font-weight:600;opacity:0;transition:opacity .2s;}
+    .img-wrap:hover .img-cta{opacity:1;}
+    .details-editor{padding:1rem;background:#fafafa;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.6rem 1rem;}
+    .dfield label{margin:0 0 .15rem;font-size:.72rem;color:#555;}
+    /* leftover fields + Save, inline below the listing, right-aligned */
+    .details-bar{display:flex;align-items:flex-end;justify-content:flex-end;gap:1.25rem;padding:1rem;background:#fafafa;border-top:1px solid #eee;}
+    .details-bar .details-editor{flex:0 0 auto;display:flex;gap:1rem;background:none;border:none;padding:0;}
+    .details-bar .dfield{width:210px;}
+    .strand-control{display:flex;flex-direction:column;gap:.35rem;}
+    .btn.save-lg{flex:0 0 auto;padding:.8rem 1.8rem;font-size:1.05rem;border-radius:6px;}
+
+    /* ─── Media library ─── */
+    .dropzone{border:2px dashed #bbb;border-radius:8px;padding:2rem;text-align:center;color:#666;cursor:pointer;background:#fff;max-width:900px;}
+    .dropzone.over{border-color:var(--accent);background:#fff5f3;color:var(--accent);}
+    .media-status{color:#666;font-size:.85rem;min-height:1.2em;}
+    .media-grid figcaption{margin-bottom:.25rem;}
+
+    /* ─── Scoped public film/news look (preview replica) ─── */
+    .preview{font-family:tt-commons-pro, sans-serif;}
+    .preview .sf-film-item{display:grid;grid-template-columns:minmax(260px,55%) 1fr;gap:1.5rem;margin:0;}
+    .preview .sf-film-image{width:100%;height:100%;object-fit:cover;display:block;}
+    .preview .sf-film-info{padding:2vw 2.5vw 2vw 1.5vw;}
+    .preview .sf-film-title{font-size:3.4vw;padding:0;color:#222;background-color:#fff;font-weight:600;line-height:1.02;margin:0;}
+    .preview .sf-film-meta{font-weight:500;font-size:.95rem;margin:.5rem 0 1rem;}
+    .preview .sf-film-meta-primary{display:block;font-size:1.2em;margin-top:.3rem;font-weight:600;}
+    .preview .sf-film-meta-secondary{font-size:1em;opacity:.85;}
+    .preview .sf-film-desc{margin:1rem 0;font-size:1.05rem;line-height:1.5;}
+    .preview .sf-film-credits{font-size:.9rem;color:#777;margin:.5rem 0 1rem;}
+    .preview .sf-film-button{display:inline-block;background:#222;color:#fff;padding:.6rem 1.2rem;text-decoration:none;font-weight:600;}
+    .preview .desc-holder{min-height:1.4rem;cursor:text;}
+    .preview .desc-display .ph{color:#aaa;font-style:italic;}
+    .preview .ql-container{min-height:90px;font:inherit;font-size:1.05rem;}
+    /* news preview */
+    .preview .news-preview{display:grid;grid-template-columns:minmax(220px,40%) 1fr;gap:1.25rem;background:#161717;}
+    .preview .np-img{width:100%;height:100%;min-height:160px;object-fit:cover;display:block;}
+    .preview .np-body{padding:1.4rem 1.6rem;color:#fff;}
+    .preview .np-title{font-size:1.9rem;font-weight:600;line-height:1.1;margin:0 0 .5rem;}
+    .preview .np-body .desc-holder{color:#ddd;}
+
+    /* inline-editable bits (meta, credits, date) */
+    .preview .ed{outline:1px dashed transparent;border-radius:3px;cursor:text;min-width:1ch;display:inline-block;}
+    .preview .ed:hover{outline-color:#d9b7b1;}
+    .preview .ed:focus{outline:2px solid var(--accent);outline-offset:1px;}
+    .preview .ed:empty:before,.preview .ph-span:before{content:attr(data-ph);color:#aaa;font-style:italic;font-weight:400;}
+    .preview .sep{color:#bbb;}
+    .preview .ed-date{cursor:pointer;outline:1px dashed transparent;border-radius:3px;}
+    .preview .ed-date:hover{outline-color:#d9b7b1;}
+    .preview .ed-date input{font:inherit;padding:0 .2rem;width:auto;display:inline-block;}
+
+    @media (max-width:900px){
+      #app{grid-template-columns:1fr;}
+      aside{border-right:none;border-bottom:1px solid #e2e2e2;}
+      .field-row{grid-template-columns:1fr;}
+      .preview .sf-film-item,.preview .news-preview{display:flex;flex-direction:column;}
+      .preview .sf-film-title{font-size:7vw;}
+      .preview .sf-film-info{padding:6vw 7vw;}
+      .details-bar{flex-direction:column;align-items:stretch;}
+      .details-bar .details-editor{flex-wrap:wrap;}
+      .details-bar .dfield{width:auto;}
+      .btn.save-lg{width:100%;}
     }
   </style>
 </head>
 <body>
-    <h1>GAZE Admin - Upload</h1>
-    <h2>Special</h2>
-    <button class="btn" onclick="window.location.href='newsadmin.html'">News</button>
-        <h2>Festival</h2>
-  <button class="btn" onclick="window.location.href='tuesdayadmin.html'">Tuesday 29th July</button>
-  <button class="btn" onclick="window.location.href='wednesdayadmin.html'">Wednesday 30th July</button>
-  <button class="btn" onclick="window.location.href='thursdayadmin.html'">Thursday 31st July</button>
-  <button class="btn" onclick="window.location.href='fridayadmin.html'">Friday 1st August</button>
-  <button class="btn" onclick="window.location.href='saturdayadmin.html'">Saturday 2nd August</button>
-  <button class="btn" onclick="window.location.href='sundayadmin.html'">Sunday 3rd August</button>
-  <button class="btn" onclick="window.location.href='mondayadmin.html'">Monday 4th August</button>
+
+  <!-- ░░░ 1. LOGIN (Supabase Auth) ░░░ -->
+  <form id="loginGate" autocomplete="on">
+    <img src="img/gaze_logo.png" alt="GAZE">
+    <h1 style="text-align:center;margin-bottom:1rem;">Admin</h1>
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" autocomplete="username" autocapitalize="off" spellcheck="false">
+    <label for="pw" style="margin-top:.6rem;">Password</label>
+    <input id="pw" name="password" type="password" autocomplete="current-password">
+    <button class="btn" id="loginBtn" type="submit" style="width:100%;margin-top:1rem;">Log in</button>
+    <p id="loginErr" style="color:#a00;font-size:.85rem;margin:.7rem 0 0;min-height:1em;"></p>
+  </form>
+
+  <!-- ░░░ 2. ADMIN APP ░░░ -->
+  <div id="app" class="hidden">
+    <aside>
+      <div class="brand"><img src="img/gaze_logo.png" alt="GAZE"><strong>Admin</strong></div>
+      <nav id="sectionNav"></nav>
+      <button class="btn grey small" id="logoutBtn" style="width:100%;margin-top:1.5rem;">Log out</button>
+    </aside>
+
+    <main>
+      <div class="page-head">
+        <h1 id="sectionTitle"></h1>
+        <span class="page-hint" id="pageHint"></span>
+      </div>
+      <section id="uploadFormContainer" class="listing"></section>
+      <section id="listings"></section>
+    </main>
+  </div>
+
+  <!-- ░░░ 3. LOGIC ░░░ -->
+  <script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
+
+    const supabaseUrl = 'https://pcqmducomykhcumkchjm.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBjcW1kdWNvbXlraGN1bWtjaGptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg4NDU4NjcsImV4cCI6MjA2NDQyMTg2N30.esmrg8uQpQQHfuzmYmNwxciv3x2ExRqV03thXVSOC38';
+    const supabase   = createClient(supabaseUrl, supabaseKey);
+
+    const bucketName = 'posters';
+
+    /* ─── Field defs (key, label, type, options?) ─── */
+    const STRANDS = ['Featured Event','Animation','3x3','Documentary','Irish Film','Messy People','First Timers','Genre Film','Intense Connections'];
+    let STRAND_OPTIONS = STRANDS.slice();   // augmented with any custom strands found in the tables
+    const DAY_FIELDS = [
+      ['image_url','Image','image'],['title','Title','text'],['strand','Strand','select',STRANDS],
+      ['venue','Venue','text'],['screening_date','Date (yyyy-mm-dd)','date'],['screening_time','Time','text'],
+      ['length','Length','text'],['country','Country','text'],['director','Director','text'],
+      ['description','Description','richtext'],['writers','Writers','text'],['producers','Producers','text'],
+      ['ticket_url','Ticket URL','text'],
+    ];
+    const NEWS_FIELDS = [
+      ['image_url','Image','image'],['title','Title','text'],
+      ['description','Description','richtext'],['ticket_url','Link (Optional)','text'],
+    ];
+
+    /* every table that has an image_url column (for the media in-use scan) */
+    const DATA_TABLES = ['lineup','news'];
+
+    /* ─── Views (nav targets) ─── */
+    const VIEWS = {};
+    VIEWS.lineup = { kind:'lineup', table:'lineup', label:'Line Up', group:'Programme', noun:'film', fields:DAY_FIELDS };
+    VIEWS.news   = { kind:'news',   table:'news',   label:'News',    group:'Special',   noun:'item', fields:NEWS_FIELDS };
+    VIEWS.media  = { kind:'media',                  label:'Media',   group:'Special' };
+
+    /* filter state for the Line Up view */
+    let filterDate = '', filterStrand = '';
+
+    /* chronological helpers (date → time → order → title) */
+    function timeToMinutes(str){
+      if(!str) return 1e9;
+      const m = String(str).trim().toLowerCase().match(/(\d{1,2})[:.]?(\d{2})?\s*(am|pm)?/);
+      if(!m) return 1e9;
+      let h = parseInt(m[1],10); const min = m[2]?parseInt(m[2],10):0; const ap = m[3];
+      if(ap==='pm' && h!==12) h+=12;
+      if(ap==='am' && h===12) h=0;
+      return h*60+min;
+    }
+    function chronoSort(rows){
+      return rows.slice().sort((a,b)=>{
+        const da=a.screening_date||'9999-12-31', db=b.screening_date||'9999-12-31';
+        if(da!==db) return da<db?-1:1;
+        const ta=timeToMinutes(a.screening_time), tb=timeToMinutes(b.screening_time);
+        if(ta!==tb) return ta-tb;
+        const oa=a.order??0, ob=b.order??0;
+        if(oa!==ob) return oa-ob;
+        return (a.title||'').localeCompare(b.title||'');
+      });
+    }
+
+    /* ─── DOM refs ─── */
+    const loginGate    = document.getElementById('loginGate');
+    const app          = document.getElementById('app');
+    const sectionNav   = document.getElementById('sectionNav');
+    const sectionTitle = document.getElementById('sectionTitle');
+    const pageHint     = document.getElementById('pageHint');
+    const listings     = document.getElementById('listings');
+    const uploadContainer = document.getElementById('uploadFormContainer');
+
+    /* ─── State ─── */
+    let current = location.hash.replace('#','') in VIEWS ? location.hash.replace('#','') : 'lineup';
+    const cfg = () => VIEWS[current];
+
+    /* ─── Login (Supabase Auth) ─── */
+    const emailInput = document.getElementById('email');
+    const pwInput    = document.getElementById('pw');
+    const loginErr   = document.getElementById('loginErr');
+    const loginBtn   = document.getElementById('loginBtn');
+
+    async function tryLogin(evt){
+      if(evt) evt.preventDefault();
+      loginErr.textContent = '';
+      const email = emailInput.value.trim();
+      const password = pwInput.value;
+      if(!email || !password){ loginErr.textContent = 'Enter your email and password.'; return; }
+      loginBtn.disabled = true; loginBtn.textContent = 'Logging in…';
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      loginBtn.disabled = false; loginBtn.textContent = 'Log in';
+      if(error){ loginErr.textContent = error.message || 'Login failed.'; return; }
+      enterApp();
+    }
+    let appReady = false;
+    async function enterApp(){
+      loginGate.classList.add('hidden');
+      app.classList.remove('hidden');
+      if(appReady) return;          /* don't rebuild if already initialised */
+      appReady = true;
+      buildNav();
+      await loadStrandOptions();
+      selectSection(current);
+    }
+    async function logout(){
+      await supabase.auth.signOut();
+      location.reload();
+    }
+
+    /* pull the distinct strands actually used in lineup (+ defaults) */
+    async function loadStrandOptions(){
+      try{
+        const { data } = await supabase.from('lineup').select('strand');
+        const set = new Set();   /* ONLY strands that exist in lineup */
+        (data||[]).forEach(row => { if(row.strand) set.add(row.strand); });
+        STRAND_OPTIONS = [...set].sort((a,b)=>a.localeCompare(b));
+      }catch(e){ console.error(e); }
+    }
+    function rememberStrand(s){
+      if(s && !STRAND_OPTIONS.includes(s)){ STRAND_OPTIONS.push(s); STRAND_OPTIONS.sort((a,b)=>a.localeCompare(b)); }
+    }
+    document.getElementById('loginGate').addEventListener('submit', tryLogin);
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+    /* restore an existing session (stay logged in across reloads) */
+    supabase.auth.getSession().then(({ data })=>{ if(data && data.session) enterApp(); });
+    /* if the session ends (e.g. token revoked / logout in another tab), return to login */
+    supabase.auth.onAuthStateChange((event)=>{ if(event === 'SIGNED_OUT') location.reload(); });
+
+    /* ─── Sidebar nav ─── */
+    function buildNav(){
+      sectionNav.innerHTML = '';
+      let lastGroup = null;
+      for(const [key,v] of Object.entries(VIEWS)){
+        if(v.group !== lastGroup){
+          const lbl = document.createElement('div'); lbl.className='nav-group-label'; lbl.textContent=v.group;
+          sectionNav.appendChild(lbl); lastGroup = v.group;
+        }
+        const b = document.createElement('button');
+        b.className='nav-item'; b.dataset.key=key; b.textContent=v.label;
+        b.addEventListener('click',()=>selectSection(key));
+        sectionNav.appendChild(b);
+      }
+    }
+
+    function selectSection(key){
+      current = key;
+      history.replaceState(null,'',`#${key}`);
+      const v = cfg();
+      sectionTitle.textContent = v.label;
+      pageHint.textContent = v.kind==='lineup' ? 'Filter by date or strand to find a film — films sort chronologically'
+                           : v.kind==='media'  ? 'Upload and manage images in the posters bucket'
+                           : '';
+      [...sectionNav.querySelectorAll('.nav-item')].forEach(b=>b.classList.toggle('active', b.dataset.key===key));
+      renderUploadForm();
+      loadListings();
+    }
+
+    /* ─── Add-new form ─── */
+    function renderUploadForm(){
+      const v = cfg();
+      if(v.kind==='media'){ uploadContainer.classList.add('hidden'); uploadContainer.innerHTML=''; return; }
+      uploadContainer.classList.remove('hidden');
+      const noun = v.noun;
+      uploadContainer.innerHTML = `
+        <header class="flex" style="justify-content:space-between;">
+          <strong>Add New ${noun.charAt(0).toUpperCase()+noun.slice(1)}</strong>
+          <button type="button" class="btn small" id="toggleUpload">+ Add</button>
+        </header>`;
+
+      const form = document.createElement('form');
+      form.className = 'edit-form hidden';
+      form.addEventListener('submit', submitNew);
+      const preset = (v.kind==='lineup' && filterStrand) ? { strand:filterStrand } : {};
+      form.innerHTML = fieldsHTML(preset) +
+        `<div class="flex" style="margin-top:1rem;"><button type="submit" class="btn">Upload</button><button type="reset" class="btn grey">Clear</button></div>`;
+      uploadContainer.appendChild(form);
+      attachBrowseHandler(form);
+      const strandSlot = form.querySelector('.strand-slot');
+      if(strandSlot){ strandSlot.replaceWith(makeStrandControl(strandSlot.dataset.val||'')); }
+
+      const toggleBtn = document.getElementById('toggleUpload');
+      toggleBtn.addEventListener('click',()=>{
+        const hidden = form.classList.toggle('hidden');
+        toggleBtn.textContent = hidden ? '+ Add' : 'Hide';
+        if(!hidden) initRichText(form);
+      });
+    }
+
+    async function submitNew(evt){
+      evt.preventDefault();
+      syncRichText(evt.target);
+      const v = cfg();
+      const obj = Object.fromEntries(new FormData(evt.target).entries());
+      const table = v.table;
+      const { data:maxRows, error:maxErr } = await supabase.from(table).select('order').order('order',{ascending:false}).limit(1);
+      if(maxErr){ alert('Could not fetch current order'); console.error(maxErr); return; }
+      obj.order = maxRows && maxRows.length ? (maxRows[0].order || 0) + 1 : 1;
+      const { error } = await supabase.from(table).insert(obj);
+      if(error){ alert('Upload failed'); console.error(error); return; }
+      rememberStrand(obj.strand);
+      alert('Uploaded!');
+      evt.target.reset(); evt.target.classList.add('hidden');
+      const tb = document.getElementById('toggleUpload'); if(tb) tb.textContent='+ Add';
+      loadListings();
+    }
+
+    /* ─── Load + render ─── */
+    async function loadListings(){
+      const v = cfg();
+      if(v.kind==='media') return renderMedia();
+      listings.textContent = 'Loading…';
+
+      if(v.kind==='lineup'){
+        const { data, error } = await supabase.from('lineup').select('*');
+        if(error){ listings.textContent='Error loading records'; console.error(error); return; }
+        const allRows = (data||[]).map(r=>({ ...r, _table:'lineup' }));
+        listings.innerHTML = '';
+        listings.appendChild(buildFilterBar(allRows));
+        let rows = allRows;
+        if(filterDate)   rows = rows.filter(r => r.screening_date === filterDate);
+        if(filterStrand) rows = rows.filter(r => r.strand === filterStrand);
+        rows = chronoSort(rows);
+        if(!rows.length){ listings.insertAdjacentHTML('beforeend', '<p style="color:#777;">No films match this filter.</p>'); return; }
+        rows.forEach((row,i)=>listings.appendChild(buildLiveCard(row,i,rows,false)));
+        return;
+      }
+
+      /* news */
+      const { data, error } = await supabase.from('news').select('*').order('order',{ascending:true});
+      if(error){ listings.textContent='Error loading records'; console.error(error); return; }
+      const rows = (data||[]).map(r=>({ ...r, _table:'news' }));
+      listings.innerHTML = '';
+      if(!rows.length){ listings.textContent = 'No records yet.'; return; }
+      rows.forEach((row,i)=>listings.appendChild(buildLiveCard(row,i,rows,true)));
+    }
+
+    /* Line Up filter bar: by date + by strand (options from the unfiltered set) */
+    function buildFilterBar(allRows){
+      const bar = document.createElement('div'); bar.className='filter-bar';
+      const dates   = [...new Set(allRows.map(r=>r.screening_date).filter(Boolean))].sort();
+      const strands = [...new Set(allRows.map(r=>r.strand).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+      const dateOpts   = ['<option value="">All dates</option>'].concat(dates.map(d=>`<option value="${d}"${d===filterDate?' selected':''}>${formatDateStr(d)}</option>`)).join('');
+      const strandOpts = ['<option value="">All strands</option>'].concat(strands.map(s=>`<option value="${esc(s)}"${s===filterStrand?' selected':''}>${s}</option>`)).join('');
+      bar.innerHTML = `
+        <label>Date <select class="f-date">${dateOpts}</select></label>
+        <label>Strand <select class="f-strand">${strandOpts}</select></label>
+        <button type="button" class="btn grey small f-clear">Clear filters</button>
+        <span class="f-count"></span>`;
+      bar.querySelector('.f-date').addEventListener('change', e=>{ filterDate = e.target.value; loadListings(); });
+      bar.querySelector('.f-strand').addEventListener('change', e=>{ filterStrand = e.target.value; loadListings(); });
+      bar.querySelector('.f-clear').addEventListener('click', ()=>{ filterDate=''; filterStrand=''; loadListings(); });
+      return bar;
+    }
+
+    function mkBtn(text, cls){ const b=document.createElement('button'); b.type='button'; b.className='btn '+cls; b.textContent=text; return b; }
+
+    /* ─── A live, website-styled, inline-editable card ─── */
+    function buildLiveCard(row, idx, all, reorderAllowed){
+      const v = cfg();
+      const card = document.createElement('div'); card.className='live-card';
+      const els = {};
+
+      /* controls bar */
+      const ctrls = document.createElement('div'); ctrls.className='card-controls';
+      const delBtn = mkBtn('Delete','small danger');
+      ctrls.append(delBtn);
+      if(reorderAllowed){
+        const up = mkBtn('↑','small grey'), down = mkBtn('↓','small grey');
+        if(idx===0) up.disabled=true; else up.addEventListener('click',()=>swapOrder(row, all[idx-1]));
+        if(idx===all.length-1) down.disabled=true; else down.addEventListener('click',()=>swapOrder(row, all[idx+1]));
+        ctrls.append(up, down);
+      }
+
+      /* preview replica */
+      const preview = document.createElement('div'); preview.className='preview';
+      preview.appendChild(v.kind==='news' ? buildNewsPreview(row,els) : buildFilmPreview(row,els));
+
+      /* leftover fields + Save, inline below the listing */
+      const bar = document.createElement('div'); bar.className='details-bar';
+      bar.appendChild(buildFixedDetails(row, els, v));
+      const saveBtn = mkBtn('Save','save-lg');
+      saveBtn.addEventListener('click',()=>saveCard(row, els, v, saveBtn));
+      bar.appendChild(saveBtn);
+
+      delBtn.addEventListener('click', async ()=>{
+        if(!confirm('Delete this record?')) return;
+        const { error } = await supabase.from(row._table).delete().eq('id',row.id);
+        if(error){ alert('Delete failed'); console.error(error); return; }
+        loadListings();
+      });
+
+      card.append(ctrls, preview, bar);
+      return card;
+    }
+
+    function buildFilmPreview(row, els){
+      const item = document.createElement('div'); item.className='sf-film-item';
+
+      const imgWrap = document.createElement('div'); imgWrap.className='img-wrap';
+      const img = document.createElement('img'); img.className='sf-film-image'; img.src=row.image_url||''; img.alt=row.title||'';
+      const cta = document.createElement('div'); cta.className='img-cta'; cta.textContent='Change image';
+      imgWrap.append(img, cta);
+      imgWrap.addEventListener('click',()=>openImagePicker(url=>{ row.image_url=url; img.src=url; }));
+
+      const info = document.createElement('div'); info.className='sf-film-info';
+      const title = document.createElement('h2'); title.className='sf-film-title editable'; title.contentEditable='true'; title.textContent=row.title||'';
+      title.addEventListener('input',()=>{ row.title = title.textContent; });
+      const meta = buildMetaEditor(row);
+      const desc = makeDescEditor(row, els);
+      const credits = buildCreditsEditor(row);
+      const btn = document.createElement('span'); btn.className='sf-film-button'; btn.textContent='Book Tickets'; els.btn=btn;
+      btn.style.display = row.ticket_url ? 'inline-block' : 'none';
+      info.append(title, meta, desc, credits, btn);
+
+      item.append(imgWrap, info);
+      return item;
+    }
+
+    /* an inline-editable text span with greyed placeholder when empty */
+    function editSpan(row, key, ph){
+      const s = document.createElement('span'); s.className='ed'; s.contentEditable='true'; s.dataset.ph=ph;
+      if(row[key]!=null && row[key]!=='') s.textContent = row[key];
+      s.addEventListener('input',()=>{ row[key] = s.textContent.replace(/\n/g,' ').trim(); });
+      s.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); s.blur(); } });
+      return s;
+    }
+    function sepDot(){ const s=document.createElement('span'); s.className='sep'; s.textContent=' • '; return s; }
+
+    function buildMetaEditor(row){
+      const meta = document.createElement('div'); meta.className='sf-film-meta';
+      const p = document.createElement('span'); p.className='sf-film-meta-primary';
+      p.append(dateField(row), sepDot(), editSpan(row,'screening_time','Time'), sepDot(), editSpan(row,'country','Country'));
+      const s = document.createElement('span'); s.className='sf-film-meta-secondary';
+      const dir = document.createElement('span'); dir.textContent='Dir. ';
+      s.append(editSpan(row,'length','Length'), sepDot(), editSpan(row,'venue','Venue'), sepDot(), dir, editSpan(row,'director','Director'));
+      meta.append(p, s);
+      return meta;
+    }
+
+    function buildCreditsEditor(row){
+      const p = document.createElement('p'); p.className='sf-film-credits';
+      const w  = document.createElement('div'); w.append(document.createTextNode('Writers: '),   editSpan(row,'writers','names'));
+      const pr = document.createElement('div'); pr.append(document.createTextNode('Producers: '), editSpan(row,'producers','names'));
+      p.append(w, pr);
+      return p;
+    }
+
+    function formatDateStr(dstr){
+      const d = new Date(dstr); if(isNaN(d.getTime())) return dstr;
+      const wd=d.toLocaleDateString(undefined,{weekday:'long'}), mo=d.toLocaleDateString(undefined,{month:'long'});
+      return `${wd} ${mo} ${ordinal(d.getDate())} ${d.getFullYear()}`;
+    }
+    /* date: shows the formatted date; a hidden native date input is always present,
+       so a single click on the date opens the calendar straight away. Clicking any
+       other meta field never touches it. */
+    function dateField(row){
+      const wrap = document.createElement('span'); wrap.className='ed-date'; wrap.style.position='relative';
+      const disp = document.createElement('span');
+      const inp  = document.createElement('input'); inp.type='date'; inp.value = row.screening_date||'';
+      inp.style.cssText = 'position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none;';
+      function render(){
+        if(row.screening_date){ disp.textContent = formatDateStr(row.screening_date); disp.className=''; disp.removeAttribute('data-ph'); }
+        else { disp.textContent=''; disp.className='ph-span'; disp.dataset.ph='Date'; }
+      }
+      let outside = null;
+      function detach(){ if(outside){ document.removeEventListener('mousedown', outside); outside=null; } }
+      function openPicker(){
+        inp.focus();                                   /* focus so blur() can close the picker */
+        if(inp.showPicker){ try{ inp.showPicker(); }catch(e){} }
+        if(outside) return;                            /* already armed */
+        outside = e => { if(wrap.contains(e.target)) return; detach(); inp.blur(); };  /* blur closes the calendar */
+        setTimeout(()=>{ if(outside) document.addEventListener('mousedown', outside); }, 0);
+      }
+      inp.addEventListener('change',()=>{ row.screening_date = inp.value; render(); detach(); });
+      wrap.addEventListener('click', openPicker);
+      wrap.append(disp, inp);
+      render();
+      return wrap;
+    }
+
+    function buildNewsPreview(row, els){
+      const item = document.createElement('div'); item.className='news-preview';
+      const imgWrap = document.createElement('div'); imgWrap.className='img-wrap';
+      const img = document.createElement('img'); img.className='np-img'; img.src=row.image_url||''; img.alt=row.title||'';
+      const cta = document.createElement('div'); cta.className='img-cta'; cta.textContent='Change image';
+      imgWrap.append(img, cta);
+      imgWrap.addEventListener('click',()=>openImagePicker(url=>{ row.image_url=url; img.src=url; }));
+
+      const body = document.createElement('div'); body.className='np-body';
+      const title = document.createElement('div'); title.className='np-title editable'; title.contentEditable='true'; title.textContent=row.title||'';
+      title.addEventListener('input',()=>{ row.title = title.textContent; });
+      const desc = makeDescEditor(row, els);
+      body.append(title, desc);
+
+      item.append(imgWrap, body);
+      return item;
+    }
+
+    /* Description slot: shows rendered HTML; click to edit (Quill); click away to close */
+    function makeDescEditor(row, els){
+      const holder = document.createElement('div'); holder.className='sf-film-desc desc-holder';
+      els.descHolder = holder;
+
+      function renderDisplay(){
+        holder.innerHTML='';
+        const display = document.createElement('div'); display.className='desc-display';
+        display.innerHTML = row.description ? row.description : '<span class="ph">Click to add a description…</span>';
+        display.addEventListener('click', activate);
+        holder.appendChild(display);
+      }
+      function activate(){
+        if(holder.querySelector('.richtext')) return;        // already editing
+        holder.innerHTML = `<div class="richtext"><div class="rt-editor"></div><textarea class="rt-source" hidden>${escSource(row.description)}</textarea></div>`;
+        initRichText(holder);
+        const ed = holder.querySelector('.ql-editor'); if(ed) ed.focus();
+        setTimeout(()=>document.addEventListener('mousedown', onOutside), 0);
+      }
+      function onOutside(e){
+        if(holder.contains(e.target)) return;                // keep editing while inside
+        document.removeEventListener('mousedown', onOutside);
+        syncRichText(holder);
+        row.description = holder.querySelector('.rt-source').value;
+        renderDisplay();
+      }
+
+      renderDisplay();
+      return holder;
+    }
+
+    /* Leftover fields that aren't edited inline on the card (always visible, no collapse).
+       Film: Strand + Ticket URL.  News: Link (ticket_url). */
+    function buildFixedDetails(row, els, v){
+      const box = document.createElement('div'); box.className='details-editor';
+      const keys = v.kind==='news' ? ['ticket_url'] : ['strand','ticket_url'];
+      keys.forEach(key=>{
+        const def = v.fields.find(f=>f[0]===key); if(!def) return;
+        const [,label] = def;
+        const f = document.createElement('div'); f.className='dfield';
+        const lab = document.createElement('label'); lab.textContent=label; f.appendChild(lab);
+        if(key==='strand'){
+          const ctrl = makeStrandControl(row.strand);
+          ctrl._onChange = val => { row.strand = val; };
+          els.strandCtrl = ctrl;
+          f.appendChild(ctrl);
+        } else {
+          const input = document.createElement('input'); input.type='text'; input.value = row[key] ?? '';
+          input.addEventListener('input',()=>{
+            row[key] = input.value;
+            if(key==='ticket_url' && els.btn) els.btn.style.display = input.value ? 'inline-block' : 'none';
+          });
+          f.appendChild(input);
+        }
+        box.appendChild(f);
+      });
+      return box;
+    }
+
+    /* Strand picker: dropdown of known strands + a "New strand…" option that
+       reveals a text field. A hidden input (name="strand") carries the value for
+       the add-form's FormData; in the card editor we use ._onChange instead. */
+    function makeStrandControl(value){
+      const NEW = '__new__';
+      const wrap = document.createElement('div'); wrap.className='strand-control';
+      const select = document.createElement('select');
+      const text   = document.createElement('input'); text.type='text'; text.placeholder='Type new strand name'; text.className='strand-new hidden';
+      const hidden = document.createElement('input'); hidden.type='hidden'; hidden.name='strand'; hidden.value = value || '';
+      function rebuild(curr){
+        const opts = STRAND_OPTIONS.slice();
+        if(curr && !opts.includes(curr)) opts.unshift(curr);
+        select.innerHTML = '<option value="">— none —</option>' +
+          opts.map(o=>`<option value="${esc(o)}"${o===curr?' selected':''}>${o}</option>`).join('') +
+          `<option value="${NEW}">+ New strand…</option>`;
+      }
+      function setVal(val){ hidden.value = val || ''; if(wrap._onChange) wrap._onChange(val || ''); }
+      rebuild(value);
+      select.addEventListener('change',()=>{
+        if(select.value===NEW){ text.classList.remove('hidden'); text.value=''; text.focus(); setVal(''); }
+        else { text.classList.add('hidden'); setVal(select.value); }
+      });
+      text.addEventListener('input',()=>{ setVal(text.value.trim()); });
+      /* return to the normal dropdown state with `val` selected (used after Save) */
+      wrap._reset = val => { text.classList.add('hidden'); rebuild(val); hidden.value = val || ''; };
+      wrap.append(select, text, hidden);
+      return wrap;
+    }
+
+    function ordinal(n){ const s=['th','st','nd','rd']; const v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); }
+
+    async function saveCard(row, els, v, btn){
+      /* pull the latest description out of Quill if it was opened */
+      if(els.descHolder && els.descHolder.querySelector('.richtext')){
+        syncRichText(els.descHolder);
+        row.description = els.descHolder.querySelector('.rt-source').value;
+      }
+      const obj = {};
+      v.fields.forEach(([key])=>{ obj[key] = (row[key] ?? null); });   // never touches id / order
+      btn.disabled = true; btn.textContent='Saving…';
+      const { error } = await supabase.from(row._table).update(obj).eq('id', row.id);
+      btn.disabled = false;
+      if(error){ btn.textContent='Save'; alert('Save failed'); console.error(error); return; }
+      rememberStrand(row.strand);
+      if(els.strandCtrl) els.strandCtrl._reset(row.strand);   // collapse the new-strand text field back to the dropdown
+      btn.textContent='Saved ✓'; setTimeout(()=>{ btn.textContent='Save'; }, 1500);
+    }
+
+    async function swapOrder(a,b){
+      try{
+        await Promise.all([
+          supabase.from(a._table).update({order:b.order}).eq('id',a.id),
+          supabase.from(b._table).update({order:a.order}).eq('id',b.id)
+        ]);
+        loadListings();
+      }catch(err){ console.error(err); alert('Re-order failed'); }
+    }
+
+    /* ─── Field builders (add form) ─── */
+    function esc(v){ return String(v ?? '').replace(/"/g,'&quot;'); }
+    function escSource(v){ return String(v ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+    function fieldsHTML(f){
+      return cfg().fields.map(([key,label,type,options])=>{
+        if(key==='strand'){
+          return `<div class="field-row"><label>${label}</label><div class="strand-slot" data-val="${esc(f[key])}"></div></div>`;
+        }
+        let control;
+        if(type==='image'){
+          control = `<div class="flex"><input type="text" name="image_url" value="${esc(f[key])}"><button type="button" class="btn browse">Browse</button></div>`;
+        } else if(type==='richtext'){
+          control = `<div class="richtext"><div class="rt-editor"></div><textarea name="${key}" class="rt-source" hidden>${escSource(f[key])}</textarea></div>`;
+        } else if(type==='select'){
+          control = `<select name="${key}"><option value="">— none —</option>` +
+            options.map(o=>`<option value="${esc(o)}"${f[key]===o?' selected':''}>${o}</option>`).join('') + `</select>`;
+        } else {
+          control = `<input type="${type}" name="${key}" value="${esc(f[key])}">`;
+        }
+        return `<div class="field-row"><label>${label}</label>${control}</div>`;
+      }).join('');
+    }
+
+    /* ─── Rich text (Quill, inline formats only) ─── */
+    function initRichText(scope){
+      scope.querySelectorAll('.richtext').forEach(wrap=>{
+        if(wrap._quill) return;
+        const editorEl = wrap.querySelector('.rt-editor');
+        const source   = wrap.querySelector('.rt-source');
+        const quill = new Quill(editorEl, { theme:'snow', formats:['bold','italic','underline','link'],
+          modules:{ toolbar:[['bold','italic','underline'],['link'],['clean']] } });
+        let initial = source.value;
+        if(initial && !/<br|<p[ >]/i.test(initial)){ initial = initial.replace(/\r\n|\r|\n/g,'<br>'); }
+        initial = initial.trim();
+        if(initial) quill.clipboard.dangerouslyPasteHTML(initial);
+        wrap._quill = quill;
+      });
+    }
+    function syncRichText(scope){
+      scope.querySelectorAll('.richtext').forEach(wrap=>{
+        if(!wrap._quill) return;
+        const lines = [];
+        wrap._quill.root.childNodes.forEach(node=>{
+          if(node.nodeType===1 && node.tagName==='P'){
+            lines.push(node.innerHTML.replace(/^<br\s*\/?>$/i,'').trim());
+          } else if(node.nodeType===3){ lines.push(node.textContent.trim()); }
+        });
+        while(lines.length && lines[lines.length-1]==='') lines.pop();
+        wrap.querySelector('.rt-source').value = lines.join('<br>');
+      });
+    }
+
+    /* ─── Image picker + uploader (onSelect callback) ─── */
+    function attachBrowseHandler(form){
+      const browseBtn = form.querySelector('.browse');
+      if(!browseBtn) return;
+      browseBtn.addEventListener('click', ()=> openImagePicker(url=>{ form.querySelector('input[name="image_url"]').value = url; }));
+    }
+
+    async function openImagePicker(onSelect){
+      const modal = document.createElement('div'); modal.className='modal';
+      modal.innerHTML = `<div class="modal-content">
+        <div class="flex" style="justify-content:space-between;align-items:center;">
+          <h3 style="margin:0;">Select an image</h3>
+          <label class="btn small" style="cursor:pointer;">Upload new…<input type="file" accept="image/*" class="up-input" hidden></label>
+        </div>
+        <p class="up-status" style="font-size:.8rem;color:#666;margin:.5rem 0 0;"></p>
+        <div class="grid"><p>Loading images…</p></div>
+      </div>`;
+      document.body.appendChild(modal);
+      modal.addEventListener('click', e=>{ if(e.target===modal) modal.remove(); });
+
+      const grid   = modal.querySelector('.grid');
+      const status = modal.querySelector('.up-status');
+      const select = publicUrl => { onSelect(publicUrl); modal.remove(); };
+
+      async function renderGrid(){
+        const { data:files, error } = await supabase.storage.from(bucketName).list('', { limit:1000, sortBy:{column:'name',order:'asc'} });
+        if(error){ grid.innerHTML='<p>Error loading images</p>'; console.error(error); return; }
+        const imgs = (files||[]).filter(f=>f.name && !f.name.startsWith('.'));
+        if(!imgs.length){ grid.innerHTML='<p>No images yet — use “Upload new…” above.</p>'; return; }
+        grid.innerHTML='';
+        for(const file of imgs){
+          const { data:{ publicUrl } } = supabase.storage.from(bucketName).getPublicUrl(file.name);
+          const fig = document.createElement('figure');
+          fig.innerHTML = `<img src="${publicUrl}" alt="${file.name}" loading="lazy"><figcaption>${file.name}</figcaption>`;
+          fig.addEventListener('click',()=> select(publicUrl));
+          grid.appendChild(fig);
+        }
+      }
+      modal.querySelector('.up-input').addEventListener('change', async e=>{
+        const file = e.target.files[0]; if(!file) return;
+        status.textContent = `Uploading ${file.name}…`;
+        const name = await uploadFile(file, status);
+        if(!name) return;
+        const { data:{ publicUrl } } = supabase.storage.from(bucketName).getPublicUrl(name);
+        select(publicUrl);
+      });
+      renderGrid();
+    }
+
+    /* shared upload helper — returns the stored filename, or null on failure */
+    async function uploadFile(file, status){
+      const dot  = file.name.lastIndexOf('.');
+      const ext  = dot>=0 ? file.name.slice(dot).toLowerCase() : '';
+      const base = (dot>=0 ? file.name.slice(0,dot) : file.name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'') || 'image';
+      let name = base+ext;
+      const opts = { cacheControl:'3600', upsert:false, contentType:file.type||undefined };
+      let { error } = await supabase.storage.from(bucketName).upload(name, file, opts);
+      if(error && /exist|duplicate/i.test(error.message||'')){
+        name = `${base}-${Date.now()}${ext}`;
+        ({ error } = await supabase.storage.from(bucketName).upload(name, file, opts));
+      }
+      if(error){ console.error(error); if(status) status.textContent = 'Upload failed: ' + (error.message || 'the bucket may not allow uploads (check Storage policies).'); return null; }
+      return name;
+    }
+
+    /* ─── Media library ─── */
+    async function renderMedia(){
+      listings.innerHTML = '';
+      const drop = document.createElement('div'); drop.className='dropzone';
+      drop.innerHTML = '<strong>Upload images</strong><br><small>Drag &amp; drop here, or click to choose</small><input type="file" accept="image/*" multiple hidden>';
+      const status = document.createElement('p'); status.className='media-status';
+      const grid = document.createElement('div'); grid.className='grid media-grid'; grid.style.marginTop='1rem';
+      listings.append(drop, status, grid);
+
+      const fileInput = drop.querySelector('input');
+      drop.addEventListener('click',()=>fileInput.click());
+      drop.addEventListener('dragover',e=>{ e.preventDefault(); drop.classList.add('over'); });
+      drop.addEventListener('dragleave',()=>drop.classList.remove('over'));
+      drop.addEventListener('drop',e=>{ e.preventDefault(); drop.classList.remove('over'); handleFiles(e.dataTransfer.files); });
+      fileInput.addEventListener('change',()=>handleFiles(fileInput.files));
+
+      async function handleFiles(files){
+        let n=0;
+        for(const file of files){ if(!file.type.startsWith('image/')) continue; status.textContent=`Uploading ${file.name}…`; if(await uploadFile(file,status)) n++; }
+        status.textContent = n ? `Uploaded ${n} image${n>1?'s':''}.` : status.textContent;
+        loadMediaGrid();
+      }
+
+      async function loadMediaGrid(){
+        grid.innerHTML = '<p>Loading…</p>';
+        const { data:files, error } = await supabase.storage.from(bucketName).list('', { limit:1000, sortBy:{column:'name',order:'asc'} });
+        if(error){ grid.innerHTML='<p>Error loading images</p>'; console.error(error); return; }
+        const imgs = (files||[]).filter(f=>f.name && !f.name.startsWith('.'));
+        grid.innerHTML='';
+        if(!imgs.length){ grid.innerHTML='<p>No images yet.</p>'; return; }
+        for(const file of imgs){
+          const { data:{ publicUrl } } = supabase.storage.from(bucketName).getPublicUrl(file.name);
+          const fig = document.createElement('figure');
+          fig.innerHTML = `<figcaption>${file.name}</figcaption><img src="${publicUrl}" alt="${file.name}" loading="lazy">`;
+          const del = mkBtn('🗑 Delete','small danger'); del.style.marginTop='.3rem';
+          del.addEventListener('click',()=>deleteImage(file.name, loadMediaGrid));
+          fig.appendChild(del); fig.style.cursor='default'; grid.appendChild(fig);
+        }
+      }
+      loadMediaGrid();
+    }
+
+    /* delete from bucket, but warn first if any record still references the file */
+    async function deleteImage(name, after){
+      const tables = DATA_TABLES;
+      const results = await Promise.all(tables.map(t => supabase.from(t).select('id,title,image_url')));
+      const used = [];
+      results.forEach((r,i)=>(r.data||[]).forEach(row=>{ if(row.image_url && row.image_url.includes(name)) used.push(`${tables[i]}: ${row.title || row.id}`); }));
+      let msg = `Delete “${name}” from storage?`;
+      if(used.length){
+        msg = `⚠ This image is still used by ${used.length} record(s):\n\n${used.join('\n')}\n\nDeleting it will break those pictures on the public site. Delete anyway?`;
+      }
+      if(!confirm(msg)) return;
+      const { error } = await supabase.storage.from(bucketName).remove([name]);
+      if(error){ alert('Delete failed: ' + error.message); console.error(error); return; }
+      if(after) after();
+    }
+  </script>
 </body>
 </html>

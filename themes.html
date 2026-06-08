@@ -22,12 +22,35 @@
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
 <link rel="manifest" href="site.webmanifest" />
-
+    <style>
+        /* ===== Dynamic line-up listings (sf- classes) ===== */
+body { background-color: #fff; }
+#sf-listing { padding: 0; }
+.sf-film-item { display: grid; grid-template-columns: minmax(260px, 60vw) 1fr; gap: 1.5rem; max-width: 100vw; margin: 0; }
+.sf-film-image { width: 100%; height: 100%; object-fit: cover; display: block; }
+.sf-film-info { padding: 3vw 3.5vw 2vw 2vw; }
+.sf-film-title { font-size: 4vw; padding: 0; color: #222; background-color: #fff; font-weight: 600; line-height: 1; }
+.sf-film-meta { font-weight: 500; font-size: 1vw; margin-bottom: 1rem; }
+.sf-film-meta-primary { display: block; font-size: 1.2em; margin-top: 0.5vw; font-weight: 600; }
+.sf-film-meta-secondary { font-size: 1em; opacity: .85; }
+.sf-film-desc { margin-bottom: 1rem; margin-top: 2vw; }
+.sf-film-credits { font-size: .9rem; color: #777; margin-bottom: 1.5rem; }
+.sf-film-button { display: inline-block; background-color: #222; color: #fff; padding: .65rem 1.25rem; text-decoration: none; font-weight: 600; margin-bottom: 4vw; margin-top: 1vw; }
+.sf-film-button:hover { background-color: #ffaea3; color: black; }
+@media (max-width: 768px) {
+  .sf-film-item { display: flex; flex-direction: column; }
+  .sf-film-image { height: auto; }
+  .sf-film-info { padding: 6vw 8vw 10vw; }
+  .sf-film-title { font-size: 8vw; margin: 1rem 0 .5rem; }
+  .sf-film-meta { font-size: 3.5vw; margin-bottom: 1rem; }
+  .sf-film-button { margin-bottom: 8vw; }
+}
+    </style>
 </head>
 <body>
     
     <!-- SKIP TO CONTENT -->
-    <a href="#maincontent" role="link" tabindex="0" class="skip-link">GAZE International L G B T Q I A Film Festival Home Page, press enter to skip to main content or press tab to continue.</a>
+    <a href="#sf-listing" role="link" tabindex="0" class="skip-link">GAZE International L G B T Q I A Film Festival Home Page, press enter to skip to main content or press tab to continue.</a>
     <!-- Main Title -->
     <header tabindex="0" aria-label="Home Button" class="firstpage">
         <a href="index.html" style="display: inline-block; cursor: pointer;">
@@ -43,11 +66,6 @@
             <li class="dropdown" tabindex="0" aria-label="Main Menu Header, About">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">ABOUT</a>
                 <ul class="dropdown-content">
-                    <!--
-                    <li tabindex="0" aria-label=" Who are we?" role="button"><a href="whoarewe.html">Who Are We?</a></li>
-                    <li tabindex="0" aria-label=" Director's Welcome message" role="button"><a href="Directors_Welcome.html">Director's Welcome</a></li>
-                    <li tabindex="0" aria-label=" Manager's Welcome message" role="button"><a href="chair.html">Chair's Welcome</a></li>
-                    -->
                     <li tabindex="0" aria-label=" View past programmes" role="button"><a href="archive.html">Archive</a></li>
                     <li tabindex="0" aria-label=" View past programmes" role="button"><a href="news.html">News</a></li>
                     <li tabindex="0" aria-label=" Submit via Film Freeway" role="button"><a href="https://filmfreeway.com/gaze-ireland">Submit A Film</a></li>
@@ -56,36 +74,12 @@
             </li>
             <li class="dropdown" tabindex="0" aria-label="Menu Section, Tickets">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">TICKETS</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="themes.html">Festival Line Up</a></li>
-                     <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="https://events.ticketbooth.eu/event/gaze-festival-pass-2025" target="_blank">Festival Pass</a></li>
-                    <li tabindex="0" aria-label="Featured Events" role="button"><a href="featured.html">Featured Events</a></li>
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="timetable.html">Timetable</a></li>
-
-                    <!--
-                    <li tabindex="0" aria-label=" View timetable" role="button"><a href="Timetable.html">Timetable</a></li>
-                    <li tabindex="0" aria-label="Best Judys" role="button"><a href="judy.html">Best Judys</a></li>
-                    <li tabindex="0" aria-label="IFI @ Home" role="button"><a href="ifi.html">IFI @ Home</a></li>
-                    -->
-                </ul>
+                <ul class="dropdown-content"></ul>
             </li>
-            <!--
-            <li class="dropdown" tabindex="0" aria-label="main menu, Programme of events">
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">PROGRAMME</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" view Films showing on Thursday the 1st of August" role="button"><a href="thurs.html">Tuesday 29th July</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Friday the 2nd of August" role="button"><a href="fri.html">Wednesday 30th July</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Saturday the 3rd of August" role="button"><a href="sat.html">Thursday</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Sunday the 4th of August" role="button"><a href="sun.html">Sunday 4th August 2024</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Monday the 5th of August" role="button"><a href="mon.html">Monday 5th August 2024</a></li>
-                </ul>
-            </li>
-            -->
             <li class="dropdown" tabindex="0" aria-label="Main Menu Header, Support">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">SUPPORT</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" Subscribe to newsletter" role="button"><a href="https://mailchi.mp/gaze/gaze-newsletter-sign-up" target="_blank">Subscribe</a></li>
-                    <li tabindex="0" aria-label=" Become a Festival Friend" role="button"><a href="friend.html">Festival Friend</a></li>
                     <li tabindex="0" aria-label=" Volunteer With GAZE" role="button"><a href="vol.html">Volunteer</a></li>
                     <li tabindex="0" aria-label=" Star GAZE" role="button"><a href="stargaze.html">StarGAZE</a></li>
                 </ul>
@@ -101,33 +95,9 @@
             </li>        
         </ul>
     </nav>
-    <!-- Main Body -->
-    <main id="maincontent">
-
-        <section class="blue">
-            <p tabindex="0" role="heading">
-                
-                <span class="mobilehide" style="color: #f6f6f6; font-size: 2.2vw;">Quick Links</span>
-                <br>Day by Day <span class="mobilehide">| </span><a href="timetable.html"><span class="desktophide"><br>&#x1F517; </span>Timetable</a><span class="mobilehide">.</span>
-                <br>Big Hitters <span class="mobilehide">| </span><a href="featured.html"><span class="desktophide"><br>&#x1F517; </span>Featured Events</a><span class="mobilehide">.</span>
-                <span class="mobilehide"><br><br></span>
-                <span class="mobilehide" style="color: #f6f6f6; font-size: 2.2vw;">By Theme</span>
-                <br>Home Grown <span class="mobilehide">| </span><a href="irish.html"><span class="desktophide"><br>&#x1F517; </span>Irish Film</a><span class="mobilehide">.</span>
-                <br>Messy Starts <span class="mobilehide">| </span><a href="first.html"><span class="desktophide"><br>&#x1F517; </span>First Timers</a><span class="mobilehide">.</span>
-                <br>Queer Conundrums <span class="mobilehide">| </span><a href="genre.html"><span class="desktophide"><br>&#x1F517; </span>Genre Film</a><span class="mobilehide">.</span>
-                <br>Seeing Triple <span class="mobilehide">| </span><a href="3x3.html"><span class="desktophide"><br>&#x1F517; </span>3x3</a><span class="mobilehide">.</span>
-                <br>Art in Motion <span class="mobilehide">| </span><a href="animation.html"><span class="desktophide"><br>&#x1F517; </span>Animation</a><span class="mobilehide">.</span>
-                <br>Daring Docs <span class="mobilehide">| </span><a href="doc.html"><span class="desktophide"><br>&#x1F517; </span>Documentary</a><span class="mobilehide">.</span>
-                <br>Desire, All In <span class="mobilehide">| </span><a href="intense.html"><span class="desktophide"><br>&#x1F517; </span>Intense Connections</a><span class="mobilehide">.</span>
-                <br>It's Complicated <span class="mobilehide">| </span><a href="messy.html"><span class="desktophide"><br>&#x1F517; </span>Messy People</a><span class="mobilehide">.</span>
-            
-
-            
-            </p>
-        </section>
-
-<br><br><br>
-    </main>
+    <!-- Dynamic line-up (filtered by ?strand= when present) -->
+    <main id="sf-listing" tabindex="-1">Loading programme…</main>
+    <div class="desktophide"><br><br><br><br></div>
     <!-- Footer -->
     <footer>
         <div class="social-icons">
@@ -368,6 +338,28 @@ function resetParallaxEffect() {
         }
     });
 }
+</script>
+
+<!-- Supabase UMD + shared GAZE script (builds the menus + quick-nav) -->
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="gaze-lineup.js"></script>
+<!-- Dynamic line-up loader: same proven query/render as the old strand pages, pulling from `lineup` -->
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var G = window.GAZE;
+    var container = document.getElementById('sf-listing');
+    if(!G){ container.textContent = 'Sorry, something went wrong.'; return; }
+    var strand = G.currentStrand();
+    var q = G.supabase.from(G.TABLE).select('*');
+    if(strand) q = q.eq('strand', strand);
+    q.then(function(res){
+      if(res.error){ console.error(res.error); container.textContent = 'Sorry, something went wrong.'; return; }
+      var data = res.data || [];
+      if(!data.length){ container.textContent = 'Programme coming soon.'; return; }
+      container.innerHTML = G.chronoSort(data).map(G.filmItemHTML).join('');
+      if(strand) document.title = strand + ' — GAZE';
+    });
+  });
 </script>
 </body>
 </html>

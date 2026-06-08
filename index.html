@@ -64,11 +64,6 @@
             <li class="dropdown" tabindex="0" aria-label="Main Menu Header, About">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">ABOUT</a>
                 <ul class="dropdown-content">
-                    <!--
-                    <li tabindex="0" aria-label=" Who are we?" role="button"><a href="whoarewe.html">Who Are We?</a></li>
-                    <li tabindex="0" aria-label=" Director's Welcome message" role="button"><a href="Directors_Welcome.html">Director's Welcome</a></li>
-                    <li tabindex="0" aria-label=" Manager's Welcome message" role="button"><a href="chair.html">Chair's Welcome</a></li>
-                    -->
                     <li tabindex="0" aria-label=" View past programmes" role="button"><a href="archive.html">Archive</a></li>
                     <li tabindex="0" aria-label=" View past programmes" role="button"><a href="news.html">News</a></li>
                     <li tabindex="0" aria-label=" Submit via Film Freeway" role="button"><a href="https://filmfreeway.com/gaze-ireland">Submit A Film</a></li>
@@ -77,36 +72,12 @@
             </li>
             <li class="dropdown" tabindex="0" aria-label="Menu Section, Tickets">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">TICKETS</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="themes.html">Festival Line Up</a></li>
-                     <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="https://events.ticketbooth.eu/event/gaze-festival-pass-2025" target="_blank">Festival Pass</a></li>
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="featured.html">Featured Events</a></li>
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="timetable.html">Timetable</a></li>
-
-                    <!--
-                    <li tabindex="0" aria-label=" View timetable" role="button"><a href="Timetable.html">Timetable</a></li>
-                    <li tabindex="0" aria-label="Best Judys" role="button"><a href="judy.html">Best Judys</a></li>
-                    <li tabindex="0" aria-label="IFI @ Home" role="button"><a href="ifi.html">IFI @ Home</a></li>
-                    -->
-                </ul>
+                <ul class="dropdown-content"></ul>
             </li>
-            <!--
-            <li class="dropdown" tabindex="0" aria-label="main menu, Programme of events">
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">PROGRAMME</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" view Films showing on Thursday the 1st of August" role="button"><a href="thurs.html">Tuesday 29th July</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Friday the 2nd of August" role="button"><a href="fri.html">Wednesday 30th July</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Saturday the 3rd of August" role="button"><a href="sat.html">Thursday</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Sunday the 4th of August" role="button"><a href="sun.html">Sunday 4th August 2024</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Monday the 5th of August" role="button"><a href="mon.html">Monday 5th August 2024</a></li>
-                </ul>
-            </li>
-            -->
             <li class="dropdown" tabindex="0" aria-label="Main Menu Header, Support">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">SUPPORT</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" Subscribe to newsletter" role="button"><a href="https://mailchi.mp/gaze/gaze-newsletter-sign-up" target="_blank">Subscribe</a></li>
-                    <li tabindex="0" aria-label=" Become a Festival Friend" role="button"><a href="friend.html">Festival Friend</a></li>
                     <li tabindex="0" aria-label=" Volunteer With GAZE" role="button"><a href="vol.html">Volunteer</a></li>
                     <li tabindex="0" aria-label=" Star GAZE" role="button"><a href="stargaze.html">StarGAZE</a></li>
                 </ul>
@@ -126,15 +97,6 @@
 <div class="quick-nav" aria-label="Section shortcuts">
   <ul>
     <li><a href="timetable.html">Timetable</a></li>
-    <li><a href="featured.html">Featured</a></li>
-    <li><a href="irish.html">Irish</a></li>
-    <li><a href="first.html">First Timers</a></li>
-    <li><a href="genre.html">Genre</a></li>
-    <li><a href="3x3.html">3x3</a></li>
-    <li><a href="animation.html">Animation</a></li>
-    <li><a href="doc.html">Documentary</a></li>
-    <li><a href="intense.html">Intense Connections</span></a></li>
-    <li><a href="messy.html">Messy People</a></li>
   </ul>
 </div></div>
     <!-- Main Body -->
@@ -370,46 +332,35 @@ function setupAccessibility() {
     });
 }
 
+/* Parallax zoom — ONE rAF-throttled scroll/resize handler (no stacking listeners) */
 function initializeParallaxEffects() {
-    if (window.innerWidth > 768) {
-        applyParallaxEffect();
-    }
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            applyParallaxEffect();
-        } else {
-            resetParallaxEffect();
-        }
-    });
-}
-
-function applyParallaxEffect() {
-    document.addEventListener('scroll', () => {
-        const backgrounds = [
-            { element: document.querySelector('.backgroundimg'), startScroll: 100 },
-            { element: document.querySelector('.animate'), startScroll: 0 },
-            { element: document.querySelector('.backgroundimg2'), startScroll: 700 },
-            { element: document.querySelector('.backgroundimg3'), startScroll: 2000 }
-        ];
-
-        backgrounds.forEach(bg => {
-            if (bg.element) {
-                const scrollPosition = window.pageYOffset;
-                const scale = scrollPosition > bg.startScroll ? 1 + (scrollPosition - bg.startScroll) * 0.0001 : 1;
-                bg.element.style.transform = `scale(${scale})`;
-            }
+    const specs = [
+        { sel: '.backgroundimg',  startScroll: 100 },
+        { sel: '.animate',        startScroll: 0 },
+        { sel: '.backgroundimg2', startScroll: 700 },
+        { sel: '.backgroundimg3', startScroll: 2000 }
+    ];
+    let ticking = false;
+    function update() {
+        ticking = false;
+        const enabled = window.innerWidth > 768;
+        const y = window.scrollY || window.pageYOffset || 0;
+        specs.forEach(s => {
+            const el = document.querySelector(s.sel);
+            if (!el) return;
+            const scale = (enabled && y > s.startScroll) ? 1 + (y - s.startScroll) * 0.0001 : 1;
+            el.style.transform = `scale(${scale})`;
         });
-    });
-}
-
-function resetParallaxEffect() {
-    const backgrounds = [document.querySelector('.backgroundimg'), document.querySelector('.animate'), document.querySelector('.backgroundimg2'), document.querySelector('.backgroundimg3')];
-    backgrounds.forEach(bg => {
-        if (bg) {
-            bg.style.transform = 'scale(1)';
-        }
-    });
+    }
+    function onScrollOrResize() {
+        if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }
+    document.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize);
+    update();
 }
 </script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="gaze-lineup.js"></script>
 </body>
 </html>

@@ -25,113 +25,163 @@
     <!-- Add Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-Y"></script>
     <style>
-        /* ===== Dynamic film listings (bespoke sf- classes) ===== */
-body {
-    background-color: #fff;
-}
+        /* ===== News card grid ===== */
+body { background-color: #fff; }
+
 #sf-listing {
-  padding: 0;
-}
-
-.sf-film-item {
   display: grid;
-  grid-template-columns: minmax(260px, 60vw) 1fr;
-  gap: 1.5rem;
-  max-width: 100vw;
-  margin: 0;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 2.5rem;
+  max-width: 1500px;
+  margin: 0 auto;
+  /* clear the fixed header (logo + hamburger) */
+  padding: max(13vw, 175px) 5vw 10vw;
 }
 
-.sf-film-image {
+.news-card {
+  display: flex;
+  flex-direction: column;
+  background: #161717;
+  border: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  font: inherit;
+  color: #fff;
+  cursor: none;                             /* keep the site's custom cursor */
+  overflow: hidden;                         /* clip the image zoom to the card */
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.news-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 34px rgba(0,0,0,.3);
+}
+
+.news-card-img {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s ease;
+}
+.news-card:hover .news-card-img { transform: scale(1.07); }
+
+.news-card-title {
+  background: none;
+  text-align: left;
+  font-size: 1.9rem;
+  font-weight: 600;
+  line-height: 1.08;
+  margin: 1.4rem 0 .6rem;
+  padding: 0 1.5rem;
+  color: #fff;
+}
+
+.news-card .excerpt {
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: #c9c9c9;
+  margin: 0;
+  padding: 0 1.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-card .more {
+  display: inline-block;
+  margin: 1.1rem 0 1.6rem;
+  padding: 0 1.5rem;
+  font-weight: 600;
+  color: #fa6755;
+}
+
+.news-card:hover .news-card-title { color: #fa6755; }
+
+/* ---- Read-more modal ---- */
+.news-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  padding: 4vw;
+}
+.news-modal-inner {
+  background: #fff;
+  width: 100%;
+  max-width: 760px;
+  max-height: 88vh;
+  overflow: auto;
+  position: relative;
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE / old Edge */
+}
+.news-modal-inner::-webkit-scrollbar { display: none; }   /* Chrome / Safari */
+.news-modal-inner img {
+  width: 100%;
+  max-height: 46vh;
   object-fit: cover;
   display: block;
 }
-
-.sf-film-info {
-  padding: 3vw 3.5vw 2vw 2vw;
-}
-
-.sf-film-title {
-  font-size: 4vw;
-    padding: 0;
-    color: #222;
-background-color: #fff;
+.news-modal-body { padding: 2.25rem 2.5rem 2.75rem; }
+.news-modal-title {
+  background: none;
+  padding: 0;
+  text-align: left;
+  font-size: 2.2rem;
+  line-height: 1.1;
   font-weight: 600;
-  line-height: 1;
+  margin: 0 0 1.25rem;
+  color: #222;
 }
-
-.sf-film-meta {
-  font-weight: 500;
-  font-size: 1vw;
-  margin-bottom: 1rem;
+.news-modal-text {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: #222;
 }
-
-.sf-film-meta-primary {
-  display: block;
-  font-size: 1.2em;
-  margin-top: 0.5vw;
-  font-weight: 600;
-}
-
-.sf-film-meta-secondary {
-  font-size: 1em;
-  opacity: .85;
-}
-
-.sf-film-desc {
-  margin-bottom: 1rem;
-    margin-top: 2vw;
-    font-size: larger;
-}
-
-.sf-film-credits {
-  font-size: .9rem;
-  color: var(--meta);
-  margin-bottom: 1.5rem;
-}
-
-.sf-film-button {
+.news-modal-link {
   display: inline-block;
+  margin-top: 1.75rem;
   background-color: #222;
   color: #fff;
   padding: .65rem 1.25rem;
   text-decoration: none;
   font-weight: 600;
-  margin-bottom: 4vw;
-  margin-top: 1vw;
 }
-.sf-film-button:hover {
-  background-color: var(--accent);
-  color: black;
-    background-color: #ffaea3;
+.news-modal-link:hover { background-color: #ffaea3; color: #000; }
+.news-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: none;
 }
+.news-close:hover { background: #fa6755; color: #fff; }
 
-/* ---- Mobile adjustments ---- */
+/* ---- Mobile ---- */
 @media (max-width: 768px) {
-  .sf-film-item {
-    display: flex;
-    flex-direction: column;
+  #sf-listing {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    padding: 32vw 6vw 16vw;   /* clear the full-width mobile header */
   }
-  .sf-film-image {
-    height: auto;
-  }
-  .sf-film-info {
-    padding: 6vw 8vw 10vw;
-  }
-  .sf-film-title {
-    font-size: 8vw;
-    margin: 1rem 0 .5rem;
-  }
-  .sf-film-meta {
-    font-size: 3.5vw;
-    margin-bottom: 1rem;
-  }
-    .sf-film-button {margin-bottom: 8vw;}
-
+  .news-card-title { font-size: 6.5vw; padding: 0 5vw; }
+  .news-card .excerpt { padding: 0 5vw; }
+  .news-card .more { padding: 0 5vw; }
+  .news-modal-body { padding: 7vw 7vw 10vw; }
+  .news-modal-title { font-size: 8vw; }
 }
-
-
     </style>
 </head>
 <body>
@@ -151,11 +201,6 @@ background-color: #fff;
             <li class="dropdown" tabindex="0" aria-label="Main Menu Header, About">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">ABOUT</a>
                 <ul class="dropdown-content">
-                    <!--
-                    <li tabindex="0" aria-label=" Who are we?" role="button"><a href="whoarewe.html">Who Are We?</a></li>
-                    <li tabindex="0" aria-label=" Director's Welcome message" role="button"><a href="Directors_Welcome.html">Director's Welcome</a></li>
-                    <li tabindex="0" aria-label=" Manager's Welcome message" role="button"><a href="chair.html">Chair's Welcome</a></li>
-                    -->
                     <li tabindex="0" aria-label=" View past programmes" role="button"><a href="archive.html">Archive</a></li>
                     <li tabindex="0" aria-label=" View past programmes" role="button"><a href="news.html">News</a></li>
                     <li tabindex="0" aria-label=" Submit via Film Freeway" role="button"><a href="https://filmfreeway.com/gaze-ireland">Submit A Film</a></li>
@@ -164,35 +209,12 @@ background-color: #fff;
             </li>
             <li class="dropdown" tabindex="0" aria-label="Menu Section, Tickets">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">TICKETS</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="themes.html">Festival Line Up</a></li>
-                     <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="https://events.ticketbooth.eu/event/gaze-festival-pass-2025" target="_blank">Festival Pass</a></li>
-                    <li tabindex="0" aria-label="Featured Events" role="button"><a href="featured.html">Featured Events</a></li>
-                    <li tabindex="0" aria-label=" Festival Pass" role="button"><a href="timetable.html">Timetable</a></li>
-                    <!--
-                    <li tabindex="0" aria-label=" View timetable" role="button"><a href="Timetable.html">Timetable</a></li>
-                    <li tabindex="0" aria-label="Best Judys" role="button"><a href="judy.html">Best Judys</a></li>
-                    <li tabindex="0" aria-label="IFI @ Home" role="button"><a href="ifi.html">IFI @ Home</a></li>
-                    -->
-                </ul>
+                <ul class="dropdown-content"></ul>
             </li>
-            <!--
-            <li class="dropdown" tabindex="0" aria-label="main menu, Programme of events">
-                <a href="#" aria-haspopup="true" aria-expanded="false" role="button">PROGRAMME</a>
-                <ul class="dropdown-content">
-                    <li tabindex="0" aria-label=" view Films showing on Thursday the 1st of August" role="button"><a href="thurs.html">Thursday 1st August 2024</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Friday the 2nd of August" role="button"><a href="fri.html">Friday 2nd August 2024</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Saturday the 3rd of August" role="button"><a href="sat.html">Saturday 3rd August 2024</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Sunday the 4th of August" role="button"><a href="sun.html">Sunday 4th August 2024</a></li>
-                    <li tabindex="0" aria-label=" view Films showing on Monday the 5th of August" role="button"><a href="mon.html">Monday 5th August 2024</a></li>
-                </ul>
-            </li>
-            -->
             <li class="dropdown" tabindex="0" aria-label="Main Menu Header, Support">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">SUPPORT</a>
                 <ul class="dropdown-content">
                     <li tabindex="0" aria-label=" Subscribe to newsletter" role="button"><a href="https://mailchi.mp/gaze/gaze-newsletter-sign-up" target="_blank">Subscribe</a></li>
-                    <li tabindex="0" aria-label=" Become a Festival Friend" role="button"><a href="friend.html">Festival Friend</a></li>
                     <li tabindex="0" aria-label=" Volunteer With GAZE" role="button"><a href="vol.html">Volunteer</a></li>
                     <li tabindex="0" aria-label=" Star GAZE" role="button"><a href="stargaze.html">StarGAZE</a></li>
                 </ul>
@@ -251,57 +273,118 @@ background-color: #fff;
     return n + (s[(v-20)%10] || s[v] || s[0]);
   }
 
+  /* strip HTML to plain text for the card excerpt */
+  function toText(html){
+    const t = document.createElement('div');
+    t.innerHTML = html || '';
+    return (t.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+
   /* ─── main loader ─── */
   async function loadNews() {
     const container = document.getElementById('sf-listing');
-
     try {
-      /* ← one straightforward query */
+      /* respect the order set in the admin (same as every other listing page) */
       const { data: items, error } = await supabase
         .from(table)
-        .select('*');
+        .select('*')
+        .order('order', { ascending: true });
 
       if (error) throw error;
+      if (!items.length) { container.textContent = 'News coming soon.'; return; }
 
-      if (!items.length) {
-        container.textContent = 'News coming soon.';
-        return;
-      }
+      container.innerHTML = '';
+      items.forEach(item => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'news-card';
 
-      /* optional: newest first if you have a date field */
-      items.sort(
-        (a, b) => new Date(b.published_at || b.created_at || 0)
-                - new Date(a.published_at || a.created_at || 0)
-      );
+        const img = document.createElement('img');
+        img.className = 'news-card-img';
+        img.src = item.image_url || '';
+        img.alt = item.title || '';
+        img.loading = 'lazy';
 
-      container.innerHTML = items.map(item => {
-        /* adjust these lines to your actual column names */
-        const d = new Date(item.published_at || item.created_at);
-        const weekday = d.toLocaleDateString(undefined, { weekday: 'long' });
-        const month   = d.toLocaleDateString(undefined, { month: 'long' });
-        const dateStr = `${weekday} ${month} ${ordinal(d.getDate())} ${d.getFullYear()}`;
+        const title = document.createElement('div');
+        title.className = 'news-card-title';
+        title.textContent = item.title || '';
 
-        return `
-          <div class="sf-film-item">
-            <img class="sf-film-image" src="${item.image_url}" alt="${item.title}">
-            <div class="sf-film-info">
-              <h2 class="sf-film-title">${item.title}</h2>
-              <div class="sf-film-meta">
-                
-               
-              </div>
-              <p class="sf-film-desc">${item.summary || item.description || ''}</p>
-              ${item.article_url
-                  ? `<a class="sf-film-button" href="${item.article_url}" target="_blank" rel="noopener">Read more</a>`
-                  : ''}
-            </div>
-          </div>`;
-      }).join('');
+        const ex = document.createElement('p');
+        ex.className = 'excerpt';
+        ex.textContent = toText(item.description);
 
+        const more = document.createElement('span');
+        more.className = 'more';
+        more.textContent = 'Read more →';
+
+        card.append(img, title, ex, more);
+        card.addEventListener('click', () => openNewsModal(item));
+        container.appendChild(card);
+      });
     } catch (err) {
       console.error(err);
       container.textContent = 'Sorry, something went wrong.';
     }
+  }
+
+  /* ─── full-item lightbox (no separate page; opens in place) ─── */
+  function openNewsModal(item) {
+    const modal = document.createElement('div');
+    modal.className = 'news-modal';
+
+    const inner = document.createElement('div');
+    inner.className = 'news-modal-inner';
+
+    const close = document.createElement('button');
+    close.className = 'news-close';
+    close.setAttribute('aria-label', 'Close');
+    close.innerHTML = '&times;';
+    inner.appendChild(close);
+
+    if (item.image_url) {
+      const im = document.createElement('img');
+      im.src = item.image_url;
+      im.alt = item.title || '';
+      inner.appendChild(im);
+    }
+
+    const body = document.createElement('div');
+    body.className = 'news-modal-body';
+
+    const title = document.createElement('div');
+    title.className = 'news-modal-title';
+    title.textContent = item.title || '';
+    body.appendChild(title);
+
+    const text = document.createElement('div');
+    text.className = 'news-modal-text';
+    text.innerHTML = item.description || '';   // stored HTML (bold / links / line breaks)
+    body.appendChild(text);
+
+    if (item.ticket_url) {
+      const a = document.createElement('a');
+      a.className = 'news-modal-link';
+      a.href = item.ticket_url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = 'Learn more →';
+      body.appendChild(a);
+    }
+
+    inner.appendChild(body);
+    modal.appendChild(inner);
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+
+    const onKey = e => { if (e.key === 'Escape') dismiss(); };
+    function dismiss() {
+      modal.remove();
+      document.body.style.overflow = '';
+      document.removeEventListener('keydown', onKey);
+    }
+    close.addEventListener('click', dismiss);
+    modal.addEventListener('click', e => { if (e.target === modal) dismiss(); });
+    document.addEventListener('keydown', onKey);
   }
 
   document.addEventListener('DOMContentLoaded', loadNews);
@@ -529,5 +612,7 @@ function resetParallaxEffect() {
     });
 }
 </script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script defer src="gaze-lineup.js"></script>
 </body>
 </html>
