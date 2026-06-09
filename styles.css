@@ -355,7 +355,7 @@ nav ul li a:hover {
     section p {
         line-height: 11.5vh;
         font-size: 7vh;
-        color: #fa6755;
+        color: #89e8aa;
         font-weight: 300;
     }
 
@@ -367,7 +367,7 @@ section p a {
 }
 section p a:hover {
     text-decoration: none;
-    color: #ffa093;
+    color: #ffa8e7;
     
 }
 
@@ -1006,7 +1006,7 @@ li.dropdown.active {
         line-height: 11vw;
 
         font-size: 5vw; /* Adjust this value to change the text size */
-        color: #fa6755;
+        color: #89e8aa;
         font-weight: 300;
         padding: 5vw;
     }
@@ -1416,3 +1416,41 @@ footer {
     text-align: left; /* Align the text to the left */
 }
 }
+/* ───────── Per-section menu hover colours + white menu toggle ───────── */
+/* Hamburger / nav title: white background in both burger and expanded states (was orange) */
+.menu-toggle,
+.menu-toggle.expanded { background-color: #ffffff; }
+
+/* Hover colours only. Runtime menu order: 1 About · 2 Festival · 3 Line Up · 4 Support · 5 Accessibility.
+   Main items keep black bg when not hovered; sub-items keep white bg when not hovered.
+   On hover, text is dark (#161717) for legibility on the pastel backgrounds. */
+
+/* About */
+nav > ul > li.dropdown:nth-child(1):hover > a,
+nav > ul > li.dropdown:nth-child(1):focus-within > a { background-color:#89e8aa; color:#161717; }
+nav > ul > li.dropdown:nth-child(1) .dropdown-content a:hover,
+nav > ul > li.dropdown:nth-child(1) .dropdown-content a:focus { background-color:#33d069; color:#161717; }
+
+/* Festival */
+nav > ul > li.dropdown:nth-child(2):hover > a,
+nav > ul > li.dropdown:nth-child(2):focus-within > a { background-color:#ffa8e7; color:#161717; }
+nav > ul > li.dropdown:nth-child(2) .dropdown-content a:hover,
+nav > ul > li.dropdown:nth-child(2) .dropdown-content a:focus { background-color:#e06cc3; color:#161717; }
+
+/* Line Up */
+nav > ul > li.dropdown:nth-child(3):hover > a,
+nav > ul > li.dropdown:nth-child(3):focus-within > a { background-color:#ffa094; color:#161717; }
+nav > ul > li.dropdown:nth-child(3) .dropdown-content a:hover,
+nav > ul > li.dropdown:nth-child(3) .dropdown-content a:focus { background-color:#f37160; color:#161717; }
+
+/* Support */
+nav > ul > li.dropdown:nth-child(4):hover > a,
+nav > ul > li.dropdown:nth-child(4):focus-within > a { background-color:#cfa8ff; color:#161717; }
+nav > ul > li.dropdown:nth-child(4) .dropdown-content a:hover,
+nav > ul > li.dropdown:nth-child(4) .dropdown-content a:focus { background-color:#9969ff; color:#161717; }
+
+/* Accessibility */
+nav > ul > li.dropdown:nth-child(5):hover > a,
+nav > ul > li.dropdown:nth-child(5):focus-within > a { background-color:#ffea9c; color:#161717; }
+nav > ul > li.dropdown:nth-child(5) .dropdown-content a:hover,
+nav > ul > li.dropdown:nth-child(5) .dropdown-content a:focus { background-color:#ffd848; color:#161717; }

@@ -122,7 +122,7 @@
         </section>
 
         <section class="backgroundimg3" aria-label="Two women sitting on a sofa with legs crossed, wearing sheer pantyhose and high-heels">
-            <p tabindex="0" role="heading" style="font-weight: 600; font-size: 5.5vw;">29th July - 4th August 2025</p>
+            <p tabindex="0" role="heading" style="font-weight: 600; font-size: 5.5vw;">28th July - 3rd August 2026</p>
         </section>
 </div>
 
@@ -237,6 +237,7 @@ function setupMenuToggle(toggleButton, nav) {
 
     // Hover events
     toggleButton.addEventListener('mouseenter', openMenu);
+    nav.addEventListener('mouseenter', openMenu);
     // Only close the menu when leaving both button and nav area
     toggleButton.addEventListener('mouseleave', function(event) {
         if (!nav.contains(event.relatedTarget)) {

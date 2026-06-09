@@ -215,6 +215,7 @@ function setupMenuToggle(toggleButton, nav) {
 
     // Hover events
     toggleButton.addEventListener('mouseenter', openMenu);
+    nav.addEventListener('mouseenter', openMenu);
     // Only close the menu when leaving both button and nav area
     toggleButton.addEventListener('mouseleave', function(event) {
         if (!nav.contains(event.relatedTarget)) {
