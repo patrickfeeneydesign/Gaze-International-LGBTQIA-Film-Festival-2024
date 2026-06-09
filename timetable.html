@@ -262,7 +262,7 @@
           /* single source of truth */
           const { data, error } = await supabase.from('lineup').select('*');
           if(error) throw error;
-          let shows = (data||[]).filter(s => s.screening_date);
+          let shows = (data||[]).filter(s => s.screening_date && s.strand);
 
           /* keep day–order */
           shows.sort((a,b)=> new Date(a.screening_date) - new Date(b.screening_date));
@@ -341,7 +341,6 @@
     const nav = document.querySelector('nav');
     const toggleButton = document.querySelector('.menu-toggle');
     const dropdowns = document.querySelectorAll('.dropdown');
-    const cursor = createCustomCursor();
 
     if (window.matchMedia("(min-width: 768px)").matches) {
         const cursor = createCustomCursor();

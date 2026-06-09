@@ -355,7 +355,7 @@ nav ul li a:hover {
     section p {
         line-height: 11.5vh;
         font-size: 7vh;
-        color: #89e8aa;
+        color: #33d069;
         font-weight: 300;
     }
 
@@ -367,7 +367,7 @@ section p a {
 }
 section p a:hover {
     text-decoration: none;
-    color: #ffa8e7;
+    color: #89e8aa;
     
 }
 
