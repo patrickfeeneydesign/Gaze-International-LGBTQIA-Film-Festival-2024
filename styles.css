@@ -1454,3 +1454,41 @@ nav > ul > li.dropdown:nth-child(5):hover > a,
 nav > ul > li.dropdown:nth-child(5):focus-within > a { background-color:#ffea9c; color:#161717; }
 nav > ul > li.dropdown:nth-child(5) .dropdown-content a:hover,
 nav > ul > li.dropdown:nth-child(5) .dropdown-content a:focus { background-color:#ffd848; color:#161717; }
+
+/* ───────── Per-page accent colours (aligned to the menu section colours) ─────────
+   Tag <body> with one accent class per page. Light = the menu top-level hover
+   colour, dark = the menu sub-item hover colour. Untagged pages (the homepage)
+   keep their original colours. */
+.accent-green  { --accent-light:#89e8aa; --accent-dark:#33d069; } /* About: Archive, News */
+.accent-pink   { --accent-light:#ffa8e7; --accent-dark:#e06cc3; } /* Festival: Timetable, Festival Friend */
+.accent-coral  { --accent-light:#ffa094; --accent-dark:#f37160; } /* Line Up: strand listings */
+.accent-purple { --accent-light:#cfa8ff; --accent-dark:#9969ff; } /* Support: Volunteer, StarGAZE */
+
+/* Text links: light accent at rest, darker/more saturated on hover or focus.
+   :not([class]) leaves classed links (listing buttons, gallery tiles) to their
+   own page styles. */
+body[class*="accent-"] main a:not([class]) { color: var(--accent-light); }
+body[class*="accent-"] main a:not([class]):hover,
+body[class*="accent-"] main a:not([class]):focus { color: var(--accent-dark); }
+
+/* Prose links inside paragraphs use the reverse: darker tone at rest, lighter on
+   hover/focus. More specific than the rule above, so it wins for <p> links only. */
+body[class*="accent-"] main p a:not([class]) { color: var(--accent-dark); }
+body[class*="accent-"] main p a:not([class]):hover,
+body[class*="accent-"] main p a:not([class]):focus { color: var(--accent-light); }
+
+/* Page subtitle (h3 on the black banner) — desktop only; mobile h3 stays white */
+@media (min-width: 768px) {
+  body[class*="accent-"] h3 { color: var(--accent-light); }
+}
+
+/* Quick-nav shortcut links (white at rest, as before) */
+body[class*="accent-"] .quick-nav a:hover,
+body[class*="accent-"] .quick-nav a:focus { color: var(--accent-light); }
+
+/* Archive gallery overlays */
+body[class*="accent-"] .overlay { background: var(--accent-dark); }
+body[class*="accent-"] .overlay:hover { background: var(--accent-light); }
+
+/* Black header bar with white logo on every page except the homepage */
+header:not(.firstpage) { background-color: #161717; }

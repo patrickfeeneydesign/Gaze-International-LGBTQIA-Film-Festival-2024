@@ -157,7 +157,7 @@
     let items = '<li><a href="timetable.html">Timetable</a></li>';
     strands.forEach(function(s){
       const active = cur === s;
-      items += '<li><a href="themes.html?strand=' + encodeURIComponent(s) + '"' + (active ? ' style="color:#fa6755;font-weight:600;"' : '') + '>' + esc(s) + '</a></li>';
+      items += '<li><a href="themes.html?strand=' + encodeURIComponent(s) + '"' + (active ? ' style="color:#f37160;font-weight:600;"' : '') + '>' + esc(s) + '</a></li>';
     });
     qn.innerHTML = '<ul>' + items + '</ul>';
   }
