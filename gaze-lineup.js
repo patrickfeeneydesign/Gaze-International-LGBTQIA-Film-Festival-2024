@@ -122,7 +122,8 @@
       if(dc) dc.innerHTML =
         '<li tabindex="0" role="button"><a href="timetable.html">Timetable</a></li>' +
         '<li tabindex="0" role="button"><a href="https://events.ticketbooth.eu/event/gaze-festival-pass-2025" target="_blank">Festival Pass</a></li>' +
-        '<li tabindex="0" role="button"><a href="friend.html">Festival Friend</a></li>';
+        '<li tabindex="0" role="button"><a href="friend.html">Festival Friend</a></li>' +
+        '<li tabindex="0" role="button"><a href="supporters.html">Supporters</a></li>';
     }
 
     /* LINE UP dropdown shell (strands filled async) */

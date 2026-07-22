@@ -22,35 +22,12 @@
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
 <link rel="manifest" href="site.webmanifest" />
-    <style>
-        /* ===== Dynamic line-up listings (sf- classes) ===== */
-body { background-color: #fff; }
-#sf-listing { padding: 0; }
-.sf-film-item { display: grid; grid-template-columns: minmax(260px, 60vw) 1fr; gap: 1.5rem; max-width: 100vw; margin: 0; }
-.sf-film-image { width: 100%; height: 100%; object-fit: cover; display: block; }
-.sf-film-info { padding: 3vw 3.5vw 2vw 2vw; }
-.sf-film-title { font-size: 4vw; padding: 0; color: #222; background-color: #fff; font-weight: 600; line-height: 1; }
-.sf-film-meta { font-weight: 500; font-size: 1vw; margin-bottom: 1rem; }
-.sf-film-meta-primary { display: block; font-size: 1.2em; margin-top: 0.5vw; font-weight: 600; }
-.sf-film-meta-secondary { font-size: 1em; opacity: .85; }
-.sf-film-desc { margin-bottom: 1rem; margin-top: 2vw; }
-.sf-film-credits { font-size: .9rem; color: #777; margin-bottom: 1.5rem; }
-.sf-film-button { display: inline-block; background-color: #222; color: #fff; padding: .65rem 1.25rem; text-decoration: none; font-weight: 600; margin-bottom: 4vw; margin-top: 1vw; }
-.sf-film-button:hover { background-color: #ffa094; color: black; }
-@media (max-width: 768px) {
-  .sf-film-item { display: flex; flex-direction: column; }
-  .sf-film-image { height: auto; }
-  .sf-film-info { padding: 6vw 8vw 10vw; }
-  .sf-film-title { font-size: 8vw; margin: 1rem 0 .5rem; }
-  .sf-film-meta { font-size: 3.5vw; margin-bottom: 1rem; }
-  .sf-film-button { margin-bottom: 8vw; }
-}
-    </style>
+    <!-- Add Google Analytics -->
+
 </head>
-<body class="accent-coral">
-    
+<body class="accent-pink">
     <!-- SKIP TO CONTENT -->
-    <a href="#sf-listing" role="link" tabindex="0" class="skip-link">GAZE International L G B T Q I A Film Festival Home Page, press enter to skip to main content or press tab to continue.</a>
+    <a href="#maincontent" role="link" tabindex="0" class="skip-link">Festival Supporters. Press enter to skip to page content, or press tab to navigate menu</a>
     <!-- Main Title -->
     <header tabindex="0" aria-label="Home Button">
         <a href="index.html" style="display: inline-block; cursor: pointer;">
@@ -58,9 +35,9 @@ body { background-color: #fff; }
         </a>
     </header>
     <!-- BUTTON TOGGLE MENU -->
-    <button class="menu-toggle" class="pageone" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="The main menu is now open, press tab to navigate"></button>
-    <!-- Menu -->
-    <nav>
+    <button class="menu-toggle" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-label="The main menu is now open, press tab to navigate"></button>
+       <!-- Menu -->
+       <nav>
         <ul>
             <li class="dropdown" tabindex="0" aria-label="Main Menu Header, About">
                 <a href="#" aria-haspopup="true" aria-expanded="false" role="button">ABOUT</a>
@@ -94,30 +71,77 @@ body { background-color: #fff; }
             </li>        
         </ul>
     </nav>
-    <!-- Dynamic line-up (filtered by ?strand= when present) -->
-    <main id="sf-listing" tabindex="-1">Loading programme…</main>
-    <div class="desktophide"><br><br><br><br></div>
-    <!-- Footer -->
-    <footer class="black-background">
-        <div class="social-icons">
-            <a href="https://www.instagram.com/gazefilmfest/" target="_blank" aria-label="Instagram" role="link">
-                <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
-            </a>
-            <a href="https://www.facebook.com/gazefilmfest/" target="_blank" aria-label="Facebook" role="link">
-                <img src="img/facebook-app-round-white-icon.png" alt="Link to Facebook page" tabindex="0">
-            </a>
-            <a href="https://x.com/GAZEfilmfest" target="_blank" aria-label="Twitter" role="link">
-                <img src="img/x-social-media-white-icon.png" alt="Link to Twitter page" tabindex="0">
-            </a>
-            <a href="https://www.tiktok.com/@gazefilmfest?is_from_webapp=1&sender_device=pc" target="_blank" aria-label="Tiktok" role="link">
-                <img src="img/tiktok.png" alt="Link to Tiktok page" tabindex="0">
-            </a>
-        </div>
-        <div class="footer-text">
+    <!-- Main Body -->
+    <main id="maincontent">
+        <article>
+
+            <h2 tabindex="0" role="heading">
+                    Festival Supporters
+            </h2>
+
+            <h3 tabindex="0" role="heading">
+                    Supporting LGBTQIA Cinema in Ireland
+            </h3>
+
+            <h4 tabindex="0" role="heading">
+                    GAZE wouldn't happen without our partners, funders and supporters. Their generosity keeps
+                    queer cinema on the big screen.
+            </h4>
+
+                <img alt="Festival Partners: the logos of GAZE's funders, industry, venue, cultural, programming and media partners."
+                    src="img/GAZE_02_logos.jpg" style="width: 84%; margin-left: 8vw; margin-top: 3vw;">
+
+            <p tabindex="0">
+                    We'd like to thank our principal funder, <a href="https://www.artscouncil.ie" target="_blank" rel="noopener">The Arts Council</a>; our industry partners, <a href="https://www.nationaltalentacademies.ie" target="_blank" rel="noopener">National Talent
+                    Academies</a>, <a href="https://www.cnam.ie" target="_blank" rel="noopener">Coimisi&uacute;n na Me&aacute;n</a> and <a href="https://www.screenireland.ie" target="_blank" rel="noopener">F&iacute;s &Eacute;ireann / Screen Ireland</a>; and our
+                    funders, <a href="https://www.dublincity.ie" target="_blank" rel="noopener">Dublin City Council</a>.
+                <br><br>
+                    Thank you to our Bronze Partners, <a href="https://www.anpost.com" target="_blank" rel="noopener">An Post</a> and <a href="https://www.wtp.ie" target="_blank" rel="noopener">We The People</a>; our venue partners, the <a href="https://ifi.ie" target="_blank" rel="noopener">Irish Film
+                    Institute</a> and <a href="https://www.lighthousecinema.ie" target="_blank" rel="noopener">Light House Cinema</a>; and our entertainment partners, <a href="https://teelingwhiskey.com" target="_blank" rel="noopener">Teeling Whiskey</a> and the <a href="https://www.ashlinghotel.ie" target="_blank" rel="noopener">Ashling
+                    Hotel Dublin</a>.
+                <br><br>
+                    Thank you to our cultural partners: <a href="https://outhouse.ie" target="_blank" rel="noopener">Outhouse</a>, <a href="https://gayhealthnetwork.ie" target="_blank" rel="noopener">Gay Health Network</a>, <a href="https://man2man.ie" target="_blank" rel="noopener">Man2Man.ie</a>, <a href="https://www.instagram.com/queerspectrumfilmfest/" target="_blank" rel="noopener">Queer Spectrum
+                    Film Festival</a>, <a href="https://www.facebook.com/p/Dublin-Lesbian-Line-100064358546983/" target="_blank" rel="noopener">Dublin Lesbian Line</a>, <a href="https://www.goethe.de/ins/ie/en/index.html" target="_blank" rel="noopener">Goethe-Institut</a>, the <a href="https://www.instagram.com/netherlandsinireland/" target="_blank" rel="noopener">Embassy of the Kingdom of the Netherlands</a>,
+                    <a href="https://tite.ie" target="_blank" rel="noopener">TIte</a>, <a href="https://teni.ie" target="_blank" rel="noopener">Transgender Equality Network Ireland</a>, <a href="https://www.sportingpride.ie" target="_blank" rel="noopener">Sporting Pride</a>, <a href="https://man2man.ie/you-me-and-hiv/" target="_blank" rel="noopener">You, Me and HIV</a> and <a href="https://pozvibe.com" target="_blank" rel="noopener">Poz Vibe Tribe</a>.
+                <br><br>
+                    Thank you to our programming partners: <a href="https://aemi.ie" target="_blank" rel="noopener">aemi</a>, <a href="https://www.priosmafilmfest.com" target="_blank" rel="noopener">PR&Iacute;OSMA</a>, <a href="https://brodnagaeltachta.ie" target="_blank" rel="noopener">Br&oacute;d na Gaeltachta</a>, the
+                    <a href="https://imma.ie" target="_blank" rel="noopener">Irish Museum of Modern Art (IMMA)</a>, <a href="https://www.misleor.ie" target="_blank" rel="noopener">MISLE&Oacute;R Festival of Nomadic Cultures</a> and <a href="https://www.galwaypride.ie" target="_blank" rel="noopener">Galway Pride</a>; and
+                    to our media partner, <a href="https://gcn.ie" target="_blank" rel="noopener">GCN</a>.
+            </p>
+
+            <h4 tabindex="0" role="heading" style="padding-top:1vw;padding-bottom:0;">
+                    Become a supporter
+            </h4>
+
+            <p tabindex="0" style="padding-top:0;">
+                    Interested in partnering with or supporting GAZE? We'd love to hear from you. Get in touch at
+                    <a role="link" href="mailto:info@gaze.ie">info@gaze.ie</a> to find out how you can get involved.
+            </p>
+            <br><br><br><br>
+        </article>
+
+    </main>
+   <!-- Footer -->
+   <footer class="black-background">
+    <div class="social-icons">
+        <a href="https://www.instagram.com/gazefilmfest/" target="_blank" aria-label="Instagram" role="link">
+            <img src="img/instagram-icon.png" alt="Link to Instagram page" tabindex="0">
+        </a>
+        <a href="https://www.facebook.com/gazefilmfest/" target="_blank" aria-label="Facebook" role="link">
+            <img src="img/facebook-app-round-white-icon.png" alt="Link to Facebook page" tabindex="0">
+        </a>
+        <a href="https://x.com/GAZEfilmfest" target="_blank" aria-label="Twitter" role="link">
+            <img src="img/x-social-media-white-icon.png" alt="Link to Twitter page" tabindex="0">
+        </a>
+        <a href="https://www.tiktok.com/@gazefilmfest?is_from_webapp=1&sender_device=pc" target="_blank" aria-label="Tiktok" role="link">
+            <img src="img/tiktok.png" alt="Link to Tiktok page" tabindex="0">
+        </a>
+    </div>
+    <div class="footer-text">
             &copy; GAZE Film Festival 2026 | All rights reserved
-        </div>
-    </footer>
-   <script>
+    </div>
+</footer>
+<script>
     
     document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('nav');
@@ -338,27 +362,7 @@ function resetParallaxEffect() {
     });
 }
 </script>
-
-<!-- Supabase UMD + shared GAZE script (builds the menus + quick-nav) -->
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script defer src="gaze-lineup.js"></script>
-<!-- Dynamic line-up loader: same proven query/render as the old strand pages, pulling from `lineup` -->
-<script>
-  document.addEventListener('DOMContentLoaded', function(){
-    var G = window.GAZE;
-    var container = document.getElementById('sf-listing');
-    if(!G){ container.textContent = 'Sorry, something went wrong.'; return; }
-    var strand = G.currentStrand();
-    var q = G.supabase.from(G.TABLE).select('*');
-    if(strand) q = q.eq('strand', strand);
-    q.then(function(res){
-      if(res.error){ console.error(res.error); container.textContent = 'Sorry, something went wrong.'; return; }
-      var data = res.data || [];
-      if(!data.length){ container.textContent = 'Programme coming soon.'; return; }
-      container.innerHTML = G.chronoSort(data).map(G.filmItemHTML).join('');
-      if(strand) document.title = strand + ' — GAZE';
-    });
-  });
-</script>
 </body>
 </html>
