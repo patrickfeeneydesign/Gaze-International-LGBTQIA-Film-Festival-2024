@@ -50,11 +50,13 @@
 
   /* the exact public listing markup (lifted from the old strand pages) */
   function filmItemHTML(film){
+    /* screening_date is a date-only string, so it parses as UTC midnight — format it
+       in UTC too, otherwise viewers west of UTC see the previous day. */
     const d = new Date(film.screening_date);
     const dateStr = isNaN(d.getTime()) ? '' :
-      d.toLocaleDateString(undefined,{weekday:'long'}) + ' ' +
-      d.toLocaleDateString(undefined,{month:'long'}) + ' ' +
-      ordinal(d.getDate()) + ' ' + d.getFullYear();
+      d.toLocaleDateString(undefined,{weekday:'long', timeZone:'UTC'}) + ' ' +
+      d.toLocaleDateString(undefined,{month:'long', timeZone:'UTC'}) + ' ' +
+      ordinal(d.getUTCDate()) + ' ' + d.getUTCFullYear();
     const line1 = [dateStr, film.screening_time, film.country].filter(Boolean).join(' • ');
     const line2 = [film.length, film.venue, film.director && ('Dir. ' + film.director)].filter(Boolean).join(' • ');
     return '' +

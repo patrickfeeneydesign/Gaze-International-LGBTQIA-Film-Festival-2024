@@ -286,11 +286,13 @@
 
           /* build HTML */
           container.innerHTML = [...byDay.keys()].sort().map(dateStr=>{
+            /* dateStr is a date-only key (UTC midnight) — format in UTC to match,
+               otherwise viewers west of UTC see the previous day. */
             const d = new Date(dateStr);
             const heading =
-              `${d.toLocaleDateString(undefined,{weekday:'long'})} ` +
-              `${d.toLocaleDateString(undefined,{month:'long'})} ` +
-              `${ordinal(d.getDate())}`;
+              `${d.toLocaleDateString(undefined,{weekday:'long', timeZone:'UTC'})} ` +
+              `${d.toLocaleDateString(undefined,{month:'long', timeZone:'UTC'})} ` +
+              `${ordinal(d.getUTCDate())}`;
 
             const list = byDay.get(dateStr).map(show=>{
               const strand      = show.strand || '';
@@ -557,6 +559,6 @@ function resetParallaxEffect() {
 }
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script defer src="gaze-lineup.js"></script>
+<script defer src="gaze-lineup.js?v=2"></script>
 </body>
 </html>
